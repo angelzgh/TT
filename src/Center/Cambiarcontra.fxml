@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="panelP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="510.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.CambiarcontraController">
+   <children>
+      <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="510.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="36.0" prefWidth="1020.0" style="-fx-background-color: #4D92DF;" text="Cuenta" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+               <font>
+                  <Font name="System Italic" size="25.0" />
+               </font>
+            </Label>
+         </top>
+         <center>
+            <GridPane prefHeight="475.0" prefWidth="1020.0" BorderPane.alignment="CENTER">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="49.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="135.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="90.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="148.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Contraseña actual:" GridPane.halignment="LEFT" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Nueva contraseña:" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Repetir contraseña:" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Pregunta de seguridad:" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Respuesta:" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="Arial" size="15.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <JFXPasswordField fx:id="txtCpass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="225.0" style="-fx-background-color: #FFFFFF;" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                     <GridPane.margin>
+                        <Insets left="200.0" />
+                     </GridPane.margin>
+                  </JFXPasswordField>
+                  <JFXPasswordField fx:id="txtCnpass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="225.0" style="-fx-background-color: #FFFFFF;" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="200.0" />
+                     </GridPane.margin>
+                  </JFXPasswordField>
+                  <JFXPasswordField fx:id="txtCrnpass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="225.0" style="-fx-background-color: #FFFFFF;" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="200.0" />
+                     </GridPane.margin>
+                  </JFXPasswordField>
+                  <JFXComboBox fx:id="cbxpregunta" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="271.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="245.0" />
+                     </GridPane.margin>
+                  </JFXComboBox>
+                  <JFXTextField fx:id="txtrespuesta" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="271.0" style="-fx-background-color: #FFFFFF;" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                     <GridPane.margin>
+                        <Insets left="245.0" />
+                     </GridPane.margin>
+                  </JFXTextField>
+                  <JFXButton fx:id="btnCcguardar" buttonType="RAISED" onAction="#cambiarContraseña" prefHeight="36.0" prefWidth="148.0" ripplerFill="#c1e1b8" style="-fx-background-color: #FFFFFF;" text="Guardar" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                     <GridPane.margin>
+                        <Insets left="300.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCcancelar" buttonType="RAISED" onAction="#cancelar" prefHeight="36.0" prefWidth="148.0" ripplerFill="#c1e1b8" style="-fx-background-color: #F76969;" text="Cancelar" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+                     <GridPane.margin>
+                        <Insets left="380.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+               </children>
+            </GridPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

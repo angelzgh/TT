@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="panelPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.RecuperarcontraController">
+   <children>
+      <AnchorPane id="AnchorPane" cacheShape="false" focusTraversable="true" layoutX="10.0" layoutY="10.0" pickOnBounds="false" prefHeight="326.0" prefWidth="681.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+      <SplitPane dividerPositions="0.29797979797979796" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-image: ..\imagenes\recuperar.PNG;">
+               <children>
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="400.0" fitWidth="350.0">
+                           <image>
+                              <Image url="@../imagenes/recuperar.PNG" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D minX="400.0" minY="350.0" />
+                           </viewport>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0">
+               <children>
+                  <Pane layoutX="21.0" layoutY="53.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: #0B243B;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label layoutX="81.0" layoutY="63.0" prefHeight="36.0" prefWidth="212.0" text="Correo electronico" textFill="WHITE">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Label>
+                        <Label id="lblStatus" fx:id="lblStatus1" layoutX="63.0" layoutY="255.0" prefHeight="20.0" prefWidth="232.0" textFill="#fc3939">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="btnEnviar" layoutX="198.0" layoutY="313.0" onAction="#cambiarContra" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #FFFFFF;" text="Enviar" />
+                        <JFXButton fx:id="btnCancelar" layoutX="61.0" layoutY="313.0" onAction="#cancelarCambio" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #F76969;" text="Cancelar" />
+                        <JFXTextField fx:id="txtCorreo" focusColor="#a84042" layoutX="55.0" layoutY="108.0" prefHeight="25.0" prefWidth="246.0" promptText="Correo" style="-fx-background-color: #FFFFFF;" />
+                        <JFXTextField fx:id="txtResseguridad" focusColor="#a84042" layoutX="55.0" layoutY="230.0" prefHeight="25.0" prefWidth="246.0" promptText="Contraseña" style="-fx-background-color: #FFFFFF;" />
+                        <JFXComboBox fx:id="cmbpreguntaseguridad" layoutX="55.0" layoutY="167.0" prefHeight="25.0" prefWidth="246.0" promptText="Pregunta de seguridad" style="-fx-background-color: #FFFFFF;" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

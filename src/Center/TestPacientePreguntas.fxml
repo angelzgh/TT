@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.TestPacientePreguntasController">
+   <children>
+      <SplitPane dividerPositions="0.29797979797979796" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="300.0" styleClass="l" stylesheets="@../styles/Styles.css">
+               <children>
+                  <GridPane layoutY="6.0" prefHeight="510.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="165.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="382.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="416.0" minHeight="10.0" prefHeight="340.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="406.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="55.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF;" text="Modulo de Ayuda" textAlignment="CENTER">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lblAyuda" alignment="CENTER" onMouseClicked="#mostrarAyuda" prefHeight="36.0" prefWidth="122.0" text="AYUDA" textFill="WHITE" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Arial" size="26.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <JFXButton fx:id="btnguardar" buttonType="RAISED" prefHeight="38.0" prefWidth="138.0" ripplerFill="#2ebb9f" style="-fx-background-color: #2ebb9f;" text="GUARDAR" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="imgAudio" fitHeight="44.0" fitWidth="47.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../imagenes/audio.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets right="50.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                        <JFXTextArea fx:id="txtayuda" editable="false" opacity="0.66" style="-fx-background-color: #FFFFFF;" styleClass="letra" stylesheets="@../styles/Styles.css" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="20.0" top="5.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </JFXTextArea>
+                        <ImageView fx:id="imgAyuda" fitHeight="44.0" fitWidth="51.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../imagenes/ayuda.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets right="100.0" />
+                           </GridPane.margin>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+                  <JFXButton fx:id="btnFinalizar1" buttonType="RAISED" layoutX="780.0" layoutY="462.0" onAction="#mostrarPrediagnostico" prefHeight="38.0" prefWidth="138.0" ripplerFill="#79b1b1" style="-fx-background-color: #79b1b1;" text="Finalizar" />
+               </children></AnchorPane>
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="980.0" style="-fx-background-color: #FFFFFF;">
+               <children>
+                  <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="lblPaciente" alignment="CENTER" layoutX="2.0" layoutY="-1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="1020.0" style="-fx-background-color: #4D92DF;" text="Bienvenido " textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Italic" size="25.0" />
+                           </font>
+                        </Label>
+                        <JFXRadioButton fx:id="rbtnTPoca" layoutX="158.0" layoutY="375.0" text="Ocasionalmente">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="grupoPregunta" />
+                           </toggleGroup>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtnTPsiempre" layoutX="688.0" layoutY="375.0" text="Siempre" toggleGroup="$grupoPregunta">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtnTPnunca" layoutX="37.0" layoutY="375.0" text="Nunca" toggleGroup="$grupoPregunta">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtnTPavc" layoutX="373.0" layoutY="375.0" text="A veces" toggleGroup="$grupoPregunta">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="rbtnTPcs" layoutX="512.0" layoutY="375.0" text="Casi siempre" toggleGroup="$grupoPregunta">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </JFXRadioButton>
+                        <Pane layoutX="14.0" layoutY="162.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="210.0" prefWidth="910.0" style="-fx-background-color: #FFFFFF;">
+                           <children>
+                              <JFXTextArea fx:id="txtpregunta" editable="false" layoutX="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="184.0" prefWidth="901.0" style="-fx-background-color: #FFFFFF;">
+                                 <font>
+                                    <Font name="Century Gothic" size="32.0" />
+                                 </font>
+                              </JFXTextArea>
+                              <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="819.0" layoutY="117.0">
+                                 <image>
+                                    <Image url="@../imagenes/audio.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <JFXButton fx:id="btnFinalizar" buttonType="RAISED" layoutX="321.0" layoutY="452.0" onAction="#mostrarPrediagnostico" prefHeight="38.0" prefWidth="138.0" ripplerFill="#79b1b1" style="-fx-background-color: #79b1b1;" text="Finalizar" />
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
