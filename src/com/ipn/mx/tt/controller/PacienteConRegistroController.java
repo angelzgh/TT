@@ -28,6 +28,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import java.util.List;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.AnchorPane;
 import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
 
 /**
@@ -53,6 +54,10 @@ public class PacienteConRegistroController implements Initializable {
     }
 
     private List pacientes;
+
+    @FXML
+    private AnchorPane panelP;
+
     @FXML
     private JFXButton btnPriniciar;
 
@@ -71,12 +76,13 @@ public class PacienteConRegistroController implements Initializable {
     private TableColumn<PacienteTabla, String> test;
     @FXML
     private TableColumn<PacienteTabla, String> columnaEdad;
-    
-        @FXML
+
+    @FXML
     private JFXButton btnPpregiagnostico;
-    
+    @FXML
+    private JFXButton volverPacienteR;
+
     private ObservableList<PacienteTabla> ol;
-    
 
     @FXML
     void buscarPaciente(KeyEvent event) {
@@ -87,11 +93,10 @@ public class PacienteConRegistroController implements Initializable {
             if (busqueda.length() > 2) {
                 ol.clear();
                 LinkedList ls = new LinkedList();
-                pacientes.forEach((l) ->
-                {
-                    Paciente p=new Paciente((DBObject) l);
-                    if(p.getCURP().contains(curp))
-                    {
+                pacientes.forEach((l)
+                        -> {
+                    Paciente p = new Paciente((DBObject) l);
+                    if (p.getCURP().contains(curp)) {
                         ls.add(p);
                     }
                 });
@@ -189,7 +194,24 @@ public class PacienteConRegistroController implements Initializable {
     }
 
     public void directoEspecialista() {
-        directoEspecialista=true;
+        directoEspecialista = true;
+    }
+
+    @FXML
+    void verPrediagnostico(ActionEvent event) {
+        if (tabla.getSelectionModel().getSelectedItem() != null) {
+            PacienteTabla pt = tabla.getSelectionModel().getSelectedItem();
+            pt.setOrigen(getPaciente(pt.getCURP().getValue()));
+
+            PacienteNuevoController pnc = (PacienteNuevoController) cv.cambiarVista("/Center/PacienteNuevo.fxml", panelP);
+            pnc.setC(c);
+            pnc.ponerPaciente(pt.getOrigen());
+            pnc.funcionActualizar();
+//        pnc.setBorder();
+        } else {
+            CustomMessage cm = new CustomMessage("Advertencia", "Seleccione un paciente", 0);
+        }
+
     }
 
 }

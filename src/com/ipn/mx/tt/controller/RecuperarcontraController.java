@@ -7,6 +7,9 @@ package com.ipn.mx.tt.controller;
  */
 import com.ipn.mx.tt.dao.PreguntaSeguridadDAO;
 import com.ipn.mx.tt.dao.UsuarioDAO;
+import com.ipn.mx.tt.modelo.PreguntaSeguridadRespondida;
+import com.ipn.mx.tt.modelo.Usuario;
+import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.Validador;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
@@ -59,7 +62,18 @@ public class RecuperarcontraController implements Initializable {
                 correo = v.validarTF(txtCorreo);
         if (ud.correoExiste(correo)) {
             System.out.println(pregunta + respuesta);
-
+            String usuario = ud.correoDeUsuario(correo);
+            Usuario u = new Usuario(ud.getUsuario(usuario));
+            System.out.println(u.toString());
+            PreguntaSeguridadRespondida psr = psd.getPregunta(usuario);
+            if (psr.getPregunta().equals(pregunta) && psr.getRespuesta().equals(respuesta)) {
+                CustomMessage cm = new CustomMessage("Aviso", "Se envío un correo a tu dirección registrada.", 0);
+                System.out.println("CONFIRMADO");
+            } else {
+                CustomMessage cm = new CustomMessage("ERROR", "Verifica tu información", 2);
+            }
+        } else {
+            CustomMessage cm = new CustomMessage("ERROR", "El correo proporcionado no esta relacionado a ningún usuario registrado", 0);
         }
 
     }

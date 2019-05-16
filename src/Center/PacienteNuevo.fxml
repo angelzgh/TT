@@ -116,7 +116,7 @@
                         <Insets bottom="20.0" />
                      </opaqueInsets>
                      <GridPane.margin>
-                        <Insets right="70.0" />
+                        <Insets />
                      </GridPane.margin>
                      <cursor>
                         <Cursor fx:constant="HAND" />
@@ -178,6 +178,31 @@
                         <Insets left="70.0" />
                      </GridPane.margin>
                   </Label>
+                  <JFXButton fx:id="btnPnrActualizar" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#actualizarPaciente" prefHeight="28.0" prefWidth="162.0" ripplerFill="WHITE" style="-fx-background-color: #B1F4AD;" text="Actualizar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="btnVolverP" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#volverPaciente" prefHeight="28.0" prefWidth="162.0" ripplerFill="WHITE" style="-fx-background-color: #B1F4AD;" text="Volver" GridPane.rowIndex="9">
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets bottom="20.0" />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <GridPane.margin>
+                        <Insets left="70.0" />
+                     </GridPane.margin>
+                  </JFXButton>
                </children>
             </GridPane>
          </center>
