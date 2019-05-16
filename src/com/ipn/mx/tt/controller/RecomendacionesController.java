@@ -12,6 +12,9 @@ import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -23,8 +26,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperPrintManager;
 import net.sf.jasperreports.view.JasperViewer;
 
 /**
@@ -121,7 +126,7 @@ public class RecomendacionesController implements Initializable {
 
     }
     @FXML
- void PDF(ActionEvent event) throws JRException {
+ void PDF(ActionEvent event) throws JRException, IOException {
 HashMap parametros=new HashMap();
 String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
 System.out.println(master);
@@ -172,8 +177,12 @@ parametros.put("sexo",paciente.getSexo());
 parametros.put("curp",paciente.getCURP());
 parametros.put("escolaridad",paciente.getEscolaridad());
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
-JasperViewer.viewReport(informe,false);
-    
+//JasperViewer.viewReport(informe,false);
+// Lo exportamos!
+JasperExportManager.exportReportToPdfFile(informe,"C://TT//"+paciente.getNombre()+ ".pdf");
+String file = new String("C://TT//"+paciente.getNombre()+ ".pdf");
+//definiendo la ruta en la propiedad file
+Runtime.getRuntime().exec("cmd /c start "+file);
 }
 
     @FXML
