@@ -16,10 +16,10 @@
         <items>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="260.0" styleClass="l" stylesheets="@../styles/Styles.css">
                <children>
-                  <JFXButton fx:id="btnRimprimir" layoutX="52.0" layoutY="285.0" onAction="#imprimirRecomendacion" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Imprimir" />
+                  <JFXButton fx:id="btnRimprimir" layoutX="52.0" layoutY="285.0" onAction="#PDF" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Imprimir" />
                   <JFXButton fx:id="btnRenviarcorreo" layoutX="39.0" layoutY="348.0" onAction="#enviarEmailRecomendacion" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #FECD7C;" text="Enviar por correo" />
                   <JFXButton fx:id="btnRcerrar" layoutX="23.0" layoutY="419.0" onAction="#verRecomendacion" prefHeight="31.0" prefWidth="150.0" ripplerFill="#e26363c9" style="-fx-background-color: #e26363;" text="Ver reporte completo" />
-                  <JFXButton fx:id="btnVolver" layoutX="52.0" layoutY="42.0" onAction="#regresarPrediagnostico" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Imprimir" />
+                  <JFXButton fx:id="btnVolver" layoutX="52.0" layoutY="42.0" onAction="#regresarPrediagnostico" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Volver" />
                </children></AnchorPane>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0">
                <children>
