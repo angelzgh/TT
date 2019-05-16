@@ -62,15 +62,17 @@ public class UsuarioDAO extends DocumentoDAO {
         DBCursor cursor = cjm.getMongoCollection().find(query);
         return cursor.hasNext();
     }
-        public boolean correoExiste(String correo) {
+
+    public boolean correoExiste(String correo) {
         DBObject query = new BasicDBObject("Correo", correo);
         DBCursor cursor = cjm.getMongoCollection().find(query);
         return cursor.hasNext();
     }
-                public String correoDeUsuario(String correo) {
+
+    public String correoDeUsuario(String correo) {
         DBObject query = new BasicDBObject("Correo", correo);
         DBCursor cursor = cjm.getMongoCollection().find(query);
-        return (String)cursor.one().get("_id");
+        return (String) cursor.one().get("_id");
     }
 
     public boolean actualizarDatos(Usuario text) {
@@ -105,5 +107,11 @@ public class UsuarioDAO extends DocumentoDAO {
             return false;
         }
     }
-    
+
+    public DBObject getUsuario(String usuario) {
+        DBObject query = new BasicDBObject("_id", usuario);
+        DBCursor cursor = cjm.getMongoCollection().find(query);
+        return cursor.one();
+    }
+
 }

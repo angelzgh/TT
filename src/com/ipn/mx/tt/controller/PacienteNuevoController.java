@@ -18,6 +18,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -90,12 +91,17 @@ public class PacienteNuevoController implements Initializable {
 
     @FXML
     private JFXComboBox cbxescolaridad;
+    @FXML
+    private JFXButton btnPnrActualizar;
 
+    @FXML
+    private JFXButton btnVolverP;
+    @FXML
+    private JFXButton volverPacienteR;
     private BorderPane bp;
 
     ObservableList<String> items = FXCollections.observableArrayList("Sin estudios", "Primaria",
             "Secundaria", "Preparatoria", "Licenciatura", "Maestria", "Doctorado");
-
 
     /**
      * Initializes the controller class.
@@ -112,8 +118,9 @@ public class PacienteNuevoController implements Initializable {
         cad = new CuestionarioAplicadoDAO();
         cad.conectar();
         cbxescolaridad.setItems(items);
-        
-        cbxescolaridad.setValue("-");
+        cbxescolaridad.setPromptText("-");
+        btnPnrActualizar.setVisible(false);
+        btnVolverP.setVisible(false);
         // TODO
     }
 
@@ -183,5 +190,37 @@ public class PacienteNuevoController implements Initializable {
         System.out.println(ic.toString());
         System.out.println(p.toString());
 
+    }
+
+    @FXML
+    public void actualizarPaciente(ActionEvent event) {
+
+    }
+
+    @FXML
+    public void volverPaciente(ActionEvent event) {
+        PacienteConRegistroController pcrc = (PacienteConRegistroController) cv.cambiarVista("/Center/PacienteConRegistro.fxml", panelP);
+        pcrc.setC(c);
+    }
+
+    public void ponerPaciente(Paciente p) {
+        txtPnCURP.setText(p.getCURP());
+        txtPnapellido.setText(p.getApellido());
+        txtPncorreo.setText(p.getCorreo());
+        txtPndireccion.setText(p.getDireccion());
+        txtPnnombre.setText(p.getNombre());
+        txtPntelefono.setText(p.getTelefono());
+        if (p.getSexo().equals("F")) {
+            rbPfemenino.setSelected(true);
+        } else {
+            rbPmasculino.setSelected(true);
+        }
+        cbxescolaridad.setValue(p.getEscolaridad());
+    }
+
+    public void funcionActualizar() {
+        btnPnrActualizar.setVisible(true);
+        btnPnregistrar.setVisible(false);
+        btnVolverP.setVisible(true);
     }
 }
