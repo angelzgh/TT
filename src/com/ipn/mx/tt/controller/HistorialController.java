@@ -115,10 +115,14 @@ public class HistorialController implements Initializable {
     @FXML
     private void verPrediagnostico(ActionEvent event) {
         if (tblPpre.getSelectionModel().getSelectedItem() != null) {
-            HistorialvistaController hc = (HistorialvistaController) cv.cambiarVista("/Center/Historialvista.fxml", mc.getPanelPrin());
-            hc.setMc(mc);
-            hc.setNumPaciente(Double.parseDouble(tblPpre.getSelectionModel().getSelectedItem().getNumeroCuestionario().getValue()));
-            hc.cargarTablas();
+            PrediagnosticoController pc = (PrediagnosticoController) cv.cambiarVista("/Center/Prediagnostico.fxml", mc.getPanelPrin());
+            InfoCuestionario ic
+                    = cad.traerInfo(Double.valueOf(tblPpre.getSelectionModel().getSelectedItem().getNumeroCuestionario().get()));
+            pc.setMc(mc);
+            pc.setIc(ic);
+            System.out.println(ic.toString());
+            pc.cargarResultadosPred();
+            //pc.startgrafica();
         } else {
             CustomMessage cm = new CustomMessage("ERROR", "Seleccione un Prediagnostico.", 2);
         }

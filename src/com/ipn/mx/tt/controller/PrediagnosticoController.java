@@ -5,6 +5,7 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.PrediagnosticoDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
@@ -41,6 +42,7 @@ public class PrediagnosticoController implements Initializable {
     private InfoCuestionario ic;
     private Paciente paciente;
     private Conducta conducta;
+    private PrediagnosticoDAO pdd;
 
     @FXML
     private AnchorPane panelPrin;
@@ -154,7 +156,6 @@ public class PrediagnosticoController implements Initializable {
         this.conducta = conducta;
     }
 
-    
     @FXML
     void guardarCuestionario(ActionEvent event) {
         test.guardarCuestionario(ic.getIdCuestionario());
@@ -163,6 +164,8 @@ public class PrediagnosticoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cv = new cargadorVista();
+        pdd=new PrediagnosticoDAO();
+        pdd.conectar();
         btnGuardar.setVisible(false);
     }
 
@@ -212,7 +215,7 @@ public class PrediagnosticoController implements Initializable {
         lblDuracion.setText(dt1.format(test.getDuracion()) + "minutos");
         lblInicio.setText(dt.format(test.getInicioCuestionario()));
         lblTermino.setText(dt.format(test.getFinCuestionario()));
-        lblCuestionario.setText(ic.getIdCuestionario()+"");
+        lblCuestionario.setText(ic.getIdCuestionario() + "");
     }
 
     public void startgrafica() {
@@ -372,7 +375,7 @@ public class PrediagnosticoController implements Initializable {
         pc.setConducta(conducta);
         pc.setPaciente(paciente);
         pc.configurarVista();
-        
+
     }
 
     public void darClickBotonGuardar() {
@@ -383,5 +386,34 @@ public class PrediagnosticoController implements Initializable {
 
     public void habilitarBotonGuardar() {
         btnGuardar.setVisible(true);
+    }
+
+    public void cargarResultadosPred() {
+        //Prediagnostico p1;
+        pdd.traerTrastorno(ic.getIdCuestionario(), 1.0);
+        
+        pdd.traerTrastorno(ic.getIdCuestionario(), 2.0);
+        DecimalFormat df = new DecimalFormat("#.00");
+//        ihsdq.setText("" + df.format(test.getTrastorno(1, 1)));
+//        is50.setText("" + df.format(test.getTrastorno(2, 1)));
+//        rchsdq.setText("" + df.format(test.getTrastorno(1, 2)));
+//        rcs50.setText("" + df.format(test.getTrastorno(2, 2)));
+//        pihsdq.setText("" + df.format(test.getTrastorno(1, 3)));
+//        pis50.setText("" + df.format(test.getTrastorno(2, 3)));
+//        ahsdq.setText("" + df.format(test.getTrastorno(1, 4)));
+//        as50.setText("" + df.format(test.getTrastorno(2, 4)));
+//        hhsdq.setText("" + df.format(test.getTrastorno(1, 5)));
+//        hs50.setText("" + (test.getTrastorno(2, 5)));
+//        nhsdq.setText("" + (test.getTrastorno(1, 6)));
+//        ns50.setText("" + df.format(test.getTrastorno(2, 6)));
+//        ohsdq.setText("" + (test.getTrastorno(1, 7)));
+//        os50.setText("" + df.format(test.getTrastorno(2, 7)));
+
+//        SimpleDateFormat dt = new SimpleDateFormat("hh:mm:ss");
+//        SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
+//        lblDuracion.setText(dt1.format(test.getDuracion()) + "minutos");
+//        lblInicio.setText(dt.format(test.getInicioCuestionario()));
+//        lblTermino.setText(dt.format(test.getFinCuestionario()));
+        lblCuestionario.setText(ic.getIdCuestionario() + "");
     }
 }

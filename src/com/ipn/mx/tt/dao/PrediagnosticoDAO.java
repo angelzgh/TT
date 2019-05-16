@@ -7,6 +7,7 @@ package com.ipn.mx.tt.dao;
 
 import com.ipn.mx.tt.modelo.Cuestionario;
 import com.mongodb.BasicDBObject;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
 /**
@@ -36,6 +37,14 @@ public class PrediagnosticoDAO extends DocumentoDAO {
 
         cjm.getMongoCollection().insert(dbo);
     }
-    
+
+    public DBObject traerTrastorno(Double idCuestionario, Double numCuestionario) {
+        DBObject dbo = new BasicDBObject("_numCuestionario", numCuestionario)
+                .append("_idCuestionario", idCuestionario);
+        DBCursor cursor = cjm.getMongoCollection().find(dbo);
+        System.out.println(cursor.toArray());
+        //System.out.println(cursor.one().toString());
+        return dbo;
+    }
 
 }

@@ -108,6 +108,7 @@ public class TestEspecialistaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        cv = new cargadorVista();
         // TODO
         rbtnTEnunca.setOnAction((event) -> {
             contestarPregunta(1);
@@ -138,7 +139,7 @@ public class TestEspecialistaController implements Initializable {
 
     @FXML
     private void mostrarPrediagnostico(ActionEvent ae) {
-        cv = new cargadorVista();
+        
         PrediagnosticoController pc = (PrediagnosticoController) cv.cambiarVista("/Center/Prediagnostico.fxml", mc.getPanelPrin());
         test.getFinCuestionario();
         test.getDuracion();
@@ -146,7 +147,6 @@ public class TestEspecialistaController implements Initializable {
         pc.setMc(mc);
         pc.setIc(ic);
         pc.habilitarBotonGuardar();
-
         pc.cargarResultados();
         pc.startgrafica();
 
