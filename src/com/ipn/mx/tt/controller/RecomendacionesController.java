@@ -120,22 +120,21 @@ public class RecomendacionesController implements Initializable {
     }
     @FXML
  void PDF(ActionEvent event) throws JRException {
-
+HashMap parametros=new HashMap();
 String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
 System.out.println(master);
-HashMap parametros=new HashMap();
 
-parametros.put("nombre","");
-parametros.put("apellidos","");
-parametros.put("edad","23");
-parametros.put("sexo","");
-parametros.put("trabaja","Si");
-parametros.put("diatrabaja","Viernes");
-parametros.put("diast","5");
-parametros.put("hpdiasd","8");
-parametros.put("hpdiast","6");
-parametros.put("diasd","2");
-parametros.put("hpsueño","7");
+  parametros.put("trabaja","no");  
+parametros.put("diatrabaja","No aplica");
+parametros.put("diast","No aplica");
+parametros.put("hpdiasd","No aplica");
+parametros.put("hpdiast","No aplica");
+parametros.put("diasd","No aplica");
+parametros.put("hpsueño","No aplica");
+parametros.put("nombre",paciente.getNombre());
+parametros.put("apellidos",paciente.getApellido());
+parametros.put("edad",paciente.getEdad());
+parametros.put("sexo",paciente.getSexo());
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 JasperViewer.viewReport(informe,false);
     

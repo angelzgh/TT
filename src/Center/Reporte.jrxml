@@ -6,7 +6,7 @@
 	<style name="Crosstab Data Text"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="apellidos" class="java.lang.String"/>
-	<parameter name="edad" class="java.lang.String"/>
+	<parameter name="edad" class="java.lang.Integer"/>
 	<parameter name="sexo" class="java.lang.String"/>
 	<parameter name="trabaja" class="java.lang.String"/>
 	<parameter name="diatrabaja" class="java.lang.String"/>
@@ -27,10 +27,6 @@
 				</textElement>
 				<text><![CDATA[INSTITUTO NACIONAL DE PQUIATRÍA RAMÓN DE LA FUENTE MUÑIZ]]></text>
 			</staticText>
-			<image>
-				<reportElement x="0" y="0" width="156" height="65"/>
-				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Temp\\Documents\\NetBeansProjects\\TT\\src\\main\\resources\\imagenes\\inp.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement mode="Opaque" x="398" y="59" width="46" height="20" forecolor="#CC3300" backcolor="#CCCCCC"/>
 				<textElement>
@@ -38,6 +34,10 @@
 				</textElement>
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
+			<image>
+				<reportElement x="9" y="0" width="164" height="59"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Temp\\Documents\\NetBeansProjects\\Prueba\\TT\\src\\imagenes\\inp.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -59,7 +59,7 @@
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="69" splitType="Stretch">
+		<band height="84" splitType="Stretch">
 			<staticText>
 				<reportElement x="22" y="0" width="56" height="16" forecolor="#003333"/>
 				<textElement>
@@ -110,13 +110,8 @@
 			</line>
 			<textField>
 				<reportElement x="156" y="14" width="353" height="20"/>
-				<textElement textAlignment="Center"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{apellidos}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="2" y="49" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{edad}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="186" y="48" width="100" height="20"/>
@@ -127,6 +122,11 @@
 				<reportElement x="20" y="16" width="90" height="14"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="22" y="51" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$P{edad}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
