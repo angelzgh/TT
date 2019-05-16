@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="35"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Crosstab Data Text"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="apellidos" class="java.lang.String"/>
@@ -38,8 +38,8 @@
 				<text><![CDATA[Fecha]]></text>
 			</staticText>
 			<image>
-				<reportElement x="9" y="0" width="164" height="59"/>
-				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Temp\\Documents\\NetBeansProjects\\Prueba\\TT\\src\\imagenes\\inp.png"]]></imageExpression>
+				<reportElement x="0" y="13" width="163" height="52"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Users\\Temp\\Documents\\NetBeansProjects\\TT\\src\\imagenes\\inp.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
