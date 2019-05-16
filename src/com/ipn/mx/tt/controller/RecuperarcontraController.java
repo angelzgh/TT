@@ -10,6 +10,7 @@ import com.ipn.mx.tt.dao.UsuarioDAO;
 import com.ipn.mx.tt.modelo.PreguntaSeguridadRespondida;
 import com.ipn.mx.tt.modelo.Usuario;
 import com.ipn.mx.tt.util.CustomMessage;
+import com.ipn.mx.tt.util.Email;
 import com.ipn.mx.tt.util.Validador;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
@@ -17,6 +18,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +27,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javax.mail.MessagingException;
 
 /**
  * FXML Controller class
@@ -67,8 +71,14 @@ public class RecuperarcontraController implements Initializable {
             System.out.println(u.toString());
             PreguntaSeguridadRespondida psr = psd.getPregunta(usuario);
             if (psr.getPregunta().equals(pregunta) && psr.getRespuesta().equals(respuesta)) {
-                CustomMessage cm = new CustomMessage("Aviso", "Se envío un correo a tu dirección registrada.", 0);
-                System.out.println("CONFIRMADO");
+                try {
+                    CustomMessage cm = new CustomMessage("Aviso", "Se envío un correo a tu dirección registrada.", 0);
+                    System.out.println("CONFIRMADO");
+                    Email e=new Email(u.getNombre(), u.getApellido(), u.getId(),u.getCorreo(), u.getContraseña());
+                    e.send();
+                } catch (MessagingException ex) {
+                    Logger.getLogger(RecuperarcontraController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             } else {
                 CustomMessage cm = new CustomMessage("ERROR", "Verifica tu información", 2);
             }
