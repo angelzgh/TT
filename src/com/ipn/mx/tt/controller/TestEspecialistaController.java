@@ -6,7 +6,6 @@
 package com.ipn.mx.tt.controller;
 
 import com.ipn.mx.tt.modelo.InfoCuestionario;
-import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.Pregunta;
 import com.ipn.mx.tt.modelo.SintomaPregunta;
 import com.ipn.mx.tt.modelo.Test;
@@ -210,7 +209,7 @@ public class TestEspecialistaController implements Initializable {
 
     void contestarPregunta(int valor) {
 
-        if (!test.cuestionarioCompletado()) {
+        while (!test.cuestionarioCompletado()) {
             ThreadPregunta tp = new ThreadPregunta(3, rbtnTEcs, rbtnTEavc, rbtnTEnunca, rbtnTEoca, rbtnTEsiempre, regresar);
             //tp.runClock();
             //AGREGAR A LA VISTA

@@ -3,6 +3,7 @@ package com.ipn.mx.tt.controller;
 import com.ipn.mx.tt.dao.UsuarioDAO;
 import com.ipn.mx.tt.modelo.Usuario;
 import com.ipn.mx.tt.util.CustomMessage;
+import com.ipn.mx.tt.util.cargadorVista;
 import com.ipn.mx.tt.util.movEscena;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -24,8 +25,10 @@ import javafx.scene.media.MediaPlayer;
 public class LoginController implements Initializable {
 
     private movEscena mov;
+    private cargadorVista cv;
     private UsuarioDAO udao;
 
+    
     @FXML
     private Label lblStatus;
 
@@ -43,6 +46,15 @@ public class LoginController implements Initializable {
     @FXML
     private AnchorPane login;
 
+    public UsuarioDAO getUdao() {
+        return udao;
+    }
+
+    public void setUdao(UsuarioDAO udao) {
+        this.udao = udao;
+    }
+
+    
     @FXML
     void btnActionPrueba(ActionEvent event) {
 //        UsuarioDAO udao = new UsuarioDAO();
@@ -107,13 +119,15 @@ public class LoginController implements Initializable {
         mov = new movEscena();
         udao=new UsuarioDAO();
         udao.conectar();
+        cv=new cargadorVista();
         
         // txtPass.getStyleClass().setAll("btn", "btn-primary");
     }
 
     @FXML
     void irMenuRecuperarContra(MouseEvent event) {
-        mov.cambiarEscena(event, "Recuperarcontra.fxml");
+        RecuperarcontraController rcc=(RecuperarcontraController)cv.cambiarVista("/Center/Recuperarcontra.fxml",login);
+        rcc.setUd(udao);
     }
 
 }

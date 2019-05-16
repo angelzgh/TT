@@ -97,7 +97,7 @@
                                     <TableColumn fx:id="columnaHM" editable="false" prefWidth="48.0" resizable="false" text="Media" />
                                     <TableColumn fx:id="columnaS50" editable="false" prefWidth="48.0" resizable="false" text="S50" />
                                     <TableColumn fx:id="columnaS50M" prefWidth="63.0" resizable="false" text="Media" />
-                                    <TableColumn fx:id="columnaTrastornoR1" prefWidth="110.0" resizable="false" text="Detectado" />
+                                    <TableColumn fx:id="columnaDetectado" prefWidth="110.0" resizable="false" text="Detectado" />
                                  </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

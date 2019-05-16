@@ -81,6 +81,7 @@ public class RecuperarcontraController implements Initializable {
     @FXML
     void cancelarCambio(ActionEvent event) {
         LoginController lc = (LoginController) cv.cambiarVista("/Center/Login.fxml", panelPrincipal);
+        lc.setUdao(ud);
     }
 
     /**
@@ -91,9 +92,7 @@ public class RecuperarcontraController implements Initializable {
         // TODO
         v = new Validador();
         psd = new PreguntaSeguridadDAO();
-        ud = new UsuarioDAO();
         psd.conectar();
-        ud.conectar();
 
         cv = new cargadorVista();
         ObservableList<String> itemsP = FXCollections.observableArrayList(
@@ -110,5 +109,14 @@ public class RecuperarcontraController implements Initializable {
                 "Película favorita");
         cmbpreguntaseguridad.setItems(itemsP);
     }
+
+    public UsuarioDAO getUd() {
+        return ud;
+    }
+
+    public void setUd(UsuarioDAO ud) {
+        this.ud = ud;
+    }
+   
 
 }
