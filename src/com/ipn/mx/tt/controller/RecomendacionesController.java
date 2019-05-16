@@ -11,7 +11,9 @@ import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -123,18 +125,52 @@ public class RecomendacionesController implements Initializable {
 HashMap parametros=new HashMap();
 String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
 System.out.println(master);
+String edad = Integer.toString(paciente.getEdad());
+String diatrabaja ="";
+String horariot = "";
+if(conducta.getJornadaLaboral()==3){
+diatrabaja = "Domingo";
+}else if(conducta.getJornadaLaboral()==2){
+diatrabaja = "Sabado";
+}else if(conducta.getJornadaLaboral()==1){
+diatrabaja = "Viernes";
+}
+if(conducta.getHorarioTrabajo()==1){
+horariot = "Fijo";
+}else if(conducta.getHorarioTrabajo()==2){
+horariot = "Por turnos";    
+}else if(conducta.getHorarioTrabajo()==3){
+horariot = "Sin horario fijo";
+}
+String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
+String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
+String diasd = Double.toString(conducta.getDiasDeDescanso());
+String hpsueño = Double.toString(conducta.getPromedioHoras());
 
-  parametros.put("trabaja","no");  
+if(conducta.isTrabaja()){
+    parametros.put("trabaja","Sí");  
+parametros.put("diatrabaja",diatrabaja);
+parametros.put("horariot",horariot);
+parametros.put("hpdiasd",hpdiasd);
+parametros.put("hpdiast",hpdiast);
+parametros.put("diasd",diasd);
+parametros.put("hpsueño","No aplica");
+}else{
+parametros.put("trabaja","No");  
 parametros.put("diatrabaja","No aplica");
-parametros.put("diast","No aplica");
+parametros.put("horariot","No aplica");
 parametros.put("hpdiasd","No aplica");
 parametros.put("hpdiast","No aplica");
 parametros.put("diasd","No aplica");
-parametros.put("hpsueño","No aplica");
+parametros.put("hpsueño",hpsueño);
+
+}
 parametros.put("nombre",paciente.getNombre());
 parametros.put("apellidos",paciente.getApellido());
-parametros.put("edad",paciente.getEdad());
+parametros.put("edads",edad);
 parametros.put("sexo",paciente.getSexo());
+parametros.put("curp",paciente.getCURP());
+parametros.put("escolaridad",paciente.getEscolaridad());
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 JasperViewer.viewReport(informe,false);
     
