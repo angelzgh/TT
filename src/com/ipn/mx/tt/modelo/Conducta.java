@@ -48,11 +48,12 @@ public class Conducta {
         this.trabaja = (Boolean) dbo.get("Trabaja");
         this.horarioTrabajo = (Double) dbo.get("HorarioTrabajo");
         this.jornadaLaboral =  (Double) dbo.get("JornadaLaboral");
-        this.diasDeDescanso =  (Double) dbo.get("DiasDeDescanso");
+        this.diasDeDescanso =  (Double) dbo.get("DiasDescanso");
         this.promedioHoras =  (Double) dbo.get("PromedioHoras");
         this.promedioHorasLaborales = (Double) dbo.get("PromedioHorasL");
         this.horasDeTrabajo = (Double) dbo.get("HorasTrabajo");
-        this.promedioHorasDescanso = (Double) dbo.get("promedioHorasD");
+        this.promedioHorasDescanso = (Double) dbo.get("PromedioHorasD");
+        this.numCuestionario = (Double) dbo.get("_numCuestionario");
     }
 
     public Double getPromedioHoras() {

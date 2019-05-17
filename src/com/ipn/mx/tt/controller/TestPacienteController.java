@@ -149,8 +149,8 @@ public class TestPacienteController implements Initializable {
                         //CREAR habitos de sueño y mandar  datos obtenidos
                         System.out.println("CUESTIONARIO SIN CONTESTAR");
                         //CUESTIONARIO NUEVO
-                            datosPaciente=true;
-                        cargarTest();
+                        datosPaciente = true;
+                        cargarConducta();
                     }
                     if (status == 1) {
                         //CARGAR HABITOS DE SUEÑO Y ORDEN PREGUNTAS...
@@ -172,17 +172,30 @@ public class TestPacienteController implements Initializable {
     }
 
     public void cargarTest() {
+
         TestPacientePreguntasController tppc = (TestPacientePreguntasController) cv.cambiarVista("/Center/TestPacientePreguntas.fxml", mc.getPanelPrin());
         tppc.setMc(mc);
         tppc.setTipoCuestionario(tipoCuestionario);
         tppc.iniciarTest();
         tppc.setPaciente(paciente);
-        
+
         if (datosPaciente) {
             tppc.setIc(ic);
             tppc.setConducta(conducta);
             tppc.ponerPaciente();
         }
+    }
+
+    public void cargarConducta() {
+            InstruccionesTestController itc
+                    = (InstruccionesTestController) cv.cambiarVista("/Center/InstruccionesTest.fxml", mc.getPanelPrin());
+            itc.setMc(mc);
+            itc.setTipoCuestionario(tipoCuestionario);
+            itc.setPaciente(paciente);
+            if (datosPaciente) {
+                itc.setIc(ic);
+            }
+            itc.setDatosPaciente(datosPaciente);
     }
 
     @Override

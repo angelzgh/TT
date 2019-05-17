@@ -5,7 +5,9 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.ConductaDAO;
 import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
+import com.ipn.mx.tt.dao.PacienteDAO;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.PacienteTabla;
@@ -36,6 +38,8 @@ public class HistorialController implements Initializable {
     private cargadorVista cv;
     private menuController mc;
     private CuestionarioAplicadoDAO cad;
+    private ConductaDAO cd;
+    private PacienteDAO pd;
     private List cuestionarios;
     private ObservableList<PrediagnosticoTabla> ptol;
     private Validador v;
@@ -73,6 +77,10 @@ public class HistorialController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cv = new cargadorVista();
         cad = new CuestionarioAplicadoDAO();
+        cd= new ConductaDAO();
+        pd=new PacienteDAO();
+        cd.conectar();
+        pd.conectar();
         cad.conectar();
         ptol = FXCollections.observableArrayList();
         columnCURP.setCellValueFactory(cellData -> cellData.getValue().getNombre());
@@ -119,10 +127,15 @@ public class HistorialController implements Initializable {
             InfoCuestionario ic
                     = cad.traerInfo(Double.valueOf(tblPpre.getSelectionModel().getSelectedItem().getNumeroCuestionario().get()));
             pc.setMc(mc);
+            
+            pc.setConducta(cd.buscarConducta(ic.getIdCuestionario()));
+            pc.setPaciente(pd.buscarPaciente(ic.getPaciente()));
             pc.setIc(ic);
-            System.out.println(ic.toString());
-            pc.cargarResultadosPred();
-            //pc.startgrafica();
+            //System.out.println(ic.toString());
+            pc.cargarResultados();
+            pc.setTestContestado(false);
+            pc.startgrafica();
+            
         } else {
             CustomMessage cm = new CustomMessage("ERROR", "Seleccione un Prediagnostico.", 2);
         }

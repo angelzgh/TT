@@ -6,9 +6,13 @@
 package com.ipn.mx.tt.dao;
 
 import com.ipn.mx.tt.modelo.Cuestionario;
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
+import com.mongodb.Cursor;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -39,12 +43,33 @@ public class PrediagnosticoDAO extends DocumentoDAO {
     }
 
     public DBObject traerTrastorno(Double idCuestionario, Double numCuestionario) {
-        DBObject dbo = new BasicDBObject("_numCuestionario", numCuestionario)
-                .append("_idCuestionario", idCuestionario);
-        DBCursor cursor = cjm.getMongoCollection().find(dbo);
-        System.out.println(cursor.toArray());
-        //System.out.println(cursor.one().toString());
-        return dbo;
+        DBObject dbo = new BasicDBObject("_numCuestionario", numCuestionario);
+        DBObject dbo1 = new BasicDBObject("_idCuestionario", idCuestionario);
+
+        BasicDBList or = new BasicDBList();
+        or.add(dbo);
+        or.add(dbo1);
+        DBObject query = new BasicDBObject("$and", or);
+        DBCursor cursor = cjm.getMongoCollection().find(query);
+        System.out.println(cursor.size());
+        while (cursor.hasNext()) {
+            System.out.println(cursor.next());
+        }
+        return cursor.one();
+    }
+
+    public LinkedList traerTrastornos(Double numCuestionario) {
+        LinkedList ls=new LinkedList();
+        DBObject dbo = new BasicDBObject("_numCuestionario", numCuestionario);
+        BasicDBList or = new BasicDBList();
+        or.add(dbo);
+        DBObject query = new BasicDBObject("$and", or);
+        DBCursor cursor = cjm.getMongoCollection().find(query);
+        System.out.println(cursor.size());
+        while (cursor.hasNext()) {
+            ls.add(cursor.next());
+        }
+        return ls;
     }
 
 }

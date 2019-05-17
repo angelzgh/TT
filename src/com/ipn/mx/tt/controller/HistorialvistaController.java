@@ -132,7 +132,7 @@ public class HistorialvistaController implements Initializable {
     }
 
     public void cargarTablas() {
-         cargarTablaPreguntas();
+        cargarTablaPreguntas();
         System.out.println("dfsdfsdfds" + numPaciente);
         cargarTablaTrastornos();
     }
@@ -141,7 +141,7 @@ public class HistorialvistaController implements Initializable {
         for (int i = 1; i < 70; i++) {
 
             PreguntaTabla pt = pcd.getPregunta(i, numPaciente.intValue());
-            Pregunta p = new Pregunta((DBObject) preguntas.get(i-1), 1);
+            Pregunta p = new Pregunta((DBObject) preguntas.get(i - 1), 1);
             pt.setPregunta(new SimpleStringProperty(p.getTexto()));
             ptol.add(pt);
 

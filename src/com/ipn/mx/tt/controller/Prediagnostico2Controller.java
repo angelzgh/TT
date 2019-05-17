@@ -5,6 +5,9 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.PrediagnosticoDAO;
+import com.ipn.mx.tt.dao.PreguntaContestadaDAO;
+import com.ipn.mx.tt.dao.PreguntaDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
@@ -13,15 +16,18 @@ import com.ipn.mx.tt.modelo.PreguntaTabla;
 import com.ipn.mx.tt.modelo.Respuesta;
 import com.ipn.mx.tt.modelo.SintomaTrastornoTabla;
 import com.ipn.mx.tt.modelo.Test;
+import com.ipn.mx.tt.modelo.TrastornoGuardado;
 import com.ipn.mx.tt.modelo.TrastornoTabla;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.mongodb.DBObject;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -29,7 +35,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
@@ -51,6 +56,12 @@ public class Prediagnostico2Controller implements Initializable {
     private ObservableList<TrastornoTabla> ttol;
     private Paciente paciente;
     private Conducta conducta;
+    private Boolean testContestado;
+    private PreguntaContestadaDAO pcd;
+    private PreguntaDAO pd;
+    private List trastornos;
+    private LinkedList puntajes;
+    private PrediagnosticoDAO pred;
     @FXML
     private AnchorPane panelP;
     @FXML
@@ -134,6 +145,7 @@ public class Prediagnostico2Controller implements Initializable {
         pc.setPaciente(paciente);
         pc.cargarResultados();
         pc.startgrafica();
+
     }
 
     @FXML
@@ -193,11 +205,16 @@ public class Prediagnostico2Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         cv = new cargadorVista();
-
+        pcd = new PreguntaContestadaDAO();
+        pd = new PreguntaDAO();
+        pred = new PrediagnosticoDAO();
+        pd.conectar();
+        pcd.conectar();
+        pred.conectar();
         ptol = FXCollections.observableArrayList();
         sttol = FXCollections.observableArrayList();
         ttol = FXCollections.observableArrayList();
-
+        puntajes = new LinkedList();
         columnaPregunta.setCellValueFactory(cellData -> cellData.getValue().getPregunta());
         columnaRespuesta.setCellValueFactory(cellData -> cellData.getValue().getRespuesta());
 
@@ -229,6 +246,16 @@ public class Prediagnostico2Controller implements Initializable {
         tbthabitos.setItems(ptol);
         tbltrastornos.setItems(ttol);
         tblsintomas.setItems(sttol);
+
+        testContestado = true;
+    }
+
+    public Boolean getTestContestado() {
+        return testContestado;
+    }
+
+    public void setTestContestado(Boolean testContestado) {
+        this.testContestado = testContestado;
     }
 
     public void configurarVista() {
@@ -237,27 +264,74 @@ public class Prediagnostico2Controller implements Initializable {
     }
 
     public void ponerPreguntasHabitos() {
-        for (int i = 62; i < 70; i++) {
-            Respuesta r = test.obtenerRespuesta(new Double(i));
-            Pregunta p = test.getPregunta(i);
-            PreguntaTabla pt = new PreguntaTabla(r);
-            pt.setPregunta(new SimpleStringProperty(p.getTexto()));
 
-            ptol.add(pt);
+        if (test != null) {
+            for (int i = 62; i < 70; i++) {
+                Respuesta r = test.obtenerRespuesta(new Double(i));
+                Pregunta p = test.getPregunta(i);
+                PreguntaTabla pt = new PreguntaTabla(r);
+                pt.setPregunta(new SimpleStringProperty(p.getTexto()));
+
+                ptol.add(pt);
+            }
+
+        } else {
+            for (int i = 62; i < 70; i++) {
+                PreguntaTabla pt = pcd.getPregunta(i, ic.getIdCuestionario().intValue());
+                Pregunta p = pd.getPregunta(i, 1);
+                pt.setPregunta(new SimpleStringProperty(p.getTexto()));
+
+                ptol.add(pt);
+            }
         }
-
     }
 
     public void ponerPuntajes() {
 
-        ttol.add(traerTrastorno("Insomnio", 1.0));
-        ttol.add(traerTrastorno("Ritmo Circadiano", 2.0));
-        ttol.add(traerTrastorno("RLS/PLMD", 3.0));
-        ttol.add(traerTrastorno("Apnea", 4.0));
-        ttol.add(traerTrastorno("Hipersomnia", 5.0));
-        ttol.add(traerTrastorno("Narcolepsia", 6.0));
-        ttol.add(traerTrastorno("Impacto", 7.0));
+        if (test != null) {
+            ttol.add(traerTrastorno("Insomnio", 1.0));
+            ttol.add(traerTrastorno("Ritmo Circadiano", 2.0));
+            ttol.add(traerTrastorno("RLS/PLMD", 3.0));
+            ttol.add(traerTrastorno("Apnea", 4.0));
+            ttol.add(traerTrastorno("Hipersomnia", 5.0));
+            ttol.add(traerTrastorno("Narcolepsia", 6.0));
+            ttol.add(traerTrastorno("Impacto", 7.0));
+        } else {
 
+            if (trastornos.size() > 0) {
+                trastornos.forEach((t) -> {
+                    TrastornoGuardado tg = new TrastornoGuardado((DBObject) t);
+                    System.out.println(tg.toString());
+                    if (tg.getNumCuestionario().equals(ic.getIdCuestionario())) {
+                        puntajes.add(tg);
+                    }
+
+                });
+                TrastornoGuardado t1 = (TrastornoGuardado) puntajes.get(0);
+                TrastornoGuardado t2 = (TrastornoGuardado) puntajes.get(1);
+                TrastornoTabla tt = new TrastornoTabla("Insomnio", String.valueOf(t1.getInsomnio()),
+                        "29.44", String.valueOf(t2.getInsomnio()), "19");
+                TrastornoTabla tt1 = new TrastornoTabla("Ritmo Circadiano", String.valueOf(t1.getRc()),
+                        "20.46", String.valueOf(t2.getRc()), "8");
+                TrastornoTabla tt2 = new TrastornoTabla("RLS/PLMD", String.valueOf(t1.getRls()),
+                        "13.5", String.valueOf(t2.getRls()), "7");
+                TrastornoTabla tt3 = new TrastornoTabla("Apnea", String.valueOf(t1.getApnea()),
+                        "11.48", String.valueOf(t2.getApnea()), "15");
+                TrastornoTabla tt4 = new TrastornoTabla("Hipersomnia", String.valueOf(t1.getHipersomnia()),
+                        "14.5", String.valueOf(t2.getHipersomnia()), "0");
+                TrastornoTabla tt5 = new TrastornoTabla("Narcolepsia", String.valueOf(t1.getNarcolepsia()),
+                        "0", String.valueOf(t2.getNarcolepsia()), "7");
+                TrastornoTabla tt6 = new TrastornoTabla("Impacto", String.valueOf(t1.getOtro()),
+                        "0", String.valueOf(t2.getOtro()), "15");
+                ttol.add(tt);
+                ttol.add(tt1);
+                ttol.add(tt2);
+                ttol.add(tt3);
+                ttol.add(tt4);
+                ttol.add(tt5);
+                ttol.add(tt6);
+            }
+        }
     }
 
     public TrastornoTabla traerTrastorno(String trastorno, Double numTrastorno) {
@@ -268,14 +342,6 @@ public class Prediagnostico2Controller implements Initializable {
                 formatearObtenido(2, numTrastorno),
                 formatearCutoff(numTrastorno, 2.0));
         System.out.println(t.toString());
-
-        if (Double.parseDouble(t.getHsdq().get()) > Double.parseDouble(t.getHsdqM().get())
-                || Double.parseDouble(t.getS50().get()) > Double.parseDouble(t.getS50M().get())) {
-            t.setTiene(new SimpleBooleanProperty(true));
-        } else {
-
-            t.setTiene(new SimpleBooleanProperty(false));
-        }
 
         return t;
     }
@@ -295,6 +361,57 @@ public class Prediagnostico2Controller implements Initializable {
         DecimalFormat df = new DecimalFormat("#0.00");
         System.out.println(test.getCutoff(numTrastorno, numCuestionario));
         return df.format(test.getCutoff(numTrastorno, numCuestionario));
+    }
+
+    public void ponerConducta() {
+
+        System.out.println(conducta.toString());
+        if (!conducta.isTrabaja()) {
+            txttrabaja.setText("NO");
+            txthorasps.setText("" + conducta.getPromedioHoras());
+            txtdiasd.setText("-");
+            txthorassd.setText("-");
+            txthorasst.setText("-");
+            txtdriast.setText("-");
+            txtlunesa.setText("Domingo");
+            txtdriast.setText("-");
+        } else {
+
+            txttrabaja.setText("SI");
+            String diatrabaja = "";
+            String horariot = "";
+            if (conducta.getJornadaLaboral() == 3) {
+                diatrabaja = "Domingo";
+            } else if (conducta.getJornadaLaboral() == 2) {
+                diatrabaja = "Sabado";
+            } else if (conducta.getJornadaLaboral() == 1) {
+                diatrabaja = "Viernes";
+            }
+            txtlunesa.setText(diatrabaja);
+            if (conducta.getHorarioTrabajo() == 1) {
+                horariot = "Fijo";
+            } else if (conducta.getHorarioTrabajo() == 2) {
+                horariot = "Por turnos";
+            } else if (conducta.getHorarioTrabajo() == 3) {
+                horariot = "Sin horario fijo";
+            }
+            txthorario.setText(horariot);
+            String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
+            String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
+            String diasd = Double.toString(conducta.getDiasDeDescanso());
+            String hpsueño = Double.toString(conducta.getPromedioHoras());
+            txtdiasd.setText(diasd);
+            txthorassd.setText(hpdiasd);
+            txthorasst.setText(hpdiast);
+            txthorasps.setVisible(false);
+            txtdriast.setText("" + conducta.getHorasDeTrabajo());
+
+        }
+
+    }
+
+    public void configurarTrastorno() {
+        trastornos = pred.traerTrastornos(ic.getIdCuestionario());
     }
 
 }

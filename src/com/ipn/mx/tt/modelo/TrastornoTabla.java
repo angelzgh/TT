@@ -6,6 +6,7 @@
 package com.ipn.mx.tt.modelo;
 
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -27,6 +28,7 @@ public class TrastornoTabla {
         this.HsdqM = new SimpleStringProperty(HsdqM);
         this.s50 = new SimpleStringProperty(s50);
         this.s50M = new SimpleStringProperty(s50M);
+        this.getTiene();
     }
 
     
@@ -111,6 +113,13 @@ public class TrastornoTabla {
     }
 
     public BooleanProperty getTiene() {
+        if (Double.parseDouble(getHsdq().get()) > Double.parseDouble(getHsdqM().get())
+                || Double.parseDouble(getS50().get()) > Double.parseDouble(getS50M().get())) {
+            setTiene(new SimpleBooleanProperty(true));
+        } else {
+
+            setTiene(new SimpleBooleanProperty(false));
+        }
         return tiene;
     }
 
@@ -123,5 +132,6 @@ public class TrastornoTabla {
     public String toString() {
         return "TrastornoTabla{" + "Trastorno=" + Trastorno + ", Hsdq=" + Hsdq + ", HsdqM=" + HsdqM + ", s50=" + s50 + ", s50M=" + s50M + '}';
     }
+
     
 }

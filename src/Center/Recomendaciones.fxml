@@ -32,13 +32,13 @@
                         </Label>
                         <TableView fx:id="tblRtrastornos" layoutX="112.0" layoutY="54.0" prefHeight="93.0" prefWidth="721.0">
                            <columns>
-                              <TableColumn prefWidth="375.0" text="Trastorno(s)" />
-                              <TableColumn editable="false" prefWidth="345.0" resizable="false" text="Intensidad" />
+                              <TableColumn fx:id="columnaTrastorno" prefWidth="375.0" text="Trastorno(s)" />
+                              <TableColumn fx:id="columnaIntensidad" editable="false" prefWidth="345.0" resizable="false" text="Intensidad" />
                            </columns>
                         </TableView>
-                        <TableView fx:id="tblPtrastornos1" layoutX="112.0" layoutY="158.0" prefHeight="119.0" prefWidth="843.0">
+                        <TableView fx:id="tblRecomendaciones" layoutX="112.0" layoutY="158.0" prefHeight="119.0" prefWidth="843.0">
                            <columns>
-                              <TableColumn fx:id="tblRrecomendaciones" editable="false" prefWidth="842.0" resizable="false" text="Recomendaciones de higiene del sueño" />
+                              <TableColumn fx:id="columnaRrecomendaciones" editable="false" prefWidth="842.0" resizable="false" text="Recomendaciones de higiene del sueño" />
                            </columns>
                         </TableView>
                         <JFXTextArea layoutX="112.0" layoutY="284.0" prefHeight="204.0" prefWidth="864.0" />

@@ -8,14 +8,21 @@ package com.ipn.mx.tt.controller;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
+import com.ipn.mx.tt.modelo.PreguntaTabla;
+import com.ipn.mx.tt.modelo.Recomendacion;
+import com.ipn.mx.tt.modelo.RecomendacionTabla;
+import com.ipn.mx.tt.modelo.SintomaTrastornoTabla;
 import com.ipn.mx.tt.modelo.Test;
+import com.ipn.mx.tt.modelo.TrastornoIntensidad;
+import com.ipn.mx.tt.modelo.TrastornoIntensidadTabla;
+import com.ipn.mx.tt.modelo.TrastornoTabla;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +47,55 @@ public class RecomendacionesController implements Initializable {
     private InfoCuestionario ic;
     private Paciente paciente;
     private Conducta conducta;
+
+    @FXML
+    private TableView<TrastornoIntensidadTabla> tblRtrastornos;
+    @FXML
+    private JFXButton btnVolver;
+
+    @FXML
+    private TableColumn<TrastornoIntensidadTabla, String> columnaTrastorno;
+
+    @FXML
+    private TableColumn<TrastornoIntensidadTabla, String> columnaIntensidad;
+
+    @FXML
+    private TableView<RecomendacionTabla> tblRecomendaciones;
+
+    @FXML
+    private TableColumn<RecomendacionTabla, String> columnaRrecomendaciones;
+
+    @FXML
+    private JFXButton btnRimprimir;
+
+    @FXML
+    private JFXButton btnRenviarcorreo;
+
+    @FXML
+    private JFXButton btnRcerrar;
+
+        private ObservableList<RecomendacionTabla> rtol;
+    private ObservableList<TrastornoIntensidadTabla> titol;
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+        cv = new cargadorVista();
+
+        
+        columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
+        columnaIntensidad.setCellValueFactory(cellData -> cellData.getValue().getIntensidad());
+
+        columnaRrecomendaciones.setCellValueFactory(cellData -> cellData.getValue().getRecomendacion());
+                rtol = FXCollections.observableArrayList();
+        titol = FXCollections.observableArrayList();
+        tblRecomendaciones.setItems(rtol);
+        tblRtrastornos.setItems(titol);
+        rtol.add(new RecomendacionTabla(new Recomendacion("Come bien")));
+        titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
+    }
 
     public menuController getMc() {
         return mc;
@@ -82,36 +138,6 @@ public class RecomendacionesController implements Initializable {
     }
 
     @FXML
-    private JFXButton btnVolver;
-
-    @FXML
-    private TableView<?> tblRtrastornos;
-
-    @FXML
-    private TableView<?> tblPtrastornos1;
-
-    @FXML
-    private TableColumn<?, ?> tblRrecomendaciones;
-
-    @FXML
-    private JFXButton btnRimprimir;
-
-    @FXML
-    private JFXButton btnRenviarcorreo;
-
-    @FXML
-    private JFXButton btnRcerrar;
-
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        cv = new cargadorVista();
-    }
-
-    @FXML
     void enviarEmailRecomendacion(ActionEvent event) {
 
     }
@@ -120,61 +146,62 @@ public class RecomendacionesController implements Initializable {
     void imprimirRecomendacion(ActionEvent event) {
 
     }
+
     @FXML
- void PDF(ActionEvent event) throws JRException {
-HashMap parametros=new HashMap();
-String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
-System.out.println(master);
-String edad = Integer.toString(paciente.getEdad());
-String diatrabaja ="";
-String horariot = "";
-if(conducta.getJornadaLaboral()==3){
-diatrabaja = "Domingo";
-}else if(conducta.getJornadaLaboral()==2){
-diatrabaja = "Sabado";
-}else if(conducta.getJornadaLaboral()==1){
-diatrabaja = "Viernes";
-}
-if(conducta.getHorarioTrabajo()==1){
-horariot = "Fijo";
-}else if(conducta.getHorarioTrabajo()==2){
-horariot = "Por turnos";    
-}else if(conducta.getHorarioTrabajo()==3){
-horariot = "Sin horario fijo";
-}
-String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
-String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
-String diasd = Double.toString(conducta.getDiasDeDescanso());
-String hpsueño = Double.toString(conducta.getPromedioHoras());
+    void PDF(ActionEvent event) throws JRException {
+        HashMap parametros = new HashMap();
+        String master = System.getProperty("user.dir") + "\\src\\Center\\Reporte.jasper";
+        System.out.println(master);
+        String edad = Integer.toString(paciente.getEdad());
+        String diatrabaja = "";
+        String horariot = "";
+        if (conducta.getJornadaLaboral() == 3) {
+            diatrabaja = "Domingo";
+        } else if (conducta.getJornadaLaboral() == 2) {
+            diatrabaja = "Sabado";
+        } else if (conducta.getJornadaLaboral() == 1) {
+            diatrabaja = "Viernes";
+        }
+        if (conducta.getHorarioTrabajo() == 1) {
+            horariot = "Fijo";
+        } else if (conducta.getHorarioTrabajo() == 2) {
+            horariot = "Por turnos";
+        } else if (conducta.getHorarioTrabajo() == 3) {
+            horariot = "Sin horario fijo";
+        }
+        String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
+        String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
+        String diasd = Double.toString(conducta.getDiasDeDescanso());
+        String hpsueño = Double.toString(conducta.getPromedioHoras());
 
-if(conducta.isTrabaja()){
-    parametros.put("trabaja","Sí");  
-parametros.put("diatrabaja",diatrabaja);
-parametros.put("horariot",horariot);
-parametros.put("hpdiasd",hpdiasd);
-parametros.put("hpdiast",hpdiast);
-parametros.put("diasd",diasd);
-parametros.put("hpsueño","No aplica");
-}else{
-parametros.put("trabaja","No");  
-parametros.put("diatrabaja","No aplica");
-parametros.put("horariot","No aplica");
-parametros.put("hpdiasd","No aplica");
-parametros.put("hpdiast","No aplica");
-parametros.put("diasd","No aplica");
-parametros.put("hpsueño",hpsueño);
+        if (conducta.isTrabaja()) {
+            parametros.put("trabaja", "Sí");
+            parametros.put("diatrabaja", diatrabaja);
+            parametros.put("horariot", horariot);
+            parametros.put("hpdiasd", hpdiasd);
+            parametros.put("hpdiast", hpdiast);
+            parametros.put("diasd", diasd);
+            parametros.put("hpsueño", "No aplica");
+        } else {
+            parametros.put("trabaja", "No");
+            parametros.put("diatrabaja", "No aplica");
+            parametros.put("horariot", "No aplica");
+            parametros.put("hpdiasd", "No aplica");
+            parametros.put("hpdiast", "No aplica");
+            parametros.put("diasd", "No aplica");
+            parametros.put("hpsueño", hpsueño);
 
-}
-parametros.put("nombre",paciente.getNombre());
-parametros.put("apellidos",paciente.getApellido());
-parametros.put("edads",edad);
-parametros.put("sexo",paciente.getSexo());
-parametros.put("curp",paciente.getCURP());
-parametros.put("escolaridad",paciente.getEscolaridad());
-JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
-JasperViewer.viewReport(informe,false);
-    
-}
+        }
+        parametros.put("nombre", paciente.getNombre());
+        parametros.put("apellidos", paciente.getApellido());
+        parametros.put("edads", edad);
+        parametros.put("sexo", paciente.getSexo());
+        parametros.put("curp", paciente.getCURP());
+        parametros.put("escolaridad", paciente.getEscolaridad());
+        JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
+        JasperViewer.viewReport(informe, false);
+
+    }
 
     @FXML
     void regresarPrediagnostico(ActionEvent event) {
@@ -185,7 +212,9 @@ JasperViewer.viewReport(informe,false);
         pc.setMc(mc);
         pc.setConducta(conducta);
         pc.setPaciente(paciente);
+        pc.configurarTrastorno();
         pc.configurarVista();
+        pc.ponerConducta();
     }
 
     @FXML
