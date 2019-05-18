@@ -76,7 +76,6 @@ public class UsuarioDAO extends DocumentoDAO {
     }
 
     public boolean actualizarDatos(Usuario text) {
-        //    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
         if (usuarioExiste(text.getId())) {
             System.out.println(text.getId());

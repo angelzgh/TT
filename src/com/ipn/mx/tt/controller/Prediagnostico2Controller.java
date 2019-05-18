@@ -167,6 +167,7 @@ public class Prediagnostico2Controller implements Initializable {
         rc.setConducta(conducta);
         rc.setPaciente(paciente);
         rc.setSintomasDetectados(sintomasDetectados);
+        rc.ponerRecomendaciones();
     }
 
     public String[] getSintomasDetectados() {

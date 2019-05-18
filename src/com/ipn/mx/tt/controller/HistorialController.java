@@ -9,8 +9,6 @@ import com.ipn.mx.tt.dao.ConductaDAO;
 import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
 import com.ipn.mx.tt.dao.PacienteDAO;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
-import com.ipn.mx.tt.modelo.Paciente;
-import com.ipn.mx.tt.modelo.PacienteTabla;
 import com.ipn.mx.tt.modelo.PrediagnosticoTabla;
 import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.Validador;

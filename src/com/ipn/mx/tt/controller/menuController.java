@@ -159,4 +159,12 @@ public class menuController implements Initializable {
         this.PanelPrin = PanelPrin;
     }
 
+    public String getTiempo()
+    {
+        return lblHora.getText();
+    }
+    public String getDia()
+    {
+        return lblFecha.getText();
+    }
 }

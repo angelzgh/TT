@@ -58,7 +58,7 @@ public class PacienteDAO extends DocumentoDAO {
         } else {
             paciente = new Paciente();
         }
-        
+
         return paciente;
     }
 
@@ -78,4 +78,25 @@ public class PacienteDAO extends DocumentoDAO {
             return false;
         }
     }
+
+    public Boolean actualizarDatos(Paciente p) {
+        if (pacienteExiste(p.getCURP())) {
+
+            DBObject query = new BasicDBObject("_CURP", p.getCURP());
+            cjm.getMongoCollection().update(query, new BasicDBObject("$set",
+                    new BasicDBObject("Direccion", p.getDireccion())
+                            .append("Fecha", p.getFecha())
+                            .append("Nombre", p.getNombre())
+                            .append("Apellido", p.getApellido())
+                            .append("Correo", p.getCorreo())
+                            .append("Sexo", p.getSexo())
+                            .append("Telefono", p.getTelefono())
+                            .append("Escolaridad", p.getEscolaridad())
+            ));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

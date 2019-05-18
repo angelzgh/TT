@@ -18,7 +18,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +25,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Spinner;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -156,12 +154,17 @@ public class PacienteNuevoController implements Initializable {
                     && !Direccion.equals("") && !Telefono.equals("") && !cbxescolaridad.getValue().equals("-")) {
 
                 p = new Paciente(Nombre, Apellido, Sexo, Correo, Fecha, Direccion, Telefono, CURP, Escolaridad);
-                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId());
+                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId(),c.getDia());
                 registrarPaciente(p, ic);
 
                 CustomMessage cm1 = new CustomMessage("MENSAJE", "¿Desea realizar el Cuestionario?", 4);
                 if (cm1.getMessage().getButtonData().equals(ButtonType.OK.getButtonData())) {
-
+                    ComenzarTestController ctc = (ComenzarTestController) cv.cambiarVista("/Center/ComenzarTest.fxml", c.getPanelPrin());
+                    ctc.setC(c);
+                    ctc.setPaciente(p);
+                    ctc.setDatosPaciente(true);
+                    ctc.ocultarEspecialista();
+                    ctc.setIc(ic);
                 } else {
                     CustomMessage cm2 = new CustomMessage("MENSAJE", "El cuestionario se guardó para más tarde", 2);
                     // GENERAR PDF O MOSTRAR EL NUMERO DE CUESTIONARIO ASIGNADO PARA APLICAR MÁS TARDE
@@ -194,6 +197,43 @@ public class PacienteNuevoController implements Initializable {
 
     @FXML
     public void actualizarPaciente(ActionEvent event) {
+        String Nombre = validador.validarTF(txtPnnombre),
+                Apellido = validador.validarTF(txtPnapellido),
+                Sexo,
+                Correo = validador.validarTF(txtPncorreo),
+                Fecha = validador.validarDP(datePn),
+                Direccion = validador.validarTF(txtPndireccion),
+                Telefono = validador.validarTF(txtPntelefono),
+                CURP = validador.validarTF(txtPnCURP),
+                Escolaridad = validador.validarCbx(cbxescolaridad);
+
+        if (rbPfemenino.isSelected()) {
+            Sexo = "F";
+        } else {
+            Sexo = "M";
+        }
+        if (pd.pacienteExiste(CURP)) {
+            if (!Nombre.equals("") && !Apellido.equals("") && !CURP.equals("") && !Correo.equals("") && !Fecha.equals("")
+                    && !Direccion.equals("") && !Telefono.equals("") && !cbxescolaridad.getValue().equals("-")) {
+
+                p = new Paciente(Nombre, Apellido, Sexo, Correo, Fecha, Direccion, Telefono, CURP, Escolaridad);
+
+                CustomMessage cm1 = new CustomMessage("MENSAJE", "¿Guardar los cambios?", 3);
+                if (cm1.getMessage().getButtonData().equals(ButtonType.OK.getButtonData())) {
+                    if (pd.actualizarDatos(p)) {
+                        CustomMessage cme = new CustomMessage("MENSAJE", "Los cambios se guardaron con éxito", 0);
+                        //exito
+                    } else {
+                        CustomMessage cme = new CustomMessage("ERROR", "Hubo error al intentar guardar los cambios...", 2);
+                        //error
+                    }
+                }
+            } else {
+                CustomMessage cm = new CustomMessage("ERROR", "Hubo un error en alguno de los campos...", 2);
+            }
+        } else {
+            CustomMessage cm = new CustomMessage("ERROR", "El Paciente no existe...", 2);
+        }
 
     }
 

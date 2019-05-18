@@ -146,7 +146,7 @@ public class PacienteConRegistroController implements Initializable {
             ctc.ocultarEspecialista();
             if (!cad.cuestionarioPrevio(pt.getCURP().getValue())) {
                 System.out.println("dsfdsfsdfdsfd");
-                InfoCuestionario ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, pt.getCURP().get(), c.getUsuario().getId());
+                InfoCuestionario ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, pt.getCURP().get(), c.getUsuario().getId(),c.getDia());
                 cad.insertarInfoCuestionario(ic);
                 ctc.setIc(ic);
             } else {
@@ -156,14 +156,14 @@ public class PacienteConRegistroController implements Initializable {
                 switch (statusCuestionario.intValue()) {
                     case 0:
                         //CARGAR INFORMACIÓN DE CUESTIONARIO Y APLICAR
-                        ic = new InfoCuestionario(cad.numCuestionario(pt.getCURP().get()), 0.0, pt.getCURP().get(), c.getUsuario().getId());
+                        ic = new InfoCuestionario(cad.numCuestionario(pt.getCURP().get()), 0.0, pt.getCURP().get(), c.getUsuario().getId(),c.getDia());
                         ctc.setIc(ic);
                         break;
                     case 1:
                         //BUSCAR ORDEN DE CUESTIONARIO Y PREGUNTAS CONTESTADAS
                         break;
                     case 2:
-                        ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, pt.getCURP().get(), c.getUsuario().getId());
+                        ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, pt.getCURP().get(), c.getUsuario().getId(),c.getDia());
                         cad.insertarInfoCuestionario(ic);
                         ctc.setIc(ic);
                         break;

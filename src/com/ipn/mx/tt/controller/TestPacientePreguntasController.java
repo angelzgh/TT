@@ -47,6 +47,7 @@ public class TestPacientePreguntasController implements Initializable {
     private Test test;
     private int contadorPregunta;
     private Paciente paciente;
+    private String[] sintomasDetectados;
 
     @FXML
     private BorderPane panelRight;
@@ -102,6 +103,14 @@ public class TestPacientePreguntasController implements Initializable {
     @FXML
     private ImageView imgAudio;
 
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
+    }
+
     public InfoCuestionario getIc() {
         return ic;
     }
@@ -116,6 +125,10 @@ public class TestPacientePreguntasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        sintomasDetectados = new String[10];
+        for (int i = 1; i < 10; i++) {
+            sintomasDetectados[i] = "";
+        }
         // TODO
         rbtnTPnunca.setOnAction((event) -> {
             contestarPregunta(1);
@@ -150,6 +163,8 @@ public class TestPacientePreguntasController implements Initializable {
         pc.setConducta(conducta);
         pc.setPaciente(paciente);
         pc.cargarResultados();
+        pc.setSintomasDetectados(sintomasDetectados);
+
         pc.startgrafica();
         pc.darClickBotonGuardar();
 
@@ -176,7 +191,7 @@ public class TestPacientePreguntasController implements Initializable {
 
         if (p.getId() > 0 && p.getId() != 99) {
             txtayuda.setText(p.getAyuda());
-            txtpregunta.setText("(" + p.getId() + ")" + contadorPregunta + ".-" + p.getTexto());
+            txtpregunta.setText(contadorPregunta + ".-" + p.getTexto());
             pregunta = p.getId();
             instrumento = test.getTipoCuestionario(pregunta);
             // int tipo=id.tipoCuestionario(pregunta);
@@ -297,7 +312,14 @@ public class TestPacientePreguntasController implements Initializable {
             trastorno = test.getTrastorno(numeroSintoma);
             trastorno.forEach((trastornoLoop) -> {
                 TrastornoSintoma ts = (TrastornoSintoma) trastornoLoop;
-
+                if (valor >= 3) {
+                    if (sintomasDetectados[ts.getTrastorno()].contains(String.valueOf(numeroSintoma) + ",")) {
+                        System.out.println("YA AGREGADO" + numeroSintoma);
+                        System.out.println(sintomasDetectados[ts.getTrastorno()]);
+                    } else {
+                        sintomasDetectados[ts.getTrastorno()] += numeroSintoma + ",";
+                    }
+                }
                 if (test.banderaLevantada(ts.getTrastorno())) {
                     //System.out.println("YA SUMADO:" + preguntaC);
                 } else {

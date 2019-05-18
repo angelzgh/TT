@@ -26,7 +26,7 @@ import javafx.scene.layout.BorderPane;
  * @author garci
  */
 public class ComenzarTestController implements Initializable {
-    
+
     private boolean datosPaciente;
     private menuController c;
     private cargadorVista cv;
@@ -34,61 +34,61 @@ public class ComenzarTestController implements Initializable {
     private InfoCuestionario ic;
     private CuestionarioAplicadoDAO cad;
     private boolean especialistaDirecto;
-    
+
     public boolean isEspecialistaDirecto() {
         return especialistaDirecto;
     }
-    
+
     public void setEspecialistaDirecto(boolean especialistaDirecto) {
         this.especialistaDirecto = especialistaDirecto;
     }
-    
+
     public boolean isDatosPaciente() {
         return datosPaciente;
     }
-    
+
     public void setDatosPaciente(boolean datosPaciente) {
         this.datosPaciente = datosPaciente;
     }
-    
+
     public InfoCuestionario getIc() {
         return ic;
     }
-    
+
     public void setIc(InfoCuestionario ic) {
         this.ic = ic;
     }
-    
+
     public Paciente getPaciente() {
         return paciente;
     }
-    
+
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-    
+
     public void ocultarEspecialista() {
         this.btnTespecialista.setVisible(false);
         this.imgEspecialista.setVisible(false);
     }
-    
+
     public menuController getC() {
         return c;
     }
-    
+
     public void setC(menuController c) {
         this.c = c;
     }
-    
+
     @FXML
     private BorderPane panelRight;
-    
+
     @FXML
     private JFXButton btnTespecialista;
-    
+
     @FXML
     private JFXButton btnTpaciente;
-    
+
     @FXML
     private JFXButton btnTacompañante;
     @FXML
@@ -105,9 +105,9 @@ public class ComenzarTestController implements Initializable {
         cad.conectar();
         especialistaDirecto = false;
     }
-    
+
     public void abrirPaciente(int i) {
-        
+
         if (datosPaciente) {
             InstruccionesTestController itc
                     = (InstruccionesTestController) cv.cambiarVista("/Center/InstruccionesTest.fxml", c.getPanelPrin());
@@ -123,21 +123,21 @@ public class ComenzarTestController implements Initializable {
             tpc.setMc(c);
             tpc.setTipoCuestionario(i);
             tpc.setDatosPaciente(datosPaciente);
-            
+
         }
-        
+
     }
-    
+
     @FXML
     void abirAcompañante(ActionEvent event) {
         abrirPaciente(2);
     }
-    
+
     @FXML
     void abrirEspecialista(ActionEvent event) {
-        
+
         if (especialistaDirecto) {
-            
+
             PacienteNuevo2Controller pnc = (PacienteNuevo2Controller) cv.cambiarVista("/Center/PacienteNuevo2.fxml", c.getPanelPrin());
             pnc.setPaciente(paciente);
             System.out.println(ic.toString());
@@ -146,7 +146,7 @@ public class ComenzarTestController implements Initializable {
             pnc.setDatosPaciente(datosPaciente);
             pnc.setTipoCuestionario(1);
             pnc.setComenzarEspecialista(true);
-            
+
         } else {
             CustomMessage cm = new CustomMessage("¿?", "¿Asignar el cuestionario a un paciente?", 3);
             if (cm.getMessage().getButtonData().equals(ButtonType.OK.getButtonData())) {
@@ -155,7 +155,7 @@ public class ComenzarTestController implements Initializable {
                 pcrc.directoEspecialista();
             } else {
                 System.out.println("Paciente generico...");
-                InfoCuestionario icg = new InfoCuestionario(cad.buscarSiguiente() + 1, c.getUsuario().getId());
+                InfoCuestionario icg = new InfoCuestionario(cad.buscarSiguiente() + 1, c.getUsuario().getId(), c.getDia());
                 paciente = new Paciente();
                 ic = icg;
                 cad.insertarInfoCuestionario(icg);
@@ -170,28 +170,28 @@ public class ComenzarTestController implements Initializable {
                 pnc.setDatosPaciente(datosPaciente);
                 pnc.setTipoCuestionario(1);
                 pnc.setComenzarEspecialista(true);
-                
+
             }
         }
     }
-    
+
     @FXML
     void abrirPaciente(ActionEvent event) {
         abrirPaciente(1);
-        
+
     }
-    
+
     void setCuestionario(Double idCuestionario) {
-        
+
     }
-    
+
     public void imprimirDatos() {
         System.out.println(paciente.toString()
                 + ic.toString());
     }
-    
+
     public void clicEspecialista() {
         btnTespecialista.fire();
     }
-    
+
 }

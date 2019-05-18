@@ -254,9 +254,10 @@ public class Test {
         return cuestionario.obtenerRespuesta(numPregunta.intValue());
     }
 
-    public void guardarCuestionario(Double numCuestionario) {
+    public void guardarCuestionario(InfoCuestionario ic) {
+        Double numCuestionario=ic.getIdCuestionario();
         pcd.guardarPreguntasContestadas(numCuestionario, obtenerPreguntasContestadas());
-        cad.actualizarDatos(numCuestionario, 2.0);
+        cad.actualizarDatos(ic);
         pred.insertarTrastornos(1.0, numCuestionario, cuestionario);
         pred.insertarTrastornos(2.0, numCuestionario, cuestionario);
     }
