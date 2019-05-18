@@ -192,7 +192,7 @@ public class TestEspecialistaController implements Initializable {
     public void cargarPregunta(Pregunta p) {
 
         if (p.getId() > 0 && p.getId() != 99) {
-            txtpregunta.setText("(" + p.getId() + ")" + contadorPregunta + ".-" + p.getTexto());
+            txtpregunta.setText(contadorPregunta + ".-" + p.getTexto());
             pregunta = p.getId();
             instrumento = test.getTipoCuestionario(pregunta);
             // int tipo=id.tipoCuestionario(pregunta);

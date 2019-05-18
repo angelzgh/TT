@@ -5,25 +5,23 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.RecomendacionDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
-import com.ipn.mx.tt.modelo.PreguntaTabla;
 import com.ipn.mx.tt.modelo.Recomendacion;
 import com.ipn.mx.tt.modelo.RecomendacionTabla;
-import com.ipn.mx.tt.modelo.SintomaTrastornoTabla;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.modelo.TrastornoIntensidad;
 import com.ipn.mx.tt.modelo.TrastornoIntensidadTabla;
-import com.ipn.mx.tt.modelo.TrastornoTabla;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.String;
-import java.io.File;
-import java.io.FileOutputStream;
+import com.mongodb.DBObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,8 +35,6 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperPrintManager;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * FXML Controller class
@@ -54,6 +50,7 @@ public class RecomendacionesController implements Initializable {
     private InfoCuestionario ic;
     private Paciente paciente;
     private Conducta conducta;
+    private RecomendacionDAO rd;
 
     @FXML
     private TableView<TrastornoIntensidadTabla> tblRtrastornos;
@@ -90,8 +87,9 @@ public class RecomendacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        rd = new RecomendacionDAO();
+        rd.conectar();
         cv = new cargadorVista();
-
         columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
         columnaIntensidad.setCellValueFactory(cellData -> cellData.getValue().getIntensidad());
 
@@ -241,5 +239,33 @@ public class RecomendacionesController implements Initializable {
     @FXML
     void verRecomendacion(ActionEvent event) {
 
+    }
+
+    public void ponerRecomendaciones() {
+        obtenerRecomendaciones(1.0);
+        obtenerRecomendaciones(2.0);
+        obtenerRecomendaciones(3.0);
+        obtenerRecomendaciones(4.0);
+        obtenerRecomendaciones(5.0);
+        obtenerRecomendaciones(6.0);
+
+    }
+
+    public void obtenerRecomendaciones(Double trastorno) {
+        List l = rd.traerRecomendacion(trastorno);
+        LinkedList ls=new LinkedList();
+        System.out.println("TAMAÑO MAXIMO:" + l.size());
+        while(ls.size()<3){
+            int x = (int) (Math.random() * l.size()) + 1;
+            System.out.println(x);
+            if(!ls.contains(x))
+            {
+                ls.add(x);
+                Recomendacion r=new Recomendacion((DBObject) l.get(x-1));
+                RecomendacionTabla rt=new RecomendacionTabla(r);
+                rtol.add(rt);
+                
+            }
+        }
     }
 }

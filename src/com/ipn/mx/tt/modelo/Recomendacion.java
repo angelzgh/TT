@@ -5,6 +5,8 @@
  */
 package com.ipn.mx.tt.modelo;
 
+import com.mongodb.DBObject;
+
 /**
  *
  * @author Axel Reyes
@@ -15,6 +17,9 @@ private String recomendacion;
 
     public Recomendacion(String recomendacion) {
         this.recomendacion = recomendacion;
+    }
+    public Recomendacion(DBObject dbo) {
+        this.recomendacion = (String) dbo.get("texto");
     }
 
 

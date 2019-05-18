@@ -49,7 +49,7 @@ public class CustomMessage {
                 break;
             case 4:
                 ButtonType b1 = new ButtonType("AHORA", ButtonBar.ButtonData.OK_DONE);
-                
+
                 ButtonType b2 = new ButtonType("DESPUES", ButtonBar.ButtonData.CANCEL_CLOSE);
                 am = new Alert(Alert.AlertType.CONFIRMATION, "", b1, b2);
                 break;
