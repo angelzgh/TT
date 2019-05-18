@@ -6,6 +6,8 @@
 package com.ipn.mx.tt.modelo;
 
 import com.mongodb.DBObject;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -108,13 +110,16 @@ public class Paciente {
         this.Telefono = Telefono;
     }
 
-    public int getEdad() {
-//        long ageInMillis = new Date().getTime() - new Date(Fecha).getTime();
-//
-//        Date age = new Date(ageInMillis);
-
-        // return age.getYear();
-        return 23;
+    public int getEdad() throws ParseException {
+ Date now = new Date(System.currentTimeMillis());
+     Date reg=new SimpleDateFormat("yyyy-MM-dd").parse(this.getFecha());  
+SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+System.out.println(date.format(now));
+System.out.println(this.getFecha());
+ 
+		int años=(int) (((now.getTime()-reg.getTime())/86400000)/365);
+                System.out.println("Años"+años);
+        return años;
     }
 
     public Paciente(String Nombre, String Apellido, String Sexo, String Correo, String Fecha, String Direccion, String Telefono, String CURP,String Escolaridad) {

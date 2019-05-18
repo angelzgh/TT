@@ -6,6 +6,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -13,35 +14,41 @@
    <children>
       <SplitPane dividerPositions="0.29797979797979796" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="260.0" styleClass="l" stylesheets="@../styles/Styles.css" />
+          <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="260.0" styleClass="l" stylesheets="@../styles/Styles.css" />
           <AnchorPane fx:id="panelT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0">
                <children>
-                  <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label fx:id="lblPaciente" alignment="CENTER" layoutX="3.0" layoutY="-1.0" prefHeight="38.0" prefWidth="1020.0" style="-fx-background-color: #4D92DF;" text="Bienvenido " textAlignment="CENTER" textFill="WHITE">
+                  <BorderPane prefHeight="510.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <top>
+                        <Label fx:id="lblPaciente" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="38.0" prefWidth="1020.0" style="-fx-background-color: #4D92DF;" text="Bienvenido " textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font name="System Italic" size="25.0" />
                            </font>
                         </Label>
-                        <Label layoutX="436.0" layoutY="67.0" text="Instrucciones">
-                           <font>
-                              <Font name="Arial" size="25.0" />
-                           </font>
-                        </Label>
-                        <TextArea editable="false" layoutX="217.0" layoutY="108.0" prefHeight="123.0" prefWidth="592.0" text="Bienvenido, introduce el número de paciente otorgado &#10;por tu especialista y preciona el botón de comenzar &#10;para iniciar el test">
-                           <font>
-                              <Font name="Arial" size="23.0" />
-                           </font>
-                        </TextArea>
-                        <Label layoutX="323.0" layoutY="273.0" text="Número:">
-                           <font>
-                              <Font name="Arial" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="btnTPComenzar" buttonType="RAISED" layoutX="473.0" layoutY="347.0" onAction="#iniciarTest" prefHeight="30.0" prefWidth="125.0" ripplerFill="WHITE" style="-fx-background-color: #AECFDC;" text="Continuar" />
-                        <JFXTextField fx:id="txtTPnumero" layoutX="400.0" layoutY="271.0" onKeyReleased="#enterMenu" prefHeight="25.0" prefWidth="260.0" />
-                     </children>
-                  </Pane>
+                     </top>
+                     <center>
+                        <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="436.0" layoutY="67.0" text="Instrucciones">
+                                 <font>
+                                    <Font name="Arial" size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextArea editable="false" layoutX="217.0" layoutY="108.0" prefHeight="123.0" prefWidth="592.0" text="Bienvenido, introduce el número de paciente otorgado &#10;por tu especialista y preciona el botón de comenzar &#10;para iniciar el test">
+                                 <font>
+                                    <Font name="Arial" size="23.0" />
+                                 </font>
+                              </TextArea>
+                              <Label layoutX="323.0" layoutY="273.0" text="Número:">
+                                 <font>
+                                    <Font name="Arial" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="btnTPComenzar" buttonType="RAISED" layoutX="473.0" layoutY="347.0" onAction="#iniciarTest" prefHeight="30.0" prefWidth="125.0" ripplerFill="WHITE" style="-fx-background-color: #AECFDC;" text="Continuar" />
+                              <JFXTextField fx:id="txtTPnumero" layoutX="400.0" layoutY="271.0" onKeyReleased="#enterMenu" prefHeight="25.0" prefWidth="260.0" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
                </children>
             </AnchorPane>
         </items>

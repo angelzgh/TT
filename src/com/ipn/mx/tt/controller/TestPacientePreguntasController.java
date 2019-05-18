@@ -183,18 +183,18 @@ public class TestPacientePreguntasController implements Initializable {
             instrumento = test.getTipoCuestionario(pregunta);
             // int tipo=id.tipoCuestionario(pregunta);
             if (instrumento == 1) {
-                rbtnTPavc.setText("Aplicable a veces");
+                /**rbtnTPavc.setText("Aplicable a veces");
                 rbtnTPcs.setText("Generalmente aplicable");
                 rbtnTPnunca.setText("No aplicable en lo absoluto");
                 rbtnTPoca.setText("Generalmente no aplicable");
-                rbtnTPsiempre.setText("Totalmente aplicable");
+                rbtnTPsiempre.setText("Totalmente aplicable");*/
                 rbtnTPavc.setVisible(true);
             } else {
 
-                rbtnTPcs.setText("Bastante");
+                /**rbtnTPcs.setText("Bastante");
                 rbtnTPnunca.setText("Nada");
                 rbtnTPoca.setText("Algo");
-                rbtnTPsiempre.setText("Mucho");
+                rbtnTPsiempre.setText("Mucho");*/
                 rbtnTPavc.setVisible(false);
             }
             contadorPregunta++;
@@ -231,7 +231,7 @@ public class TestPacientePreguntasController implements Initializable {
 
     void contestarPregunta(int valor) {
 
-        while (!test.cuestionarioCompletado()) {
+        if (!test.cuestionarioCompletado()) {
             ThreadPregunta tp = new ThreadPregunta(3, rbtnTPcs, rbtnTPavc, rbtnTPnunca, rbtnTPoca, rbtnTPsiempre, regresar);
             //tp.runClock();
             //AGREGAR A LA VISTA

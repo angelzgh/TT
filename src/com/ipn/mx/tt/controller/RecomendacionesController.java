@@ -23,6 +23,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -154,7 +158,12 @@ public class RecomendacionesController implements Initializable {
     }
 
     @FXML
- void PDF(ActionEvent event) throws JRException, IOException {
+ void PDF(ActionEvent event) throws JRException, IOException, ParseException {
+      Date now = new Date(System.currentTimeMillis());
+SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+System.out.println(date.format(now));
+    
+		
 HashMap parametros=new HashMap();
 String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
 System.out.println(master);
@@ -198,6 +207,7 @@ String hpsueño = Double.toString(conducta.getPromedioHoras());
             parametros.put("hpsueño", hpsueño);
 
 }
+parametros.put("fecha",date.format(now));
 parametros.put("nombre",paciente.getNombre());
 parametros.put("apellidos",paciente.getApellido());
 parametros.put("edads",edad);
@@ -206,10 +216,8 @@ parametros.put("curp",paciente.getCURP());
 parametros.put("escolaridad",paciente.getEscolaridad());
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
-// Lo exportamos!
 JasperExportManager.exportReportToPdfFile(informe,"C://TT//"+paciente.getNombre()+ ".pdf");
 String file = new String("C://TT//"+paciente.getNombre()+ ".pdf");
-//definiendo la ruta en la propiedad file
 Runtime.getRuntime().exec("cmd /c start "+file);
 }
 
