@@ -36,6 +36,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class PacienteNuevo2Controller implements Initializable {
 
+    private boolean comenzarEspecialista;
     private boolean datosPaciente;
     private ConductaDAO cd;
     private Validador v;
@@ -151,28 +152,52 @@ public class PacienteNuevo2Controller implements Initializable {
         txtPhorasl.setVisible(false);
         cd = new ConductaDAO();
         cd.conectar();
-        cv=new cargadorVista();
+        cv = new cargadorVista();
+        comenzarEspecialista = false;
         // TODO
     }
 
+    public boolean isComenzarEspecialista() {
+        return comenzarEspecialista;
+    }
+
+    public void setComenzarEspecialista(boolean comenzarEspecialista) {
+        this.comenzarEspecialista = comenzarEspecialista;
+    }
+
+    
     public void hacerCuestionario() {
 
-        TestPacienteController tpc
-                = (TestPacienteController) cv.cambiarVista("/Center/TestPaciente.fxml", mc.getPanelPrin());
-        tpc.setMc(mc);
-        tpc.setTipoCuestionario(tipoCuestionario);
-        tpc.setPaciente(paciente);
-        
-        tpc.setDatosPaciente(datosPaciente);
-        if (datosPaciente) {
-            tpc.setConducta(c);
-            tpc.setIc(ic);
-            tpc.ponerPaciente();
-            tpc.clickComenzar();
+        if (comenzarEspecialista) {
+            TestEspecialistaController tec
+                    = (TestEspecialistaController) cv.cambiarVista("/Center/TestEspecialista.fxml", mc.getPanelPrin());
+            tec.setMc(mc);
+            tec.setTipoCuestionario(1);
+            tec.iniciarTest();
+            tec.setConducta(c);
+            tec.setPaciente(paciente);
+            if (ic != null) {
+                tec.setIc(ic);
+            }
+
+        } else {
+            TestPacienteController tpc
+                    = (TestPacienteController) cv.cambiarVista("/Center/TestPaciente.fxml", mc.getPanelPrin());
+            tpc.setMc(mc);
+            tpc.setTipoCuestionario(tipoCuestionario);
+            tpc.setPaciente(paciente);
+
+            tpc.setDatosPaciente(datosPaciente);
+            if (datosPaciente) {
+                tpc.setConducta(c);
+                tpc.setIc(ic);
+                tpc.ponerPaciente();
+                tpc.clickComenzar();
+            }
+            //1 .- Paciente
+            //2 .- Acompañante
+            //CARGAR VISTA 
         }
-        //1 .- Paciente
-        //2 .- Acompañante
-        //CARGAR VISTA 
 
     }
 
@@ -200,7 +225,7 @@ public class PacienteNuevo2Controller implements Initializable {
         this.mc = mc;
     }
 
-   public void setPaciente(Paciente p) {
+    public void setPaciente(Paciente p) {
         paciente = p;
     }
 
@@ -343,13 +368,13 @@ public class PacienteNuevo2Controller implements Initializable {
 
         }
     }
-    public void imprimirDatos()
-    {
-        System.out.println(paciente.toString() + ic.toString()+ c.toString());
+
+    public void imprimirDatos() {
+        System.out.println(paciente.toString() + ic.toString() + c.toString());
     }
 
     void setPanel(AnchorPane panelVista) {
-        panelP=panelVista;
+        panelP = panelVista;
     }
 
 }

@@ -42,7 +42,15 @@ public class Paciente {
     }
 
     public Paciente() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                this.Nombre = "PACIENTE";
+        this.Apellido = "GRAL";
+        this.Sexo = "H";
+        this.Correo = "gral@gmail.com";
+        this.Fecha = "04/11/1996";
+        this.Direccion = "-";
+        this.Telefono = "-";
+        this.CURP = "XEXX010101HNEXXXA4";
+        this.Escolaridad="-";
     }
 
     @Override
