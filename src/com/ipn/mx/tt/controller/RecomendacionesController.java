@@ -51,6 +51,7 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class RecomendacionesController implements Initializable {
 
+    private String[] sintomasDetectados;
     private menuController mc;
     private cargadorVista cv;
     private Test test;
@@ -84,8 +85,9 @@ public class RecomendacionesController implements Initializable {
     @FXML
     private JFXButton btnRcerrar;
 
-        private ObservableList<RecomendacionTabla> rtol;
+    private ObservableList<RecomendacionTabla> rtol;
     private ObservableList<TrastornoIntensidadTabla> titol;
+
     /**
      * Initializes the controller class.
      */
@@ -94,17 +96,24 @@ public class RecomendacionesController implements Initializable {
         // TODO
         cv = new cargadorVista();
 
-        
         columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
         columnaIntensidad.setCellValueFactory(cellData -> cellData.getValue().getIntensidad());
 
         columnaRrecomendaciones.setCellValueFactory(cellData -> cellData.getValue().getRecomendacion());
-                rtol = FXCollections.observableArrayList();
+        rtol = FXCollections.observableArrayList();
         titol = FXCollections.observableArrayList();
         tblRecomendaciones.setItems(rtol);
         tblRtrastornos.setItems(titol);
         rtol.add(new RecomendacionTabla(new Recomendacion("Come bien")));
         titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
+    }
+
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
     }
 
     public menuController getMc() {
@@ -189,6 +198,21 @@ String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
 String diasd = Double.toString(conducta.getDiasDeDescanso());
 String hpsueño = Double.toString(conducta.getPromedioHoras());
 
+        if (conducta.getJornadaLaboral() == 3) {
+            diatrabaja = "Domingo";
+        } else if (conducta.getJornadaLaboral() == 2) {
+            diatrabaja = "Sabado";
+        } else if (conducta.getJornadaLaboral() == 1) {
+            diatrabaja = "Viernes";
+        }
+        if (conducta.getHorarioTrabajo() == 1) {
+            horariot = "Fijo";
+        } else if (conducta.getHorarioTrabajo() == 2) {
+            horariot = "Por turnos";
+        } else if (conducta.getHorarioTrabajo() == 3) {
+            horariot = "Sin horario fijo";
+        }
+
         if (conducta.isTrabaja()) {
             parametros.put("trabaja", "Sí");
             parametros.put("diatrabaja", diatrabaja);
@@ -215,11 +239,21 @@ parametros.put("sexo",paciente.getSexo());
 parametros.put("curp",paciente.getCURP());
 parametros.put("escolaridad",paciente.getEscolaridad());
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
+
+        
+        parametros.put("nombre", paciente.getNombre());
+        parametros.put("apellidos", paciente.getApellido());
+        parametros.put("edads", edad);
+        parametros.put("sexo", paciente.getSexo());
+        parametros.put("curp", paciente.getCURP());
+        parametros.put("escolaridad", paciente.getEscolaridad());
 //JasperViewer.viewReport(informe,false);
+
 JasperExportManager.exportReportToPdfFile(informe,"C://TT//"+paciente.getNombre()+ ".pdf");
 String file = new String("C://TT//"+paciente.getNombre()+ ".pdf");
 Runtime.getRuntime().exec("cmd /c start "+file);
-}
+ }
+
 
     @FXML
     void regresarPrediagnostico(ActionEvent event) {
@@ -233,6 +267,8 @@ Runtime.getRuntime().exec("cmd /c start "+file);
         pc.configurarTrastorno();
         pc.configurarVista();
         pc.ponerConducta();
+        pc.setSintomasDetectados(sintomasDetectados);
+        pc.ponerTrastornosSintomas();
     }
 
     @FXML

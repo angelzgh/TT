@@ -5,7 +5,9 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
+import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.Pregunta;
 import com.ipn.mx.tt.modelo.SintomaPregunta;
 import com.ipn.mx.tt.modelo.Test;
@@ -40,6 +42,7 @@ import javafx.scene.layout.BorderPane;
  */
 public class TestEspecialistaController implements Initializable {
 
+    private Paciente paciente;
     private cargadorVista cv;
     private int tipoCuestionario;
     private int instrumento, pregunta, puntaje;
@@ -48,6 +51,32 @@ public class TestEspecialistaController implements Initializable {
     private Test test;
     private int contadorPregunta;
     private InfoCuestionario ic;
+    private Conducta conducta;
+    private String[] sintomasDetectados;
+
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public Conducta getConducta() {
+        return conducta;
+    }
+
+    public void setConducta(Conducta conducta) {
+        this.conducta = conducta;
+    }
 
     public InfoCuestionario getIc() {
         return ic;
@@ -135,20 +164,28 @@ public class TestEspecialistaController implements Initializable {
         columnaRespuesta.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> {
             return new SimpleStringProperty(param.getValue().getValue());
         });
+        sintomasDetectados = new String[10];
+        for (int i = 1; i < 10; i++) {
+            sintomasDetectados[i] = "";
+        }
     }
 
     @FXML
     private void mostrarPrediagnostico(ActionEvent ae) {
-        
+
         PrediagnosticoController pc = (PrediagnosticoController) cv.cambiarVista("/Center/Prediagnostico.fxml", mc.getPanelPrin());
         test.getFinCuestionario();
         test.getDuracion();
         pc.setTest(test);
         pc.setMc(mc);
         pc.setIc(ic);
+        pc.setPaciente(paciente);
+        pc.setConducta(conducta);
         pc.habilitarBotonGuardar();
         pc.cargarResultados();
         pc.startgrafica();
+        pc.setSintomasDetectados(sintomasDetectados);
+        pc.habilitarBotonGuardar();
 
     }
 
@@ -160,19 +197,11 @@ public class TestEspecialistaController implements Initializable {
             instrumento = test.getTipoCuestionario(pregunta);
             // int tipo=id.tipoCuestionario(pregunta);
             if (instrumento == 1) {
-                rbtnTEavc.setText("Aplicable a veces");
-                rbtnTEcs.setText("Generalmente aplicable");
-                rbtnTEnunca.setText("No aplicable en lo absoluto");
-                rbtnTEoca.setText("Generalmente no aplicable");
-                rbtnTEsiempre.setText("Totalmente aplicable");
+
                 rbtnTEavc.setVisible(true);
             } else {
-
-                rbtnTEcs.setText("Bastante");
-                rbtnTEnunca.setText("Nada");
-                rbtnTEoca.setText("Algo");
-                rbtnTEsiempre.setText("Mucho");
                 rbtnTEavc.setVisible(false);
+
             }
             contadorPregunta++;
         }
@@ -235,6 +264,9 @@ public class TestEspecialistaController implements Initializable {
             rbtnTEoca.setDisable(true);
             rbtnTEsiempre.setDisable(true);
             btnFinalizar.setVisible(true);
+            for (int i = 0; i < 10; i++) {
+                System.out.println(sintomasDetectados[i]);
+            }
         }
     }
 
@@ -289,15 +321,24 @@ public class TestEspecialistaController implements Initializable {
             trastorno = test.getTrastorno(numeroSintoma);
             trastorno.forEach((trastornoLoop) -> {
                 TrastornoSintoma ts = (TrastornoSintoma) trastornoLoop;
-
+                if (valor >= 3) {
+                    if (sintomasDetectados[ts.getTrastorno()].contains(String.valueOf(numeroSintoma) + ",")) {
+                        System.out.println("YA AGREGADO" + numeroSintoma);
+                        System.out.println(sintomasDetectados[ts.getTrastorno()]);
+                    } else {
+                        sintomasDetectados[ts.getTrastorno()] += numeroSintoma + ",";
+                    }
+                }
                 if (test.banderaLevantada(ts.getTrastorno())) {
                     //System.out.println("YA SUMADO:" + preguntaC);
                 } else {
                     if ((!test.respuestaContestada(preguntaContestada))
-                            || ((test.respuestaContestada(preguntaContestada)) && (preguntaContestada == 16 || preguntaContestada == 17))) {
+                            || ((test.respuestaContestada(preguntaContestada))
+                            && (preguntaContestada == 16 || preguntaContestada == 17))) {
                         test.levantarBandera(ts.getTrastorno());
                         System.out.println("/Instrumento:/" + instrumentoC + "/Sintoma/" + numeroSintoma + "/Trastorno/" + ts.getTrastorno()
                                 + "/Pregunta:/" + preguntaContestada + "/Valor:/" + valor);
+
                         test.calificarPregunta(instrumentoC, ts.getTrastorno(), valor);
                         test.agregarRespuesta(preguntaContestada, valor.intValue());
                     }

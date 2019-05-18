@@ -6,9 +6,11 @@
 package com.ipn.mx.tt.controller;
 
 import com.ipn.mx.tt.dao.PrediagnosticoDAO;
+import com.ipn.mx.tt.dao.SintomaCuestionarioDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
+import com.ipn.mx.tt.modelo.SintomaCuestionario;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
@@ -45,6 +47,17 @@ public class PrediagnosticoController implements Initializable {
     private Conducta conducta;
     private PrediagnosticoDAO pdd;
     private Boolean testContestado;
+    private SintomaCuestionarioDAO scd;
+
+    private String[] sintomasDetectados;
+
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
+    }
 
     public Boolean getTestContestado() {
         return testContestado;
@@ -169,12 +182,26 @@ public class PrediagnosticoController implements Initializable {
     @FXML
     void guardarCuestionario(ActionEvent event) {
         test.guardarCuestionario(ic.getIdCuestionario());
+        SintomaCuestionario sc = new SintomaCuestionario(ic.getIdCuestionario(), 1.0, sintomasDetectados[1]);
+        SintomaCuestionario sc1 = new SintomaCuestionario(ic.getIdCuestionario(), 2.0, sintomasDetectados[2]);
+        SintomaCuestionario sc2 = new SintomaCuestionario(ic.getIdCuestionario(), 3.0, sintomasDetectados[3]);
+        SintomaCuestionario sc3 = new SintomaCuestionario(ic.getIdCuestionario(), 4.0, sintomasDetectados[4]);
+        SintomaCuestionario sc4 = new SintomaCuestionario(ic.getIdCuestionario(), 5.0, sintomasDetectados[5]);
+        SintomaCuestionario sc5 = new SintomaCuestionario(ic.getIdCuestionario(), 6.0, sintomasDetectados[6]);
+        scd.insertarSintomaCuestionario(sc.toDBObject());
+        scd.insertarSintomaCuestionario(sc1.toDBObject());
+        scd.insertarSintomaCuestionario(sc2.toDBObject());
+        scd.insertarSintomaCuestionario(sc3.toDBObject());
+        scd.insertarSintomaCuestionario(sc4.toDBObject());
+        scd.insertarSintomaCuestionario(sc5.toDBObject());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cv = new cargadorVista();
         pdd = new PrediagnosticoDAO();
+        scd = new SintomaCuestionarioDAO();
+        scd.conectar();
         pdd.conectar();
         btnGuardar.setVisible(false);
 
@@ -406,6 +433,10 @@ public class PrediagnosticoController implements Initializable {
 
     }
 
+    public void cargarSintomaTrastorno() {
+
+    }
+
     @FXML
     private void siguienteVista(ActionEvent event) {
         Prediagnostico2Controller pc
@@ -419,8 +450,8 @@ public class PrediagnosticoController implements Initializable {
         pc.configurarTrastorno();
         pc.configurarVista();
         pc.ponerConducta();
-        
-
+        pc.setSintomasDetectados(sintomasDetectados);
+        pc.ponerTrastornosSintomas();
     }
 
     public void darClickBotonGuardar() {
@@ -461,4 +492,5 @@ public class PrediagnosticoController implements Initializable {
 //        lblTermino.setText(dt.format(test.getFinCuestionario()));
         lblCuestionario.setText(ic.getIdCuestionario() + "");
     }
+
 }

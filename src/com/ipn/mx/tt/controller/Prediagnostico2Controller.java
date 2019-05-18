@@ -8,12 +8,15 @@ package com.ipn.mx.tt.controller;
 import com.ipn.mx.tt.dao.PrediagnosticoDAO;
 import com.ipn.mx.tt.dao.PreguntaContestadaDAO;
 import com.ipn.mx.tt.dao.PreguntaDAO;
+import com.ipn.mx.tt.dao.SintomaCuestionarioDAO;
+import com.ipn.mx.tt.dao.SintomaDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.Pregunta;
 import com.ipn.mx.tt.modelo.PreguntaTabla;
 import com.ipn.mx.tt.modelo.Respuesta;
+import com.ipn.mx.tt.modelo.Sintoma;
 import com.ipn.mx.tt.modelo.SintomaTrastornoTabla;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.modelo.TrastornoGuardado;
@@ -28,7 +31,6 @@ import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,6 +40,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -47,12 +52,12 @@ import javafx.scene.layout.AnchorPane;
  */
 public class Prediagnostico2Controller implements Initializable {
 
+    private String[] sintomasDetectados;
     private menuController mc;
     private cargadorVista cv;
     private Test test;
     private InfoCuestionario ic;
     private ObservableList<PreguntaTabla> ptol;
-    private ObservableList<SintomaTrastornoTabla> sttol;
     private ObservableList<TrastornoTabla> ttol;
     private Paciente paciente;
     private Conducta conducta;
@@ -62,6 +67,17 @@ public class Prediagnostico2Controller implements Initializable {
     private List trastornos;
     private LinkedList puntajes;
     private PrediagnosticoDAO pred;
+    private SintomaDAO sd;
+    private SintomaCuestionarioDAO scd;
+    TreeItem<String> itemRaiz;
+
+    TreeItem<String> itemInsomnio, itemRc, itemRls, itemApnea, itemHipersomnia, itemNarcolepsia;
+
+    @FXML
+    private TreeTableView<String> trastornoView;
+
+    @FXML
+    private TreeTableColumn<String, String> columnTrastorno;
     @FXML
     private AnchorPane panelP;
     @FXML
@@ -69,12 +85,6 @@ public class Prediagnostico2Controller implements Initializable {
 
     @FXML
     private TableColumn<PreguntaTabla, String> columnaRespuesta;
-
-    @FXML
-    private TableColumn<SintomaTrastornoTabla, String> columnaSintoma;
-
-    @FXML
-    private TableColumn<SintomaTrastornoTabla, String> columnaTrastorno;
 
     @FXML
     private TableColumn<TrastornoTabla, String> columnaTrastornoR;
@@ -94,9 +104,6 @@ public class Prediagnostico2Controller implements Initializable {
     private TableColumn<TrastornoTabla, Boolean> columnaDetectado;
     @FXML
     private TableView<PreguntaTabla> tbthabitos;
-
-    @FXML
-    private TableView<SintomaTrastornoTabla> tblsintomas;
 
     @FXML
     private TableView<TrastornoTabla> tbltrastornos;
@@ -145,6 +152,8 @@ public class Prediagnostico2Controller implements Initializable {
         pc.setPaciente(paciente);
         pc.cargarResultados();
         pc.startgrafica();
+        pc.setSintomasDetectados(sintomasDetectados);
+        pc.habilitarBotonGuardar();
 
     }
 
@@ -157,7 +166,15 @@ public class Prediagnostico2Controller implements Initializable {
         rc.setIc(ic);
         rc.setConducta(conducta);
         rc.setPaciente(paciente);
+        rc.setSintomasDetectados(sintomasDetectados);
+    }
 
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
     }
 
     public InfoCuestionario getIc() {
@@ -208,18 +225,18 @@ public class Prediagnostico2Controller implements Initializable {
         pcd = new PreguntaContestadaDAO();
         pd = new PreguntaDAO();
         pred = new PrediagnosticoDAO();
+        sd = new SintomaDAO();
+        scd = new SintomaCuestionarioDAO();
+        scd.conectar();
+        sd.conectar();
         pd.conectar();
         pcd.conectar();
         pred.conectar();
         ptol = FXCollections.observableArrayList();
-        sttol = FXCollections.observableArrayList();
         ttol = FXCollections.observableArrayList();
         puntajes = new LinkedList();
         columnaPregunta.setCellValueFactory(cellData -> cellData.getValue().getPregunta());
         columnaRespuesta.setCellValueFactory(cellData -> cellData.getValue().getRespuesta());
-
-        columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
-        columnaSintoma.setCellValueFactory(cellData -> cellData.getValue().getSintoma());
 
         columnaTrastornoR.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
         columnaHSDQ.setCellValueFactory(cellData -> cellData.getValue().getHsdq());
@@ -241,13 +258,30 @@ public class Prediagnostico2Controller implements Initializable {
                 }
             }
         });
-        sttol.add(new SintomaTrastornoTabla("prueba", "prueba"));
-
+        columnTrastorno.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> {
+            return new SimpleStringProperty(param.getValue().getValue());
+        });
         tbthabitos.setItems(ptol);
         tbltrastornos.setItems(ttol);
-        tblsintomas.setItems(sttol);
+
+        itemRaiz = new TreeItem<>("Trastornos");
+
+        trastornoView.setRoot(itemRaiz);
 
         testContestado = true;
+        itemInsomnio = new TreeItem<>("Insomnio");
+        itemRc = new TreeItem<>("RC");
+        itemRls = new TreeItem<>("RLS");
+        itemApnea = new TreeItem<>("Apnea");
+        itemHipersomnia = new TreeItem<>("Hipersomnia");
+        itemNarcolepsia = new TreeItem<>("Narcolepsia");
+        trastornoView.getRoot().getChildren().addAll(itemInsomnio);
+        trastornoView.getRoot().getChildren().addAll(itemRc);
+        trastornoView.getRoot().getChildren().addAll(itemRls);
+        trastornoView.getRoot().getChildren().addAll(itemApnea);
+        trastornoView.getRoot().getChildren().addAll(itemHipersomnia);
+        trastornoView.getRoot().getChildren().addAll(itemNarcolepsia);
+
     }
 
     public Boolean getTestContestado() {
@@ -412,6 +446,52 @@ public class Prediagnostico2Controller implements Initializable {
 
     public void configurarTrastorno() {
         trastornos = pred.traerTrastornos(ic.getIdCuestionario());
+    }
+
+    public void ponerTrastornosSintomas() {
+
+        if (sintomasDetectados != null) {
+
+            ponerSintomasView(sintomasDetectados[1], itemInsomnio);
+            ponerSintomasView(sintomasDetectados[2], itemRc);
+            ponerSintomasView(sintomasDetectados[3], itemRls);
+            ponerSintomasView(sintomasDetectados[4], itemApnea);
+            ponerSintomasView(sintomasDetectados[5], itemHipersomnia);
+            ponerSintomasView(sintomasDetectados[6], itemNarcolepsia);
+
+        } else {
+            configurarSintomasDetectados();
+            ponerTrastornosSintomas();
+        }
+    }
+
+    public void ponerSintomasView(String numSintoma, TreeItem ti) {
+        
+        if(numSintoma.contains(","))
+        {
+                    String[] sintomas = numSintoma.split(",");
+        for (String sintoma : sintomas) {
+            Sintoma s = sd.getSintoma(Double.valueOf(sintoma));
+            TreeItem<String> itemSintoma = new TreeItem<>(s.getNombre());
+            ti.getChildren().addAll(itemSintoma);
+
+        }
+        }
+    }
+
+    public void configurarSintomasDetectados() {
+        Double numC = ic.getIdCuestionario();
+        sintomasDetectados = new String[10];
+        for (int i = 1; i < 10; i++) {
+            sintomasDetectados[i] = " ";
+        }
+        sintomasDetectados[1] = scd.traerSintoma(numC, 1.0).getSintomas();
+        sintomasDetectados[2] = scd.traerSintoma(numC, 2.0).getSintomas();
+        sintomasDetectados[3] = scd.traerSintoma(numC, 3.0).getSintomas();
+        sintomasDetectados[4] = scd.traerSintoma(numC, 4.0).getSintomas();
+        sintomasDetectados[5] = scd.traerSintoma(numC, 5.0).getSintomas();
+        sintomasDetectados[6] = scd.traerSintoma(numC, 6.0).getSintomas();
+
     }
 
 }

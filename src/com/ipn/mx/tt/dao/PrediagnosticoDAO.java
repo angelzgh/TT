@@ -59,7 +59,7 @@ public class PrediagnosticoDAO extends DocumentoDAO {
     }
 
     public LinkedList traerTrastornos(Double numCuestionario) {
-        LinkedList ls=new LinkedList();
+        LinkedList ls = new LinkedList();
         DBObject dbo = new BasicDBObject("_numCuestionario", numCuestionario);
         BasicDBList or = new BasicDBList();
         or.add(dbo);
