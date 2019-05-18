@@ -38,7 +38,12 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
         return new BasicDBObject("_numCuestionario", info.getIdCuestionario())
                 .append("status", info.getStatus())
                 .append("Paciente", info.getPaciente())
-                .append("Especialista", info.getEspecialista());
+                .append("Especialista", info.getEspecialista())
+                .append("Registro", info.getRegistro())
+                .append("TiempoInicio", info.getTiempoInicio())
+                .append("TiempoFin", info.getTiempoFin())
+                .append("Duracion", info.getTiempoDuracion())
+                ;
     }
 
     public Double buscarSiguiente() {
@@ -108,12 +113,13 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
 
     }
 
-    public boolean actualizarDatos(Double numCuestionario, Double status) {
+    public boolean actualizarDatos(InfoCuestionario ic) {
 
-        if (cuestionarioExiste(numCuestionario)) {
-            DBObject query = new BasicDBObject("_numCuestionario", numCuestionario);
+        if (cuestionarioExiste(ic.getIdCuestionario())) {
+            DBObject query = new BasicDBObject("_numCuestionario", ic.getIdCuestionario());
             cjm.getMongoCollection().update(query, new BasicDBObject("$set",
-                    new BasicDBObject("status", status)
+                    new BasicDBObject("status", ic.getStatus())
+                   
             ));
             return true;
         } else {

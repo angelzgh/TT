@@ -154,7 +154,7 @@ public class PacienteNuevoController implements Initializable {
                     && !Direccion.equals("") && !Telefono.equals("") && !cbxescolaridad.getValue().equals("-")) {
 
                 p = new Paciente(Nombre, Apellido, Sexo, Correo, Fecha, Direccion, Telefono, CURP, Escolaridad);
-                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId());
+                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId(),c.getDia());
                 registrarPaciente(p, ic);
 
                 CustomMessage cm1 = new CustomMessage("MENSAJE", "¿Desea realizar el Cuestionario?", 4);

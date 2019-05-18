@@ -181,7 +181,7 @@ public class PrediagnosticoController implements Initializable {
 
     @FXML
     void guardarCuestionario(ActionEvent event) {
-        test.guardarCuestionario(ic.getIdCuestionario());
+        test.guardarCuestionario(ic);
         SintomaCuestionario sc = new SintomaCuestionario(ic.getIdCuestionario(), 1.0, sintomasDetectados[1]);
         SintomaCuestionario sc1 = new SintomaCuestionario(ic.getIdCuestionario(), 2.0, sintomasDetectados[2]);
         SintomaCuestionario sc2 = new SintomaCuestionario(ic.getIdCuestionario(), 3.0, sintomasDetectados[3]);
