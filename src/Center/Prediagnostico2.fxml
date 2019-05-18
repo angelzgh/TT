@@ -145,9 +145,9 @@
                                     <Insets left="30.0" top="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <JFXTextField fx:id="txthorasps" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="53.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                              <JFXTextField fx:id="txthorasps" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
-                                    <Insets left="240.0" />
+                                    <Insets right="15.0" />
                                  </GridPane.margin>
                               </JFXTextField>
                               <Label style="-fx-background-color: #FFFFFF;" text="Días de descanso:" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -195,9 +195,9 @@
                                     <Insets left="20.0" top="120.0" />
                                  </GridPane.margin>
                               </Label>
-                              <JFXTextField fx:id="txthorario" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="51.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                              <JFXTextField fx:id="txthorario" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="155.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>
-                                    <Insets right="115.0" top="110.0" />
+                                    <Insets right="15.0" top="110.0" />
                                  </GridPane.margin>
                               </JFXTextField>
                            </children>
