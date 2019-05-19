@@ -26,6 +26,16 @@ public class Cuestionario {
         RespuestasContestadas = new LinkedList();
     }
 
+    public Cuestionario(Cuestionario c) {
+        this.numCuestionario = c.numCuestionario;
+        this.s50 = c.s50;
+        this.hsdr = c.hsdr;
+        this.inicioCuestionario = c.inicioCuestionario;
+        this.duracion = c.duracion;
+        this.finCuestionario = c.finCuestionario;
+        this.RespuestasContestadas = c.RespuestasContestadas;
+    }
+
     public boolean respuestaContestada(int numeroPregunta) {
         boolean existe = false;
         Respuesta r = new Respuesta(numeroPregunta, 0);
@@ -39,9 +49,38 @@ public class Cuestionario {
         return existe;
     }
 
-    public void agregarRespuesta(int numeroRespuesta, int valorRespuesta) {
-        Respuesta r = new Respuesta(numeroRespuesta, valorRespuesta);
+    public void agregarRespuesta(int numeroPregunta, int valorRespuesta) {
+        Respuesta r = new Respuesta(numeroPregunta, valorRespuesta);
         RespuestasContestadas.add(r);
+    }
+
+    public void quitarRespuesta(int numeroPregunta) {
+        int x = 0;
+        for (Object RespuestasContestada : RespuestasContestadas) {
+
+            Respuesta r = (Respuesta) RespuestasContestada;
+            if (r.getNumeroPregunta() == numeroPregunta) {
+                RespuestasContestadas.remove(x);
+                break;
+            }
+            x++;
+        }
+    }
+
+    public void mostrarRespuestas() {
+        System.out.println("RESPUESTAS");
+        for (Object RespuestasContestada : RespuestasContestadas) {
+
+            Respuesta r = (Respuesta) RespuestasContestada;
+            System.out.println(r.toString());
+        }
+        System.out.println("FIN RESPUESTAS");
+    }
+
+    public void quitarDesde(int desde) {
+        while (desde < RespuestasContestadas.size()) {
+            RespuestasContestadas.remove(desde);
+        }
     }
 
     public Respuesta obtenerRespuesta(int numeroPregunta) {
@@ -88,9 +127,17 @@ public class Cuestionario {
         }
     }
 
+    public int getNumCuestionario() {
+        return numCuestionario;
+    }
+
+    public void setNumCuestionario(int numCuestionario) {
+        this.numCuestionario = numCuestionario;
+    }
+
     @Override
     public String toString() {
-        return "Cuestionario{" + "numCuestionario=" + numCuestionario + ", s50=" + s50 + ", hsdr=" + hsdr + '}';
+        return "Cuestionario{" + "numCuestionario=" + numCuestionario + ", s50=" + s50 + ", hsdr=" + hsdr + ", inicioCuestionario=" + inicioCuestionario + ", duracion=" + duracion + ", finCuestionario=" + finCuestionario + ", RespuestasContestadas=" + RespuestasContestadas + '}';
     }
 
     public Date getInicioCuestionario() {

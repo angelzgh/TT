@@ -12,6 +12,7 @@ import com.ipn.mx.tt.modelo.Pregunta;
 import com.ipn.mx.tt.modelo.SintomaPregunta;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.modelo.TrastornoSintoma;
+import com.ipn.mx.tt.util.ThreadImagen;
 import com.ipn.mx.tt.util.ThreadPregunta;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
@@ -20,6 +21,8 @@ import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,6 +32,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer.Status;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
@@ -48,7 +54,17 @@ public class TestPacientePreguntasController implements Initializable {
     private int contadorPregunta;
     private Paciente paciente;
     private String[] sintomasDetectados;
+    private Media song;
+    private MediaPlayer media;
+    private final ObjectProperty<MediaPlayer> playerProperty = new SimpleObjectProperty<>();
 
+    @FXML
+    private ImageView imgAyudaAudio;
+
+    @FXML
+    private ImageView imgAyuda;
+    @FXML
+    private ImageView imgPreguntaAudio;
     @FXML
     private BorderPane panelRight;
 
@@ -97,12 +113,6 @@ public class TestPacientePreguntasController implements Initializable {
     @FXML
     private Label lblAyuda;
 
-    @FXML
-    private ImageView imgAyuda;
-
-    @FXML
-    private ImageView imgAudio;
-
     public String[] getSintomasDetectados() {
         return sintomasDetectados;
     }
@@ -148,7 +158,6 @@ public class TestPacientePreguntasController implements Initializable {
         contadorPregunta = 1;
 
         btnFinalizar.setVisible(false);
-
     }
 
     @FXML
@@ -181,12 +190,12 @@ public class TestPacientePreguntasController implements Initializable {
             txtayuda.setVisible(false);
             lblAyuda.setVisible(false);
             imgAyuda.setVisible(false);
-            imgAudio.setVisible(false);
+            imgAyudaAudio.setVisible(false);
         } else {
             txtayuda.setVisible(true);
             lblAyuda.setVisible(true);
             imgAyuda.setVisible(true);
-            imgAudio.setVisible(true);
+            imgAyudaAudio.setVisible(true);
         }
 
         if (p.getId() > 0 && p.getId() != 99) {
@@ -411,4 +420,26 @@ public class TestPacientePreguntasController implements Initializable {
         this.conducta = conducta;
     }
 
+    @FXML
+    void reproducirAudioAyuda(MouseEvent event) {
+
+        song = new Media(getClass().getResource("/sonidos/Ayuda/a" + pregunta + ".mp3").toString());
+        System.out.println("/sonidos/Ayuda/a" + pregunta + ".mp3");
+        media = new MediaPlayer(song);
+        media.play();
+        ThreadImagen tp = new ThreadImagen(imgPreguntaAudio, 5);
+        tp.runClock();
+
+    }
+
+    @FXML
+    void reproducirAudioPregunta(MouseEvent event) {
+        song = new Media(getClass().getResource("/sonidos/Preguntas/p" + pregunta + ".mp3").toString());
+        System.out.println("/sonidos/Preguntas/p" + pregunta + ".mp3");
+
+        media = new MediaPlayer(song);
+        media.play();
+        ThreadImagen tp = new ThreadImagen(imgPreguntaAudio, 5);
+        tp.runClock();
+    }
 }

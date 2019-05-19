@@ -33,7 +33,6 @@ public class Paciente {
     public void setEscolaridad(String Escolaridad) {
         this.Escolaridad = Escolaridad;
     }
-    
 
     public String getCURP() {
         return CURP;
@@ -44,7 +43,7 @@ public class Paciente {
     }
 
     public Paciente() {
-                this.Nombre = "PACIENTE";
+        this.Nombre = "PACIENTE";
         this.Apellido = "GRAL";
         this.Sexo = "H";
         this.Correo = "gral@gmail.com";
@@ -52,15 +51,13 @@ public class Paciente {
         this.Direccion = "-";
         this.Telefono = "-";
         this.CURP = "XEXX010101HNEXXXA4";
-        this.Escolaridad="-";
+        this.Escolaridad = "-";
     }
 
     @Override
     public String toString() {
         return "Paciente{" + "Nombre=" + Nombre + ", Apellido=" + Apellido + ", Sexo=" + Sexo + ", Correo=" + Correo + ", Fecha=" + Fecha + ", Direccion=" + Direccion + ", Telefono=" + Telefono + ", CURP=" + CURP + ", Escolaridad=" + Escolaridad + '}';
     }
-
-
 
     public String getNombre() {
         return Nombre;
@@ -119,18 +116,18 @@ public class Paciente {
     }
 
     public int getEdad() throws ParseException {
- Date now = new Date(System.currentTimeMillis());
-     Date reg=new SimpleDateFormat("yyyy-MM-dd").parse(this.getFecha());  
-SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-System.out.println(date.format(now));
-System.out.println(this.getFecha());
- 
-		int años=(int) (((now.getTime()-reg.getTime())/86400000)/365);
-                System.out.println("Años"+años);
+        Date now = new Date(System.currentTimeMillis());
+        Date reg = new SimpleDateFormat("yyyy-MM-dd").parse(this.getFecha());
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        System.out.println(date.format(now));
+        System.out.println(this.getFecha());
+
+        int años = (int) (((now.getTime() - reg.getTime()) / 86400000) / 365);
+        System.out.println("Años" + años);
         return años;
     }
 
-    public Paciente(String Nombre, String Apellido, String Sexo, String Correo, String Fecha, String Direccion, String Telefono, String CURP,String Escolaridad) {
+    public Paciente(String Nombre, String Apellido, String Sexo, String Correo, String Fecha, String Direccion, String Telefono, String CURP, String Escolaridad) {
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.Sexo = Sexo;
@@ -139,7 +136,7 @@ System.out.println(this.getFecha());
         this.Direccion = Direccion;
         this.Telefono = Telefono;
         this.CURP = CURP;
-        this.Escolaridad=Escolaridad;
+        this.Escolaridad = Escolaridad;
     }
 
     public Paciente(DBObject dbo) {

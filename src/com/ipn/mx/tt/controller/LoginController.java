@@ -28,7 +28,6 @@ public class LoginController implements Initializable {
     private cargadorVista cv;
     private UsuarioDAO udao;
 
-    
     @FXML
     private Label lblStatus;
 
@@ -54,7 +53,6 @@ public class LoginController implements Initializable {
         this.udao = udao;
     }
 
-    
     @FXML
     void btnActionPrueba(ActionEvent event) {
 //        UsuarioDAO udao = new UsuarioDAO();
@@ -117,16 +115,15 @@ public class LoginController implements Initializable {
         // TODO
         // lblStatus.setVisible(false);
         mov = new movEscena();
-        udao=new UsuarioDAO();
+        udao = new UsuarioDAO();
         udao.conectar();
-        cv=new cargadorVista();
-        
+        cv = new cargadorVista();
         // txtPass.getStyleClass().setAll("btn", "btn-primary");
     }
 
     @FXML
     void irMenuRecuperarContra(MouseEvent event) {
-        RecuperarcontraController rcc=(RecuperarcontraController)cv.cambiarVista("/Center/Recuperarcontra.fxml",login);
+        RecuperarcontraController rcc = (RecuperarcontraController) cv.cambiarVista("/Center/Recuperarcontra.fxml", login);
         rcc.setUd(udao);
     }
 

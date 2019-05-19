@@ -26,7 +26,10 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
     }
 
     public List traerInformacion() {
-        return traerTodo();
+        DBObject dbo = new BasicDBObject("status", 2.0);
+        DBCursor cursor = cjm.getMongoCollection().find(dbo);
+
+        return cursor.toArray();
     }
 
     public void insertarInfoCuestionario(InfoCuestionario info) {

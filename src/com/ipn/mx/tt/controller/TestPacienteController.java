@@ -21,9 +21,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * FXML Controller class
@@ -43,6 +47,7 @@ public class TestPacienteController implements Initializable {
     private CuestionarioAplicadoDAO cad;
     private PacienteDAO pd;
     private Conducta conducta;
+
     @FXML
     private Label lblPaciente;
     @FXML
@@ -184,18 +189,19 @@ public class TestPacienteController implements Initializable {
             tppc.setConducta(conducta);
             tppc.ponerPaciente();
         }
+       mc.disableTop();
     }
 
     public void cargarConducta() {
-            InstruccionesTestController itc
-                    = (InstruccionesTestController) cv.cambiarVista("/Center/InstruccionesTest.fxml", mc.getPanelPrin());
-            itc.setMc(mc);
-            itc.setTipoCuestionario(tipoCuestionario);
-            itc.setPaciente(paciente);
-            if (datosPaciente) {
-                itc.setIc(ic);
-            }
-            itc.setDatosPaciente(datosPaciente);
+        InstruccionesTestController itc
+                = (InstruccionesTestController) cv.cambiarVista("/Center/InstruccionesTest.fxml", mc.getPanelPrin());
+        itc.setMc(mc);
+        itc.setTipoCuestionario(tipoCuestionario);
+        itc.setPaciente(paciente);
+        if (datosPaciente) {
+            itc.setIc(ic);
+        }
+        itc.setDatosPaciente(datosPaciente);
     }
 
     @Override
@@ -206,7 +212,9 @@ public class TestPacienteController implements Initializable {
         pd = new PacienteDAO();
         cad.conectar();
         pd.conectar();
+        
         // TODO
     }
+
 
 }
