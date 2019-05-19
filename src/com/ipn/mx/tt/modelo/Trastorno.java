@@ -18,6 +18,11 @@ public class Trastorno {
         puntaje = 0.0;
         preguntas = 0;
     }
+    public Trastorno (Trastorno t)
+    {
+                puntaje = t.puntaje;
+        preguntas =  t.preguntas;
+    }
 
     public int getPreguntas() {
         return preguntas;

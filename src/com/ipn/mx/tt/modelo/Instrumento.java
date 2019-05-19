@@ -13,6 +13,13 @@ public class Instrumento {
     
     private Trastorno[] trastornos;
     
+    public Instrumento(Instrumento ins)
+    {
+        trastornos=new Trastorno[10];
+        for (int i = 0; i < 10; i++) {
+            trastornos[i]=new Trastorno(ins.trastornos[i]);
+        }
+    }
     public Instrumento()
     {
         trastornos=new Trastorno[10];
@@ -40,5 +47,12 @@ public class Instrumento {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         trastornos[trastorno].restar(puntaje);
     }
+
+    @Override
+    public String toString() {
+        return "Instrumento{" + "trastornos=" + trastornos + '}';
+    }
+    
+    
     
 }
