@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="12"/>
+	<property name="ireport.y" value="169"/>
 	<style name="Crosstab Data Text"/>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="apellidos" class="java.lang.String"/>
@@ -28,7 +28,7 @@
 		<band height="82" splitType="Stretch">
 			<staticText>
 				<reportElement x="122" y="13" width="261" height="46"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INSTITUTO NACIONAL DE PSQUIATRÍA RAMÓN DE LA FUENTE MUÑIZ]]></text>
@@ -162,7 +162,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="440" splitType="Stretch">
+		<band height="472" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="22" width="555" height="1" forecolor="#999999"/>
 				<graphicElement>
@@ -171,7 +171,7 @@
 			</line>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="555" height="22" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[HÁBITOS DEL DORMIR]]></text>
@@ -242,7 +242,7 @@
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="66" y="154" width="112" height="16" forecolor="#000033"/>
+				<reportElement x="66" y="154" width="66" height="16" forecolor="#000033"/>
 				<textElement>
 					<font fontName="Arial"/>
 				</textElement>
@@ -319,7 +319,7 @@
 			</line>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="363" width="555" height="22" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[RECOMENDACIONES]]></text>
@@ -363,12 +363,22 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{hpsueño}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="195" y="132" width="155" height="17" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement>
+				<reportElement mode="Transparent" x="239" y="131" width="69" height="17" forecolor="#CC0000" backcolor="#CCCCCC"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[REPORTE]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="0" y="433" width="572" height="39"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recoe}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="384" width="572" height="35"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{recos}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 </jasperReport>

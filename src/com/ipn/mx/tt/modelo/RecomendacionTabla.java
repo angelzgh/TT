@@ -25,6 +25,7 @@ public class RecomendacionTabla {
     }
         public void setRecomendacion(Recomendacion r) {
         this.recomendacion = new SimpleStringProperty(r.getRecomendacion());
+        
     }
     
     public RecomendacionTabla(String recomendacion) {
