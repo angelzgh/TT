@@ -5,6 +5,9 @@
  */
 package com.ipn.mx.tt.modelo;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -38,7 +41,11 @@ public class PacienteTabla {
     public PacienteTabla(Paciente paciente) {
                 this.CURP = new SimpleStringProperty(paciente.getCURP());
         this.nombre = new SimpleStringProperty(paciente.getNombre());
-        this.edad = new SimpleStringProperty(""+paciente.getEdad());
+        try {
+            this.edad = new SimpleStringProperty(""+paciente.getEdad());
+        } catch (ParseException ex) {
+            Logger.getLogger(PacienteTabla.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public StringProperty getNombre() {

@@ -56,6 +56,7 @@ public class RecomendacionesController implements Initializable {
     private Paciente paciente;
     private Conducta conducta;
     private RecomendacionDAO rd;
+    private LinkedList lsRecomendacion;
 
     @FXML
     private TableView<TrastornoIntensidadTabla> tblRtrastornos;
@@ -110,6 +111,7 @@ public class RecomendacionesController implements Initializable {
         tblRecomendaciones.setItems(rtol);
         tblRtrastornos.setItems(titol);
         titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
+        lsRecomendacion = new LinkedList();
     }
 
     public String[] getSintomasDetectados() {
@@ -171,36 +173,35 @@ public class RecomendacionesController implements Initializable {
     }
 
     @FXML
- void PDF(ActionEvent event) throws JRException, IOException, ParseException {
-      Date now = new Date(System.currentTimeMillis());
-SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-System.out.println(date.format(now));
-    
-		
-HashMap parametros=new HashMap();
-String master=System.getProperty("user.dir")+"\\src\\Center\\Reporte.jasper";
-System.out.println(master);
-String edad = Integer.toString(paciente.getEdad());
-String diatrabaja ="";
-String horariot = "";
-if(conducta.getJornadaLaboral()==3){
-diatrabaja = "Domingo";
-}else if(conducta.getJornadaLaboral()==2){
-diatrabaja = "Sabado";
-}else if(conducta.getJornadaLaboral()==1){
-diatrabaja = "Viernes";
-}
-if(conducta.getHorarioTrabajo()==1){
-horariot = "Fijo";
-}else if(conducta.getHorarioTrabajo()==2){
-horariot = "Por turnos";    
-}else if(conducta.getHorarioTrabajo()==3){
-horariot = "Sin horario fijo";
-}
-String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
-String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
-String diasd = Double.toString(conducta.getDiasDeDescanso());
-String hpsueño = Double.toString(conducta.getPromedioHoras());
+    void PDF(ActionEvent event) throws JRException, IOException, ParseException {
+        Date now = new Date(System.currentTimeMillis());
+        SimpleDateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+        System.out.println(date.format(now));
+
+        HashMap parametros = new HashMap();
+        String master = System.getProperty("user.dir") + "\\src\\Center\\Reporte.jasper";
+        System.out.println(master);
+        String edad = Integer.toString(paciente.getEdad());
+        String diatrabaja = "";
+        String horariot = "";
+        if (conducta.getJornadaLaboral() == 3) {
+            diatrabaja = "Domingo";
+        } else if (conducta.getJornadaLaboral() == 2) {
+            diatrabaja = "Sabado";
+        } else if (conducta.getJornadaLaboral() == 1) {
+            diatrabaja = "Viernes";
+        }
+        if (conducta.getHorarioTrabajo() == 1) {
+            horariot = "Fijo";
+        } else if (conducta.getHorarioTrabajo() == 2) {
+            horariot = "Por turnos";
+        } else if (conducta.getHorarioTrabajo() == 3) {
+            horariot = "Sin horario fijo";
+        }
+        String hpdiasd = Double.toString(conducta.getPromedioHorasDescanso());
+        String hpdiast = Double.toString(conducta.getPromedioHorasLaborales());
+        String diasd = Double.toString(conducta.getDiasDeDescanso());
+        String hpsueño = Double.toString(conducta.getPromedioHoras());
 
         if (conducta.getJornadaLaboral() == 3) {
             diatrabaja = "Domingo";
@@ -249,11 +250,10 @@ JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmpty
         
 //JasperViewer.viewReport(informe,false);
 
-JasperExportManager.exportReportToPdfFile(informe,"C://TT//"+paciente.getNombre()+ ".pdf");
-String file = new String("C://TT//"+paciente.getNombre()+ ".pdf");
-Runtime.getRuntime().exec("cmd /c start "+file);
- }
-
+        JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
+        String file = new String("C://TT//" + paciente.getNombre() + ".pdf");
+        Runtime.getRuntime().exec("cmd /c start " + file);
+    }
 
     @FXML
     void regresarPrediagnostico(ActionEvent event) {
@@ -288,19 +288,18 @@ Runtime.getRuntime().exec("cmd /c start "+file);
 
     public void obtenerRecomendaciones(Double trastorno) {
         List l = rd.traerRecomendacion(trastorno);
-        LinkedList ls=new LinkedList();
+        LinkedList ls = new LinkedList();
         System.out.println("TAMAÑO MAXIMO:" + l.size());
-        while(ls.size()<3){
+        while (ls.size() < 3) {
             int x = (int) (Math.random() * l.size()) + 1;
             System.out.println(x);
-            if(!ls.contains(x))
-            {
+            if (!ls.contains(x)) {
                 ls.add(x);
-                Recomendacion r=new Recomendacion((DBObject) l.get(x-1));
-                RecomendacionTabla rt=new RecomendacionTabla(r);
+                Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
+                RecomendacionTabla rt = new RecomendacionTabla(r);
+                lsRecomendacion.add(r.getRecomendacion());
                 rtol.add(rt);
-                rt.getRecomendacion().get();
-                
+
             }
         }
     }

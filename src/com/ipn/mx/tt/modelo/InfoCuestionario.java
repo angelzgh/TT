@@ -148,7 +148,9 @@ public class InfoCuestionario {
 
     @Override
     public String toString() {
-        return "InfoCuestionario{" + "idCuestionario=" + idCuestionario + ", status=" + status + ", paciente=" + paciente + ", Especialista=" + Especialista + '}';
+        return "InfoCuestionario{" + "idCuestionario=" + idCuestionario + ", status=" + status + ", paciente=" + paciente + ", Especialista=" + Especialista + ", registro=" + registro + ", tiempoInicio=" + tiempoInicio + ", tiempoFin=" + tiempoFin + ", tiempoDuracion=" + tiempoDuracion + ", comentarios=" + comentarios + '}';
     }
+
+   
 
 }

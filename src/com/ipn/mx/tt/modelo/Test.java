@@ -86,6 +86,31 @@ public class Test {
 //System.out.println(SintomaPregunta.toString());
     }
 
+    public Test(Test t) {
+        this.cuestionario = t.cuestionario;
+        this.pd = t.pd;
+        this.cpd = t.cpd;
+        this.cad = t.cad;
+        this.spd = t.spd;
+        this.tsd = t.tsd;
+        this.ped = t.ped;
+        this.pcd = t.pcd;
+        this.cd = t.cd;
+        this.pred = t.pred;
+        this.contadorPreguntas = t.contadorPreguntas;
+        this.preguntas = t.preguntas;
+        this.tipoCuestionario = t.tipoCuestionario;
+        this.SintomaPregunta = t.SintomaPregunta;
+        this.TrastornoSintoma = t.TrastornoSintoma;
+        this.equivalencias = t.equivalencias;
+        this.cutoff = t.cutoff;
+        this.tipo = t.tipo;
+        this.tamañoCuestionario = t.tamañoCuestionario;
+        this.trastornos = t.trastornos;
+        this.numeracion = t.numeracion;
+        this.numeroTrastornos = t.numeroTrastornos;
+    }
+
     public Cuestionario getCuestionario() {
         return cuestionario;
     }
@@ -106,11 +131,23 @@ public class Test {
         cuestionario.calificarPregunta(instrumento, trastorno, puntaje);
     }
 
+    public void quitarRespuesta(int numeroPregunta) {
+        cuestionario.quitarRespuesta(numeroPregunta);
+    }
+
+    public void quitarDesde(int desde) {
+        cuestionario.quitarDesde(desde);
+    }
+
     public void agregarRespuesta(int preguntaC, int puntaje) {
         if (!cuestionario.respuestaContestada(preguntaC)) {
             cuestionario.agregarRespuesta(preguntaC, puntaje);
         }
 
+    }
+
+    public void imprimirContestado() {
+        cuestionario.mostrarRespuestas();
     }
 
     public LinkedList obtenerPreguntasContestadas() {
@@ -200,6 +237,10 @@ public class Test {
         contadorPreguntas++;
     }
 
+    public void restarContadorPregunta() {
+        contadorPreguntas--;
+    }
+
     public int getSigPregunta() {
 
         if (contadorPreguntas > tamañoCuestionario) {
@@ -255,7 +296,7 @@ public class Test {
     }
 
     public void guardarCuestionario(InfoCuestionario ic) {
-        Double numCuestionario=ic.getIdCuestionario();
+        Double numCuestionario = ic.getIdCuestionario();
         pcd.guardarPreguntasContestadas(numCuestionario, obtenerPreguntasContestadas());
         cad.actualizarDatos(ic);
         pred.insertarTrastornos(1.0, numCuestionario, cuestionario);
@@ -267,10 +308,11 @@ public class Test {
     }
 
     public Double getTrastorno(int instrumento, int trastorno) {
-        if(cuestionario.getTrastorno(instrumento, trastorno)!=0)
+        if (cuestionario.getTrastorno(instrumento, trastorno) != 0) {
             return cuestionario.getTrastorno(instrumento, trastorno);
-        else
-        return 0.0;
+        } else {
+            return 0.0;
+        }
     }
 
     public Double getCutoff(Double Trastorno, Double idCuestionario) {
@@ -283,7 +325,8 @@ public class Test {
         }
         return x;
     }
-        public Double getNumPreguntas(Double Trastorno, Double idCuestionario) {
+
+    public Double getNumPreguntas(Double Trastorno, Double idCuestionario) {
         Double x = 0.0;
         for (int i = 0; i < cutoff.size(); i++) {
             Cutoff c = new Cutoff((DBObject) cutoff.get(i));

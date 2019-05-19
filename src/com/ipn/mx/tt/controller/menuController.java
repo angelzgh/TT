@@ -167,4 +167,12 @@ public class menuController implements Initializable {
     {
         return lblFecha.getText();
     }
+    public void disableTop()
+    {
+        PanelPrin.getTop().setDisable(true);
+    }
+        public void EnableTop()
+    {
+        PanelPrin.getTop().setDisable(false);
+    }
 }

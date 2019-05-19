@@ -63,7 +63,7 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <JFXButton fx:id="btnPver1" onAction="#verPrediagnostico" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #53b1ff;" text="Ver" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <JFXButton fx:id="btnPver1" onAction="#verPrediagnostico" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #53b1ff;" text="Ver Prediagnostico" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <ripplerFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -74,6 +74,19 @@
                      </ripplerFill>
                      <GridPane.margin>
                         <Insets top="10.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="btnPverTest" contentDisplay="RIGHT" onAction="#verTest" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #53b1ff;" text="Ver Test" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                     <ripplerFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop color="#a2c5e1" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </ripplerFill>
+                     <GridPane.margin>
+                        <Insets right="200.0" top="10.0" />
                      </GridPane.margin>
                   </JFXButton>
                </children>
