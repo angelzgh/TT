@@ -55,6 +55,7 @@ public class RecomendacionesController implements Initializable {
     private Paciente paciente;
     private Conducta conducta;
     private RecomendacionDAO rd;
+    private LinkedList lsRecomendacion;
 
     @FXML
     private TableView<TrastornoIntensidadTabla> tblRtrastornos;
@@ -104,6 +105,7 @@ public class RecomendacionesController implements Initializable {
         tblRtrastornos.setItems(titol);
         rtol.add(new RecomendacionTabla(new Recomendacion("Come bien")));
         titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
+        lsRecomendacion=new LinkedList();
     }
 
     public String[] getSintomasDetectados() {
@@ -296,6 +298,7 @@ Runtime.getRuntime().exec("cmd /c start "+file);
                 ls.add(x);
                 Recomendacion r=new Recomendacion((DBObject) l.get(x-1));
                 RecomendacionTabla rt=new RecomendacionTabla(r);
+                lsRecomendacion.add(r.getRecomendacion());
                 rtol.add(rt);
                 
             }

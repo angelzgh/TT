@@ -5,6 +5,8 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
+import com.ipn.mx.tt.dao.CuestionarioDAO;
 import com.ipn.mx.tt.dao.PrediagnosticoDAO;
 import com.ipn.mx.tt.dao.SintomaCuestionarioDAO;
 import com.ipn.mx.tt.modelo.Conducta;
@@ -48,6 +50,7 @@ public class PrediagnosticoController implements Initializable {
     private PrediagnosticoDAO pdd;
     private Boolean testContestado;
     private SintomaCuestionarioDAO scd;
+    private CuestionarioAplicadoDAO cad;
 
     private String[] sintomasDetectados;
 
@@ -192,8 +195,11 @@ public class PrediagnosticoController implements Initializable {
         scd.insertarSintomaCuestionario(sc1.toDBObject());
         scd.insertarSintomaCuestionario(sc2.toDBObject());
         scd.insertarSintomaCuestionario(sc3.toDBObject());
+        cad.actualizarDatos(ic);
+
         scd.insertarSintomaCuestionario(sc4.toDBObject());
         scd.insertarSintomaCuestionario(sc5.toDBObject());
+
     }
 
     @Override
@@ -201,6 +207,8 @@ public class PrediagnosticoController implements Initializable {
         cv = new cargadorVista();
         pdd = new PrediagnosticoDAO();
         scd = new SintomaCuestionarioDAO();
+        cad = new CuestionarioAplicadoDAO();
+        cad.conectar();
         scd.conectar();
         pdd.conectar();
         btnGuardar.setVisible(false);
@@ -254,9 +262,11 @@ public class PrediagnosticoController implements Initializable {
             SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
             lblDuracion.setText(dt1.format(test.getDuracion()) + "minutos");
             lblInicio.setText(dt.format(test.getInicioCuestionario()));
+            ic.setTiempoInicio(lblInicio.getText());
             lblTermino.setText(dt.format(test.getFinCuestionario()));
+            ic.setTiempoFin(lblTermino.getText());
             lblCuestionario.setText(ic.getIdCuestionario() + "");
-
+            ic.setTiempoDuracion(lblDuracion.getText());
         } else {
             DBObject c1 = pdd.traerTrastorno(1.0, ic.getIdCuestionario());
             DBObject c2 = pdd.traerTrastorno(2.0, ic.getIdCuestionario());
@@ -277,6 +287,10 @@ public class PrediagnosticoController implements Initializable {
             ohsdq.setText("" + df.format((Double) c1.get("otro")));
             os50.setText("" + df.format((Double) c2.get("otro")));
 
+            lblDuracion.setText(ic.getTiempoDuracion());
+            lblInicio.setText(ic.getTiempoInicio());
+            lblTermino.setText(ic.getTiempoFin());
+            lblCuestionario.setText(ic.getIdCuestionario() + "");
 //        SimpleDateFormat dt = new SimpleDateFormat("hh:mm:ss");
 //        SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
 //        lblDuracion.setText(dt1.format(test.getDuracion()) + "minutos");
@@ -464,33 +478,6 @@ public class PrediagnosticoController implements Initializable {
         btnGuardar.setVisible(true);
     }
 
-    public void cargarResultadosPred() {
-        //Prediagnostico p1;
-        DBObject c1 = pdd.traerTrastorno(1.0, ic.getIdCuestionario());
-        DBObject c2 = pdd.traerTrastorno(2.0, ic.getIdCuestionario());
 
-        DecimalFormat df = new DecimalFormat("#.00");
-        ihsdq.setText("" + df.format((Double) c1.get("insomnio")));
-        is50.setText("" + df.format((Double) c2.get("insomnio")));
-        rchsdq.setText("" + df.format((Double) c1.get("rc")));
-        rcs50.setText("" + df.format((Double) c2.get("rc")));
-        pihsdq.setText("" + df.format((Double) c1.get("rls")));
-        pis50.setText("" + df.format((Double) c2.get("rls")));
-        ahsdq.setText("" + df.format((Double) c1.get("apnea")));
-        as50.setText("" + df.format((Double) c2.get("apnea")));
-        hhsdq.setText("" + df.format((Double) c1.get("hipersomnia")));
-        hs50.setText("" + df.format((Double) c2.get("hipersomnia")));
-        nhsdq.setText("" + df.format((Double) c1.get("narcolepsia")));
-        ns50.setText("" + df.format((Double) c2.get("narcolepsia")));
-        ohsdq.setText("" + df.format((Double) c1.get("otro")));
-        os50.setText("" + df.format((Double) c2.get("otro")));
-
-//        SimpleDateFormat dt = new SimpleDateFormat("hh:mm:ss");
-//        SimpleDateFormat dt1 = new SimpleDateFormat("mm:ss");
-//        lblDuracion.setText(dt1.format(test.getDuracion()) + "minutos");
-//        lblInicio.setText(dt.format(test.getInicioCuestionario()));
-//        lblTermino.setText(dt.format(test.getFinCuestionario()));
-        lblCuestionario.setText(ic.getIdCuestionario() + "");
-    }
 
 }

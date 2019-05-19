@@ -42,8 +42,7 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
                 .append("Registro", info.getRegistro())
                 .append("TiempoInicio", info.getTiempoInicio())
                 .append("TiempoFin", info.getTiempoFin())
-                .append("Duracion", info.getTiempoDuracion())
-                ;
+                .append("TiempoDuracion", info.getTiempoDuracion());
     }
 
     public Double buscarSiguiente() {
@@ -68,12 +67,14 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
         } else {
             ic = new InfoCuestionario();
         }
+        System.out.println(ic.toString());
         return ic;
     }
-        public List traerCuestionariosContestados() {
+
+    public List traerCuestionariosContestados() {
         DBObject dbo = new BasicDBObject("status", 2.0);
         DBCursor cursor = cjm.getMongoCollection().find(dbo);
-  
+
         return cursor.toArray();
     }
 
@@ -118,8 +119,24 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
         if (cuestionarioExiste(ic.getIdCuestionario())) {
             DBObject query = new BasicDBObject("_numCuestionario", ic.getIdCuestionario());
             cjm.getMongoCollection().update(query, new BasicDBObject("$set",
-                    new BasicDBObject("status", ic.getStatus())
-                   
+                    new BasicDBObject("status",2.0)
+                            .append("Registro", ic.getRegistro())
+                            .append("TiempoInicio", ic.getTiempoInicio())
+                            .append("TiempoFin", ic.getTiempoFin())
+                            .append("TiempoDuracion", ic.getTiempoDuracion())
+            ));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean actualizarComentarios(InfoCuestionario ic) {
+
+        if (cuestionarioExiste(ic.getIdCuestionario())) {
+            DBObject query = new BasicDBObject("_numCuestionario", ic.getIdCuestionario());
+            cjm.getMongoCollection().update(query, new BasicDBObject("$set",
+                    new BasicDBObject("Comentarios", ic.getComentarios())
             ));
             return true;
         } else {
