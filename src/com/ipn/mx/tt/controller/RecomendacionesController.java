@@ -34,6 +34,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import com.jfoenix.controls.JFXTextArea;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -81,7 +82,13 @@ public class RecomendacionesController implements Initializable {
 
     @FXML
     private JFXButton btnRcerrar;
+  
+      @FXML
+    private JFXTextArea txtrecoesp;
+         @FXML
+    private JFXButton btnFinalizar;
 
+    
     private ObservableList<RecomendacionTabla> rtol;
     private ObservableList<TrastornoIntensidadTabla> titol;
 
@@ -102,7 +109,6 @@ public class RecomendacionesController implements Initializable {
         titol = FXCollections.observableArrayList();
         tblRecomendaciones.setItems(rtol);
         tblRtrastornos.setItems(titol);
-        rtol.add(new RecomendacionTabla(new Recomendacion("Come bien")));
         titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
     }
 
@@ -236,15 +242,11 @@ parametros.put("edads",edad);
 parametros.put("sexo",paciente.getSexo());
 parametros.put("curp",paciente.getCURP());
 parametros.put("escolaridad",paciente.getEscolaridad());
+parametros.put("recoe", "Texto de prueba");
+parametros.put("recos", "Texto de prueba");
 JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
-
+     
         
-        parametros.put("nombre", paciente.getNombre());
-        parametros.put("apellidos", paciente.getApellido());
-        parametros.put("edads", edad);
-        parametros.put("sexo", paciente.getSexo());
-        parametros.put("curp", paciente.getCURP());
-        parametros.put("escolaridad", paciente.getEscolaridad());
 //JasperViewer.viewReport(informe,false);
 
 JasperExportManager.exportReportToPdfFile(informe,"C://TT//"+paciente.getNombre()+ ".pdf");
@@ -297,6 +299,7 @@ Runtime.getRuntime().exec("cmd /c start "+file);
                 Recomendacion r=new Recomendacion((DBObject) l.get(x-1));
                 RecomendacionTabla rt=new RecomendacionTabla(r);
                 rtol.add(rt);
+                rt.getRecomendacion().get();
                 
             }
         }

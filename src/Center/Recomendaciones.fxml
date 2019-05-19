@@ -20,8 +20,8 @@
         <items>
           <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="260.0" styleClass="l" stylesheets="@../styles/Styles.css">
                <children>
-                  <JFXButton fx:id="btnRimprimir" layoutX="52.0" layoutY="285.0" onAction="#PDF" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Imprimir" textFill="#fffafa" />
-                  <JFXButton fx:id="btnRenviarcorreo" layoutX="39.0" layoutY="348.0" onAction="#enviarEmailRecomendacion" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #FECD7C;" text="Enviar por correo" />
+                  <JFXButton fx:id="btnRimprimir" layoutX="52.0" layoutY="338.0" onAction="#PDF" prefHeight="31.0" prefWidth="92.0" style="-fx-background-color: #9FB4AE;" text="Imprimir" textFill="#fffafa" />
+                  <JFXButton fx:id="btnRenviarcorreo" layoutX="39.0" layoutY="389.0" onAction="#enviarEmailRecomendacion" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #FECD7C;" text="Enviar por correo" />
                   <JFXButton fx:id="btnVolver" layoutX="52.0" layoutY="42.0" onAction="#regresarPrediagnostico" prefHeight="31.0" prefWidth="92.0" ripplerFill="WHITE" style="-fx-background-color: #68d393;" text="Volver" />
                </children></AnchorPane>
             <BorderPane prefHeight="510.0" prefWidth="1020.0">
@@ -45,8 +45,8 @@
                      <children>
                         <TableView fx:id="tblRtrastornos" prefHeight="93.0" prefWidth="721.0">
                            <columns>
-                              <TableColumn fx:id="columnaTrastorno" prefWidth="375.0" text="Trastorno(s)" />
-                              <TableColumn fx:id="columnaIntensidad" editable="false" prefWidth="345.0" resizable="false" text="Intensidad" />
+                              <TableColumn fx:id="columnaTrastorno" prefWidth="564.0" text="Trastorno(s)" />
+                              <TableColumn fx:id="columnaIntensidad" editable="false" prefWidth="435.0" resizable="false" text="Intensidad" />
                            </columns>
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" top="5.0" />
@@ -54,20 +54,25 @@
                         </TableView>
                         <TableView fx:id="tblRecomendaciones" prefHeight="119.0" prefWidth="843.0" GridPane.rowIndex="1">
                            <columns>
-                              <TableColumn fx:id="columnaRrecomendaciones" editable="false" prefWidth="842.0" resizable="false" text="Recomendaciones de higiene del sueño" />
+                              <TableColumn fx:id="columnaRrecomendaciones" editable="false" prefWidth="999.0" resizable="false" text="Recomendaciones de higiene del sueño" />
                            </columns>
                            <GridPane.margin>
                               <Insets left="10.0" right="10.0" top="5.0" />
                            </GridPane.margin>
                         </TableView>
-                        <JFXTextArea prefHeight="121.0" prefWidth="1020.0" promptText="Recomendaciones y observaciones" GridPane.rowIndex="2">
+                        <JFXTextArea fx:id="txtrecoesp" prefHeight="107.0" prefWidth="867.0" promptText="Recomendaciones y observaciones" GridPane.rowIndex="2">
                            <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                              <Insets bottom="10.0" left="10.0" right="150.0" top="10.0" />
                            </GridPane.margin>
                            <font>
                               <Font size="15.0" />
                            </font>
                         </JFXTextArea>
+                        <JFXButton fx:id="btnFinalizar" prefHeight="31.0" prefWidth="118.0" ripplerFill="#51b3d6" style="-fx-background-color: #51b3d6;" text="Finalizar" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin>
+                        </JFXButton>
                      </children>
                   </GridPane>
                </center>
