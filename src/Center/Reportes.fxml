@@ -6,6 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -42,8 +43,11 @@
                            <font>
                               <Font size="13.0" />
                            </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="gp1" />
+                           </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton fx:id="rbtodo" text="Todo" textFill="WHITE" GridPane.rowIndex="5">
+                        <JFXRadioButton fx:id="rbtodo" selected="true" text="Todo" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -56,7 +60,7 @@
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtrangode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="42.0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        <JFXTextField fx:id="txtrangode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="55.0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -74,7 +78,7 @@
                               <Insets right="20.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXCheckBox fx:id="chbmuj" text="Mujeres" textFill="WHITE" GridPane.rowIndex="6">
+                        <JFXCheckBox fx:id="chbmuj" selected="true" text="Mujeres" textFill="WHITE" GridPane.rowIndex="6">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -82,7 +86,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbhom" text="Hombres" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                        <JFXCheckBox fx:id="chbhom" selected="true" text="Hombres" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="6">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -90,7 +94,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbhsdq" text="HDSQ" textFill="WHITE" GridPane.rowIndex="7">
+                        <JFXCheckBox fx:id="chbhsdq" selected="true" text="HDSQ" textFill="WHITE" GridPane.rowIndex="7">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -98,7 +102,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbs50" text="S50" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                        <JFXCheckBox fx:id="chbs50" selected="true" text="S50" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="7">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -106,7 +110,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbnarc" text="Narcolepsia" textFill="WHITE" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbnarc" selected="true" text="Narcolepsia" textFill="WHITE" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" top="80.0" />
                            </GridPane.margin>
@@ -119,7 +123,7 @@
                               <Font name="Century Gothic" size="23.0" />
                            </font>
                         </JFXTextField>
-                        <JFXRadioButton fx:id="rbedad" text="Edad:" textFill="WHITE" GridPane.rowIndex="3">
+                        <JFXRadioButton fx:id="rbedad" text="Edad:" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -127,7 +131,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXRadioButton>
-                        <JFXCheckBox fx:id="chbapnea" text="Apnea del sueño" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbapnea" selected="true" text="Apnea del sueño" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="10.0" top="50.0" />
                            </GridPane.margin>
@@ -135,7 +139,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbritmo" text="Ritmo Circadiano" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbritmo" selected="true" text="Ritmo Circadiano" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="8.0" top="20.0" />
                            </GridPane.margin>
@@ -143,7 +147,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbinso" text="Insomnio" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbinso" selected="true" text="Insomnio" textFill="WHITE" GridPane.halignment="LEFT" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" top="20.0" />
                            </GridPane.margin>
@@ -151,7 +155,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbsdlp" text="SDLP" textFill="WHITE" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbsdlp" selected="true" text="SDLP" textFill="WHITE" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets left="30.0" top="50.0" />
                            </GridPane.margin>
@@ -159,7 +163,7 @@
                               <Font size="13.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="chbhiper" text="Hipersomnia" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
+                        <JFXCheckBox fx:id="chbhiper" selected="true" text="Hipersomnia" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="8" GridPane.valignment="TOP">
                            <GridPane.margin>
                               <Insets right="34.0" top="80.0" />
                            </GridPane.margin>

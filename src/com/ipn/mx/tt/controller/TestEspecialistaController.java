@@ -271,6 +271,7 @@ public class TestEspecialistaController implements Initializable {
             rbtnTEoca.setDisable(true);
             rbtnTEsiempre.setDisable(true);
             btnFinalizar.setVisible(true);
+            regresar.setVisible(false);
         }
     }
 
