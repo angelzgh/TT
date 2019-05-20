@@ -388,14 +388,23 @@ public class RecomendacionesController implements Initializable {
     void configurarResultados() {
         String fechi = paciente.getFecha();
         System.out.println(fechi);
-        String[] fecha = fechi.split("/");
+        String[] fecha;
+        if(fechi.contains("-"))
+        {
+             fecha= fechi.split("-");
+        }
+        else
+        {
+             fecha = fechi.split("/");
+        }
         int x = 0;
 
-        if (fecha.length > 0) {
+        if (fecha[0].length() == 4) {
+            x = 2019 - Integer.parseInt(fecha[0]);
+        }
+        else if(fecha[2].length() == 4)
+        {
             x = 2019 - Integer.parseInt(fecha[2]);
-
-        } else {
-            x = 60;
         }
         resultado = new Resultados(ic.getIdCuestionario(), paciente.getSexo(), x);
     }
@@ -409,8 +418,9 @@ public class RecomendacionesController implements Initializable {
         PrediagnosticosController pc
                 = (PrediagnosticosController) cv.cambiarVista("/Center/Prediagnosticos.fxml", mc.getPanelPrin());
         pc.setMc(mc);
-        pc.abrirHistorial();
         CustomMessage cm = new CustomMessage("Aviso", "Se guardó la información del cuestionario", 0);
 
+        pc.abrirHistorial();
+        
     }
 }

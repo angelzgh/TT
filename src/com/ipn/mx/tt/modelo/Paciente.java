@@ -48,7 +48,7 @@ public class Paciente {
         this.Apellido = "GRAL";
         this.Sexo = "H";
         this.Correo = "gral@gmail.com";
-        this.Fecha = "04/11/1996";
+        this.Fecha = "1996-11-04";
         this.Direccion = "-";
         this.Telefono = "-";
         this.CURP = "XEXX010101HNEXXXA4";
