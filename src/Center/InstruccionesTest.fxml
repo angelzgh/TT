@@ -2,8 +2,12 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -39,17 +43,31 @@
                            <font>
                               <Font size="19.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </JFXButton>
                         <Label prefHeight="40.0" prefWidth="243.0" text="INSTRUCCIONES:" textFill="#16a2ff" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="28.0" />
                            </font>
                         </Label>
-                        <JFXTextArea editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="983.0" style="-fx-background-color: #FFFFFF;" text="-Responda en qué medida cada afirmación le ha sido aplicable durante las últimas 4 semanas.&#10;&#10;-No omita preguntas.&#10;&#10;-Intente contestar lo más sinceramente posible aunque no sepa sobre usted (por ejemplo, si ronca o si se mueve con sus piernas),indique lo que ha escuchado de las personas que le rodean o cómo cree que es." unFocusColor="WHITE" wrapText="true" GridPane.rowIndex="2">
+                        <JFXTextArea editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="295.0" prefWidth="983.0" style="-fx-background-color: #FFFFFF;" text="-Responda en qué medida cada afirmación le ha sido aplicable durante las últimas 4 semanas.&#10;&#10;- Intente contestar lo más sinceramente posible aunque no sepa sobre usted (por ejemplo, si ronca o si se mueve con sus piernas),indique lo que ha escuchado de las personas que le rodean o cómo cree que es.&#10;&#10;- Oprima el siguiente botón             si desea escuchar la pregunta o módulo de ayuda.&#10;&#10;- Una vez termido el test, espera a las indicaciones del especialista." unFocusColor="WHITE" wrapText="true" GridPane.rowIndex="2">
                            <font>
-                              <Font size="24.0" />
+                              <Font size="22.0" />
                            </font>
+                           <padding>
+                              <Insets left="10.0" right="10.0" />
+                           </padding>
                         </JFXTextArea>
+                        <ImageView fitHeight="56.0" fitWidth="56.0" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                           <image>
+                              <Image url="@../imagenes/audio.png" />
+                           </image>
+                           <GridPane.margin>
+                              <Insets right="390.0" top="95.0" />
+                           </GridPane.margin>
+                        </ImageView>
                      </children>
                   </GridPane>
                </children>

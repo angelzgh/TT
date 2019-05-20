@@ -2,8 +2,14 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="169"/>
+	<property name="ireport.y" value="185"/>
 	<style name="Crosstab Data Text"/>
+	<subDataset name="Dataset1">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
 	<parameter name="nombre" class="java.lang.String"/>
 	<parameter name="apellidos" class="java.lang.String"/>
 	<parameter name="sexo" class="java.lang.String"/>
@@ -21,14 +27,15 @@
 	<parameter name="fecha" class="java.lang.String"/>
 	<parameter name="recos" class="java.lang.String"/>
 	<parameter name="recoe" class="java.lang.String"/>
+	<parameter name="Parameter1" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="82" splitType="Stretch">
+		<band height="85" splitType="Stretch">
 			<staticText>
 				<reportElement x="122" y="13" width="261" height="46"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font fontName="Arial" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INSTITUTO NACIONAL DE PSQUIATRÍA RAMÓN DE LA FUENTE MUÑIZ]]></text>
@@ -45,6 +52,10 @@
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{fecha}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="99" height="77"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:/Users/Temp/Documents/NetBeansProjects/TT/src/imagenes/escom.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -162,7 +173,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="472" splitType="Stretch">
+		<band height="485" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="22" width="555" height="1" forecolor="#999999"/>
 				<graphicElement>
@@ -171,7 +182,7 @@
 			</line>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="0" width="555" height="22" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[HÁBITOS DEL DORMIR]]></text>
@@ -319,7 +330,7 @@
 			</line>
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="363" width="555" height="22" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Center">
+				<textElement>
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[RECOMENDACIONES]]></text>
@@ -364,18 +375,18 @@
 			</textField>
 			<staticText>
 				<reportElement mode="Transparent" x="239" y="131" width="69" height="17" forecolor="#CC0000" backcolor="#CCCCCC"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
+				<textElement>
 					<font fontName="Arial" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" isPdfEmbedded="false"/>
 				</textElement>
 				<text><![CDATA[REPORTE]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="0" y="433" width="572" height="39"/>
+				<reportElement x="0" y="440" width="572" height="39"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{recoe}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="384" width="572" height="35"/>
+				<reportElement x="0" y="395" width="572" height="45"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{recos}]]></textFieldExpression>
 			</textField>

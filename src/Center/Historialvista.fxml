@@ -31,9 +31,9 @@
                       <RowConstraints maxHeight="228.0" minHeight="10.0" prefHeight="99.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXTextField alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="325.0" text="Valores de los trastornos encontrados">
+                        <JFXTextField alignment="CENTER" editable="false" prefHeight="38.0" prefWidth="325.0" styleClass="letra" stylesheets="@../styles/Styles.css" text="Valores de los trastornos encontrados">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Century Gothic" size="17.0" />
                            </font>
                         </JFXTextField>
                         <TableView fx:id="tbltrastornos" editable="true" prefHeight="304.0" prefWidth="353.0" GridPane.rowIndex="1">
@@ -50,7 +50,7 @@
                         </TableView>
                         <JFXButton fx:id="btnVolver" onAction="#volverAMenu" prefHeight="45.0" prefWidth="138.0" style="-fx-background-color: #FFFFFF;" text="Volver" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <cursor>
-                              <Cursor fx:constant="OPEN_HAND" />
+                              <Cursor fx:constant="HAND" />
                            </cursor>
                            <GridPane.margin>
                               <Insets right="20.0" />

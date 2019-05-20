@@ -130,9 +130,11 @@ public class PrediagnosticoController implements Initializable {
     private Label lblCuestionario;
     @FXML
     private JFXButton btnPsiguientes;
+  
 
     @FXML
     private BarChart<?, ?> ginsomnioh;
+      
 
     @FXML
     private BarChart<?, ?> gritmoh;
@@ -302,8 +304,7 @@ public class PrediagnosticoController implements Initializable {
     }
 
     public void startgrafica() {
-
-        CategoryAxis xAxisrih = new CategoryAxis();
+CategoryAxis xAxisrih = new CategoryAxis();
         NumberAxis yAxisrih = new NumberAxis();
         xAxisrih.setLabel("Preguntas");
         yAxisrih.setLabel("Valor");
@@ -313,9 +314,9 @@ public class PrediagnosticoController implements Initializable {
         seriesih.getData().add(new XYChart.Data("Obtenido", ih));
         XYChart.Series seriesihm = new XYChart.Series();
         double ihm = 29.44;
-        seriesihm.getData().add(new XYChart.Data("Minimo", ihm));
-        ginsomnioh.getData().addAll(seriesih, seriesihm);
-
+        seriesihm.getData().add(new XYChart.Data("Punto de corte", ihm));
+    ginsomnioh.getData().addAll(seriesih, seriesihm);
+    
         CategoryAxis xAxisis = new CategoryAxis();
         NumberAxis yAxisis = new NumberAxis();
         xAxisis.setLabel("Preguntas");
@@ -326,7 +327,7 @@ public class PrediagnosticoController implements Initializable {
         seriesis.getData().add(new XYChart.Data("Obtenido", is));
         XYChart.Series seriesism = new XYChart.Series();
         double ism = 19;
-        seriesism.getData().add(new XYChart.Data("Minimo", ism));
+        seriesism.getData().add(new XYChart.Data("Punto de corte", ism));
         ginsomnios.getData().addAll(seriesis, seriesism);
 
         CategoryAxis xAxisrh = new CategoryAxis();
@@ -339,7 +340,7 @@ public class PrediagnosticoController implements Initializable {
         seriesrh.getData().add(new XYChart.Data("Obtenido", rh));
         XYChart.Series seriesrhm = new XYChart.Series();
         double rhm = 20.46;
-        seriesrhm.getData().add(new XYChart.Data("Minimo", rhm));
+        seriesrhm.getData().add(new XYChart.Data("Punto de corte", rhm));
         gritmoh.getData().addAll(seriesrh, seriesrhm);
 
         CategoryAxis xAxisrs = new CategoryAxis();
@@ -352,7 +353,7 @@ public class PrediagnosticoController implements Initializable {
         seriesrs.getData().add(new XYChart.Data("Obtenido", rs));
         XYChart.Series seriesrsm = new XYChart.Series();
         double rsm = 8;
-        seriesrsm.getData().add(new XYChart.Data("Minimo", rsm));
+        seriesrsm.getData().add(new XYChart.Data("Punto de corte", rsm));
         gritmos.getData().addAll(seriesrs, seriesrsm);
 
         CategoryAxis xAxipih = new CategoryAxis();
@@ -365,7 +366,7 @@ public class PrediagnosticoController implements Initializable {
         seriespih.getData().add(new XYChart.Data("Obtenido", pih));
         XYChart.Series seriesphm = new XYChart.Series();
         double pihm = 13.5;
-        seriesphm.getData().add(new XYChart.Data("Minimo", pihm));
+        seriesphm.getData().add(new XYChart.Data("Punto de corte", pihm));
         gpiernash.getData().addAll(seriespih, seriesphm);
 
         CategoryAxis xAxipis = new CategoryAxis();
@@ -378,7 +379,7 @@ public class PrediagnosticoController implements Initializable {
         seriespis.getData().add(new XYChart.Data("Obtenido", pis));
         XYChart.Series seriespsm = new XYChart.Series();
         double pism = 7;
-        seriespsm.getData().add(new XYChart.Data("Minimo", pism));
+        seriespsm.getData().add(new XYChart.Data("Punto de corte", pism));
         gpiernass.getData().addAll(seriespis, seriespsm);
 
         CategoryAxis xAxiaih = new CategoryAxis();
@@ -391,7 +392,7 @@ public class PrediagnosticoController implements Initializable {
         seriesah.getData().add(new XYChart.Data("Obtenido", ah));
         XYChart.Series seriesahm = new XYChart.Series();
         double ahm = 11.48;
-        seriesahm.getData().add(new XYChart.Data("Minimo", ahm));
+        seriesahm.getData().add(new XYChart.Data("Punto de corte", ahm));
         gapneah.getData().addAll(seriesah, seriesahm);
 
         CategoryAxis xAxiais = new CategoryAxis();
@@ -404,7 +405,7 @@ public class PrediagnosticoController implements Initializable {
         seriesas.getData().add(new XYChart.Data("Obtenido", as));
         XYChart.Series seriesasm = new XYChart.Series();
         double asm = 15;
-        seriesasm.getData().add(new XYChart.Data("Minimo", asm));
+        seriesasm.getData().add(new XYChart.Data("Punto de corte", asm));
         gapneas.getData().addAll(seriesas, seriesasm);
 
         CategoryAxis xAxihi = new CategoryAxis();
@@ -417,7 +418,7 @@ public class PrediagnosticoController implements Initializable {
         serieshh.getData().add(new XYChart.Data("Obtenido", hh));
         XYChart.Series serieshm = new XYChart.Series();
         double hm = 14.5;
-        serieshm.getData().add(new XYChart.Data("Minimo", hm));
+        serieshm.getData().add(new XYChart.Data("Punto de corte", hm));
         ghiper.getData().addAll(serieshh, serieshm);
 
         CategoryAxis xAxini = new CategoryAxis();
@@ -430,7 +431,7 @@ public class PrediagnosticoController implements Initializable {
         seriesns.getData().add(new XYChart.Data("Obtenido", ns));
         XYChart.Series seriesnsm = new XYChart.Series();
         double nsm = 7;
-        seriesnsm.getData().add(new XYChart.Data("Minimo", nsm));
+        seriesnsm.getData().add(new XYChart.Data("Punto de corte", nsm));
         gnarcolepsia.getData().addAll(seriesns, seriesnsm);
 
         CategoryAxis xAxioi = new CategoryAxis();
@@ -443,7 +444,7 @@ public class PrediagnosticoController implements Initializable {
         seriesos.getData().add(new XYChart.Data("Obtenido", os));
         XYChart.Series seriesosm = new XYChart.Series();
         double osm = 15;
-        seriesosm.getData().add(new XYChart.Data("Minimo", osm));
+        seriesosm.getData().add(new XYChart.Data("Punto de corte", osm));
         gimpacto.getData().addAll(seriesos, seriesosm);
 
     }

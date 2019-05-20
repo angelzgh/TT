@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -62,6 +63,9 @@
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </TableView>
                   <JFXButton fx:id="btnPver1" onAction="#verPrediagnostico" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #53b1ff;" text="Ver Prediagnostico" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <ripplerFill>
@@ -75,8 +79,11 @@
                      <GridPane.margin>
                         <Insets top="10.0" />
                      </GridPane.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="btnPverTest" contentDisplay="RIGHT" onAction="#verTest" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #53b1ff;" text="Ver Test" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                  <JFXButton fx:id="btnPverTest" contentDisplay="RIGHT" onAction="#verTest" prefHeight="36.0" prefWidth="122.0" style="-fx-background-color: #75ddb0;" text="Ver Test" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                      <ripplerFill>
                         <LinearGradient endX="1.0" endY="1.0">
                            <stops>
@@ -88,6 +95,9 @@
                      <GridPane.margin>
                         <Insets right="200.0" top="10.0" />
                      </GridPane.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXButton>
                </children>
             </GridPane>
