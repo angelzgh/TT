@@ -27,7 +27,13 @@
 	<parameter name="fecha" class="java.lang.String"/>
 	<parameter name="recos" class="java.lang.String"/>
 	<parameter name="recoe" class="java.lang.String"/>
-	<parameter name="Parameter1" class="java.lang.String"/>
+	<parameter name="insomnio" class="java.lang.String"/>
+	<parameter name="ritmo" class="java.lang.String"/>
+	<parameter name="sindrome" class="java.lang.String"/>
+	<parameter name="apnea" class="java.lang.String"/>
+	<parameter name="hiper" class="java.lang.String"/>
+	<parameter name="narc" class="java.lang.String"/>
+	<parameter name="impa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
