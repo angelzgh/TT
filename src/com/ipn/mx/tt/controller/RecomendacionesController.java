@@ -57,6 +57,7 @@ public class RecomendacionesController implements Initializable {
     private Conducta conducta;
     private RecomendacionDAO rd;
     private LinkedList lsRecomendacion;
+    private LinkedList trastornosDetectados,trastornosDetectadosNombre;
 
     @FXML
     private TableView<TrastornoIntensidadTabla> tblRtrastornos;
@@ -83,13 +84,12 @@ public class RecomendacionesController implements Initializable {
 
     @FXML
     private JFXButton btnRcerrar;
-  
-      @FXML
+
+    @FXML
     private JFXTextArea txtrecoesp;
-         @FXML
+    @FXML
     private JFXButton btnFinalizar;
 
-    
     private ObservableList<RecomendacionTabla> rtol;
     private ObservableList<TrastornoIntensidadTabla> titol;
 
@@ -110,8 +110,24 @@ public class RecomendacionesController implements Initializable {
         titol = FXCollections.observableArrayList();
         tblRecomendaciones.setItems(rtol);
         tblRtrastornos.setItems(titol);
-        titol.add(new TrastornoIntensidadTabla(new TrastornoIntensidad("Insomnio", "Media", 20.49, 40.0)));
         lsRecomendacion = new LinkedList();
+    }
+
+    public LinkedList getTrastornosDetectadosNombre() {
+        return trastornosDetectadosNombre;
+    }
+
+    public void setTrastornosDetectadosNombre(LinkedList trastornosDetectadosNombre) {
+        this.trastornosDetectadosNombre = trastornosDetectadosNombre;
+    }
+
+    
+    public LinkedList getTrastornosDetectados() {
+        return trastornosDetectados;
+    }
+
+    public void setTrastornosDetectados(LinkedList trastornosDetectados) {
+        this.trastornosDetectados = trastornosDetectados;
     }
 
     public String[] getSintomasDetectados() {
@@ -235,23 +251,21 @@ public class RecomendacionesController implements Initializable {
             parametros.put("diasd", "No aplica");
             parametros.put("hpsueño", hpsueño);
 
-}
-parametros.put("fecha",date.format(now));
-parametros.put("nombre",paciente.getNombre());
-parametros.put("apellidos",paciente.getApellido());
-parametros.put("edads",edad);
-parametros.put("sexo",paciente.getSexo());
-parametros.put("curp",paciente.getCURP());
-parametros.put("escolaridad",paciente.getEscolaridad());
-parametros.put("recoe", "Texto de prueba");
-for(int i=1;i<=10;i++){
-parametros.put("recos",lsRecomendacion.get(i));
+        }
+        parametros.put("fecha", date.format(now));
+        parametros.put("nombre", paciente.getNombre());
+        parametros.put("apellidos", paciente.getApellido());
+        parametros.put("edads", edad);
+        parametros.put("sexo", paciente.getSexo());
+        parametros.put("curp", paciente.getCURP());
+        parametros.put("escolaridad", paciente.getEscolaridad());
+        parametros.put("recoe", "Texto de prueba");
+        for (int i = 1; i <= 10; i++) {
+            parametros.put("recos", lsRecomendacion.get(i));
 
-}
+        }
 
-
-       
-JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());        
+        JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
         String file = new String("C://TT//" + paciente.getNombre() + ".pdf");
@@ -272,6 +286,8 @@ JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmpty
         pc.ponerConducta();
         pc.setSintomasDetectados(sintomasDetectados);
         pc.ponerTrastornosSintomas();
+        pc.obtenerTrastornosDetectados();
+        pc.setTrastornosDetectados(trastornosDetectados);
     }
 
     @FXML
@@ -280,15 +296,34 @@ JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmpty
     }
 
     public void ponerRecomendaciones() {
-        obtenerRecomendaciones(1.0);
-        obtenerRecomendaciones(2.0);
-        obtenerRecomendaciones(3.0);
-        obtenerRecomendaciones(4.0);
-        obtenerRecomendaciones(5.0);
-        obtenerRecomendaciones(6.0);
 
+        for (int i = 0; i < trastornosDetectados.size(); i++) {
+            obtenerRecomendaciones(new Double((int)trastornosDetectados.get(i)));
+
+        }
+    }
+    public String getPotencia()
+    {
+        int x=(int)Math.random();
+        if(x%2==0)
+        {
+            return "Medio";
+        }
+        else
+        {
+            return "Bajo";
+        }
     }
 
+    public void ponerTrastornos()
+    {
+        for (int i = 0; i <trastornosDetectadosNombre.size(); i++) {
+            
+                titol.add(new TrastornoIntensidadTabla((String)trastornosDetectadosNombre.get(i),getPotencia(), 20.49, 30.17));
+    
+        }
+    }
+    
     public void obtenerRecomendaciones(Double trastorno) {
         List l = rd.traerRecomendacion(trastorno);
         LinkedList ls = new LinkedList();
@@ -301,7 +336,7 @@ JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmpty
                 Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
                 RecomendacionTabla rt = new RecomendacionTabla(r);
                 lsRecomendacion.add(r.getRecomendacion());
-                System.out.println( lsRecomendacion);
+                System.out.println(lsRecomendacion);
                 rtol.add(rt);
 
             }

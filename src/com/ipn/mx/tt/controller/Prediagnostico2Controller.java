@@ -65,7 +65,7 @@ public class Prediagnostico2Controller implements Initializable {
     private PreguntaContestadaDAO pcd;
     private PreguntaDAO pd;
     private List trastornos;
-    private LinkedList puntajes;
+    private LinkedList puntajes, trastornosDetectados,trastornosDetectadosNombre;
     private PrediagnosticoDAO pred;
     private SintomaDAO sd;
     private SintomaCuestionarioDAO scd;
@@ -101,7 +101,7 @@ public class Prediagnostico2Controller implements Initializable {
     @FXML
     private TableColumn<TrastornoTabla, String> columnaS50M;
     @FXML
-    private TableColumn<TrastornoTabla, Boolean> columnaDetectado;
+    private TableColumn<TrastornoTabla, String> columnaDetectado;
     @FXML
     private TableView<PreguntaTabla> tbthabitos;
 
@@ -167,7 +167,19 @@ public class Prediagnostico2Controller implements Initializable {
         rc.setConducta(conducta);
         rc.setPaciente(paciente);
         rc.setSintomasDetectados(sintomasDetectados);
+
+        rc.setTrastornosDetectados(trastornosDetectados);
+        rc.setTrastornosDetectadosNombre(trastornosDetectadosNombre);
         rc.ponerRecomendaciones();
+        rc.ponerTrastornos();
+    }
+
+    public LinkedList getTrastornosDetectados() {
+        return trastornosDetectados;
+    }
+
+    public void setTrastornosDetectados(LinkedList trastornosDetectados) {
+        this.trastornosDetectados = trastornosDetectados;
     }
 
     public String[] getSintomasDetectados() {
@@ -236,6 +248,9 @@ public class Prediagnostico2Controller implements Initializable {
         ptol = FXCollections.observableArrayList();
         ttol = FXCollections.observableArrayList();
         puntajes = new LinkedList();
+        trastornosDetectados = new LinkedList();
+        trastornosDetectadosNombre = new LinkedList();
+        
         columnaPregunta.setCellValueFactory(cellData -> cellData.getValue().getPregunta());
         columnaRespuesta.setCellValueFactory(cellData -> cellData.getValue().getRespuesta());
 
@@ -252,8 +267,8 @@ public class Prediagnostico2Controller implements Initializable {
                 super.updateItem(item, empty);
                 if (item == null) {
                     setStyle("");
-                } else if (item.getTiene().get()) {
-                    setStyle("-fx-background-color: #42B855 ;");
+                } else if (item.getTiene().get().equals("DETECTADO")) {
+                    setStyle("-fx-background-color: #42B855 ; ");
                 } else {
                     setStyle("");
                 }
@@ -369,6 +384,20 @@ public class Prediagnostico2Controller implements Initializable {
         }
     }
 
+    public void obtenerTrastornosDetectados() {
+        for (int i = 0; i < 7; i++) {
+            TrastornoTabla tt = ttol.get(i);
+            if (tt.getTiene().get().equals("DETECTADO")) {
+                trastornosDetectados.add(i);
+                trastornosDetectadosNombre.add(tt.getTrastornoString());
+                
+            }
+        }
+        for (int i = 0; i < trastornosDetectados.size(); i++) {
+            System.out.println(trastornosDetectados.get(i));
+        }
+    }
+
     public TrastornoTabla traerTrastorno(String trastorno, Double numTrastorno) {
 
         TrastornoTabla t = new TrastornoTabla(trastorno,
@@ -467,16 +496,15 @@ public class Prediagnostico2Controller implements Initializable {
     }
 
     public void ponerSintomasView(String numSintoma, TreeItem ti) {
-        
-        if(numSintoma.contains(","))
-        {
-                    String[] sintomas = numSintoma.split(",");
-        for (String sintoma : sintomas) {
-            Sintoma s = sd.getSintoma(Double.valueOf(sintoma));
-            TreeItem<String> itemSintoma = new TreeItem<>(s.getNombre());
-            ti.getChildren().addAll(itemSintoma);
 
-        }
+        if (numSintoma.contains(",")) {
+            String[] sintomas = numSintoma.split(",");
+            for (String sintoma : sintomas) {
+                Sintoma s = sd.getSintoma(Double.valueOf(sintoma));
+                TreeItem<String> itemSintoma = new TreeItem<>(s.getNombre());
+                ti.getChildren().addAll(itemSintoma);
+
+            }
         }
     }
 

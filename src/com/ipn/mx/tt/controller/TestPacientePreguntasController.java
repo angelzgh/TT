@@ -158,14 +158,7 @@ public class TestPacientePreguntasController implements Initializable {
         contadorPregunta = 1;
 
         btnFinalizar.setVisible(false);
-        if(tipoCuestionario==1)
-        {
-            imgPreguntaAudio.setVisible(true);
-        }
-        else
-        {
-            imgPreguntaAudio.setVisible(false);
-        }
+
     }
 
     @FXML
@@ -240,6 +233,11 @@ public class TestPacientePreguntasController implements Initializable {
         trastorno = new LinkedList();
         test = new Test(tipoCuestionario);
         cargarPregunta(test.getPregunta(test.getSigPregunta()));
+        if (tipoCuestionario == 1) {
+            imgPreguntaAudio.setVisible(true);
+        } else {
+            imgPreguntaAudio.setVisible(false);
+        }
         //pbTPprogeso.setProgress(0.001);
     }
 

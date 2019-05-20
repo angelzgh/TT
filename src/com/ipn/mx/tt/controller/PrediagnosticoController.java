@@ -468,6 +468,7 @@ CategoryAxis xAxisrih = new CategoryAxis();
         pc.ponerConducta();
         pc.setSintomasDetectados(sintomasDetectados);
         pc.ponerTrastornosSintomas();
+        pc.obtenerTrastornosDetectados();
     }
 
     public void darClickBotonGuardar() {

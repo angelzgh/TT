@@ -20,7 +20,7 @@ public class TrastornoTabla {
     private StringProperty HsdqM;
     private StringProperty s50;
     private StringProperty s50M;
-    private BooleanProperty tiene;
+    private StringProperty tiene;
 
     public TrastornoTabla(String Trastorno, String Hsdq, String HsdqM, String s50, String s50M) {
         this.Trastorno = new SimpleStringProperty(Trastorno);
@@ -112,18 +112,18 @@ public class TrastornoTabla {
         this.s50M = new SimpleStringProperty(s50M);
     }
 
-    public BooleanProperty getTiene() {
+    public StringProperty getTiene() {
         if (Double.parseDouble(getHsdq().get()) > Double.parseDouble(getHsdqM().get())
                 || Double.parseDouble(getS50().get()) > Double.parseDouble(getS50M().get())) {
-            setTiene(new SimpleBooleanProperty(true));
+            setTiene(new SimpleStringProperty("DETECTADO"));
         } else {
 
-            setTiene(new SimpleBooleanProperty(false));
+            setTiene(new SimpleStringProperty("OK"));
         }
         return tiene;
     }
 
-    public void setTiene(BooleanProperty tiene) {
+    public void setTiene(StringProperty tiene) {
         this.tiene = tiene;
     }
 
