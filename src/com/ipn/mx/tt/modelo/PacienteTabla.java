@@ -8,6 +8,8 @@ package com.ipn.mx.tt.modelo;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -20,13 +22,23 @@ public class PacienteTabla {
     private StringProperty nombre;
     private StringProperty edad;
     private StringProperty CURP;
+    private StringProperty num;
     private Paciente origen;
 
-    public PacienteTabla(String CURP, String nombre, String edad,Paciente origen) {
+    public PacienteTabla(String CURP, String nombre, String edad, Paciente origen, Double num) {
         this.CURP = new SimpleStringProperty(CURP);
         this.nombre = new SimpleStringProperty(nombre);
         this.edad = new SimpleStringProperty(edad);
-        this.origen=origen;
+        this.num = new SimpleStringProperty("" + num);
+        this.origen = origen;
+    }
+
+    public StringProperty getNum() {
+        return num;
+    }
+
+    public void setNum(StringProperty num) {
+        this.num = num;
     }
 
     public Paciente getOrigen() {
@@ -37,12 +49,11 @@ public class PacienteTabla {
         this.origen = origen;
     }
 
-    
     public PacienteTabla(Paciente paciente) {
-                this.CURP = new SimpleStringProperty(paciente.getCURP());
+        this.CURP = new SimpleStringProperty(paciente.getCURP());
         this.nombre = new SimpleStringProperty(paciente.getNombre());
         try {
-            this.edad = new SimpleStringProperty(""+paciente.getEdad());
+            this.edad = new SimpleStringProperty("" + paciente.getEdad());
         } catch (ParseException ex) {
             Logger.getLogger(PacienteTabla.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,10 +82,5 @@ public class PacienteTabla {
     public void setCURP(StringProperty CURP) {
         this.CURP = CURP;
     }
-
-    
-    
-    
-
 
 }
