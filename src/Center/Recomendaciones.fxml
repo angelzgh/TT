@@ -78,7 +78,7 @@
                               <Font size="15.0" />
                            </font>
                         </JFXTextArea>
-                        <JFXButton fx:id="btnFinalizar" prefHeight="31.0" prefWidth="118.0" ripplerFill="#51b3d6" style="-fx-background-color: #51b3d6;" text="Finalizar" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                        <JFXButton fx:id="btnFinalizar" onAction="#guardarDatos" prefHeight="31.0" prefWidth="118.0" ripplerFill="#51b3d6" style="-fx-background-color: #51b3d6;" text="Finalizar" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin>

@@ -5,15 +5,19 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
 import com.ipn.mx.tt.dao.RecomendacionDAO;
+import com.ipn.mx.tt.dao.ResultadoDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
 import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.Recomendacion;
 import com.ipn.mx.tt.modelo.RecomendacionTabla;
+import com.ipn.mx.tt.modelo.Resultados;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.modelo.TrastornoIntensidad;
 import com.ipn.mx.tt.modelo.TrastornoIntensidadTabla;
+import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
 import com.mongodb.DBObject;
@@ -35,6 +39,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.jfoenix.controls.JFXTextArea;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -57,7 +63,9 @@ public class RecomendacionesController implements Initializable {
     private Conducta conducta;
     private RecomendacionDAO rd;
     private LinkedList lsRecomendacion;
-    private LinkedList trastornosDetectados,trastornosDetectadosNombre;
+    private LinkedList trastornosDetectados, trastornosDetectadosNombre;
+    private ResultadoDAO red;
+    private CuestionarioAplicadoDAO cad;
 
     @FXML
     private TableView<TrastornoIntensidadTabla> tblRtrastornos;
@@ -92,6 +100,7 @@ public class RecomendacionesController implements Initializable {
 
     private ObservableList<RecomendacionTabla> rtol;
     private ObservableList<TrastornoIntensidadTabla> titol;
+    private Resultados resultado;
 
     /**
      * Initializes the controller class.
@@ -99,8 +108,12 @@ public class RecomendacionesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        red = new ResultadoDAO();
+        red.conectar();
         rd = new RecomendacionDAO();
         rd.conectar();
+        cad = new CuestionarioAplicadoDAO();
+        cad.conectar();
         cv = new cargadorVista();
         columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
         columnaIntensidad.setCellValueFactory(cellData -> cellData.getValue().getIntensidad());
@@ -121,7 +134,6 @@ public class RecomendacionesController implements Initializable {
         this.trastornosDetectadosNombre = trastornosDetectadosNombre;
     }
 
-    
     public LinkedList getTrastornosDetectados() {
         return trastornosDetectados;
     }
@@ -295,32 +307,61 @@ public class RecomendacionesController implements Initializable {
     public void ponerRecomendaciones() {
 
         for (int i = 0; i < trastornosDetectados.size(); i++) {
-            obtenerRecomendaciones(new Double((int)trastornosDetectados.get(i)));
+            obtenerRecomendaciones(new Double((int) trastornosDetectados.get(i)));
+            switch ((int) trastornosDetectados.get(i)) {
+                case 1:
+                    resultado.setT1(1.0);
+                    break;
 
+                case 2:
+
+                    resultado.setT2(1.0);
+                    break;
+
+                case 3:
+
+                    resultado.setT3(1.0);
+                    break;
+
+                case 4:
+
+                    resultado.setT4(1.0);
+                    break;
+
+                case 5:
+
+                    resultado.setT5(1.0);
+                    break;
+
+                case 6:
+
+                    resultado.setT6(1.0);
+                    break;
+
+                case 7:
+                    break;
+            }
         }
+        System.out.println(resultado.toString());
     }
-    public String getPotencia()
-    {
-        int x=(int)Math.random();
-        if(x%2==0)
-        {
+
+    public String getPotencia() {
+        int x = (int) Math.random();
+        if (x % 2 == 0) {
             return "Medio";
-        }
-        else
-        {
+        } else {
             return "Bajo";
         }
     }
 
-    public void ponerTrastornos()
-    {
-        for (int i = 0; i <trastornosDetectadosNombre.size(); i++) {
-            
-                titol.add(new TrastornoIntensidadTabla((String)trastornosDetectadosNombre.get(i),getPotencia(), 20.49, 30.17));
-    
+    public void ponerTrastornos() {
+        for (int i = 0; i < trastornosDetectadosNombre.size(); i++) {
+
+            titol.add(new TrastornoIntensidadTabla((String) trastornosDetectadosNombre.get(i), getPotencia(), 20.49, 30.17));
+
         }
     }
-    
+
     public void obtenerRecomendaciones(Double trastorno) {
         List l = rd.traerRecomendacion(trastorno);
         LinkedList ls = new LinkedList();
@@ -338,5 +379,34 @@ public class RecomendacionesController implements Initializable {
 
             }
         }
+    }
+
+    void configurarResultados() {
+        String fechi = paciente.getFecha();
+        System.out.println(fechi);
+        String[] fecha = fechi.split("/");
+        int x = 0;
+
+        if (fecha.length > 0) {
+            x = 2019 - Integer.parseInt(fecha[2]);
+
+        } else {
+            x = 60;
+        }
+        resultado = new Resultados(ic.getIdCuestionario(), paciente.getSexo(), x);
+    }
+
+    @FXML
+    void guardarDatos(ActionEvent event) {
+        //guardar resultados
+        red.insertarResultado(resultado.toDBO());
+        //guardar comentarios
+        cad.actualizarComentarios(ic);
+        PrediagnosticosController pc
+                = (PrediagnosticosController) cv.cambiarVista("/Center/Prediagnosticos.fxml", mc.getPanelPrin());
+        pc.setMc(mc);
+        pc.abrirHistorial();
+        CustomMessage cm = new CustomMessage("Aviso", "Se guardó la información del cuestionario", 0);
+
     }
 }
