@@ -34,6 +34,7 @@ public class CambiarcontraController implements Initializable {
     private menuController mc;
     private cargadorVista cv;
     private UsuarioDAO ud;
+    
 
     @FXML
     private JFXPasswordField txtCpass;
@@ -64,6 +65,7 @@ public class CambiarcontraController implements Initializable {
     @FXML
     private JFXCheckBox chbno;
 
+    
     /**
      * Initializes the controller class.
      */

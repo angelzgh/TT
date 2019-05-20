@@ -5,6 +5,8 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.util.CustomMessage;
+import com.ipn.mx.tt.util.Validador;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
  */
 public class ReportesController implements Initializable {
 
+    private Validador v;
     @FXML
     private JFXRadioButton rbedad;
 
@@ -79,6 +82,7 @@ public class ReportesController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        v = new Validador();
     }
 
     public void obtenerPacientes() {
@@ -87,6 +91,7 @@ public class ReportesController implements Initializable {
             txtedad.setVisible(false);
             txtrangode.setVisible(false);
             txtrangoa.setVisible(false);
+            buscarPacientes();
         } else if (rbedad.isSelected()) {
 
             txtedad.setVisible(true);
@@ -106,4 +111,44 @@ public class ReportesController implements Initializable {
         obtenerPacientes();
     }
 
+    @FXML
+    void buscarPacientes(ActionEvent event) {
+        buscarPacientes();
+    }
+
+    private int busquedaSexo() {
+        if (chbhom.isSelected() && chbmuj.isSelected()) {
+            return 0;
+        } else if (chbhom.isSelected() && !chbmuj.isSelected()) {
+            return 1;
+        } else if (!chbhom.isSelected() && chbmuj.isSelected()) {
+            return 2;
+        } else {
+            return 99;
+        }
+
+    }
+
+    private void buscarPacientes() {
+        int bs = busquedaSexo();
+        System.out.println(bs);
+        if (rbedad.isSelected()) {
+            String edad = v.validarTF(txtedad);
+
+            if (edad.length() > 0) {
+
+            } else {
+                CustomMessage cm = new CustomMessage("Error", "El campo no puede estar vacío", 2);
+            }
+        } else if (rbrabgo.isSelected()) {
+            String desde = v.validarTF(txtrangode);
+            String hasta = v.validarTF(txtrangoa);
+            if (desde.length() > 0 && hasta.length() > 0) {
+
+            }
+            else {
+            CustomMessage cm = new CustomMessage("Error", "El campo no puede estar vacío", 2);
+        }
+        } 
+    }
 }

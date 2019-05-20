@@ -132,8 +132,8 @@ public class menuController implements Initializable {
 
         });
         TabReporte.setOnSelectionChanged((Event event) -> {
-            cv.cambiarVista("/Center/Reportes.fxml", PanelPrin);
-
+            ReportesController rc=(ReportesController)cv.cambiarVista("/Center/Reportes.fxml", PanelPrin);
+            rc.obtenerPacientes();
         });
 
         TabAyuda.setOnSelectionChanged((Event event) -> {

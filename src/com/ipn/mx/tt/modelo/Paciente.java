@@ -151,7 +151,7 @@ public class Paciente {
         this.Telefono = (String) dbo.get("Telefono");
         this.CURP = (String) dbo.get("_CURP");
         this.Escolaridad = (String) dbo.get("Escolaridad");
-        this.Edad = (int) dbo.get("Edad");
+        //this.Edad = (int) dbo.get("Edad");
     }
 
     public Paciente(PacienteTabla pt) {
