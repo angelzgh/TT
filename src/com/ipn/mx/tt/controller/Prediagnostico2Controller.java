@@ -390,7 +390,7 @@ public class Prediagnostico2Controller implements Initializable {
     public void obtenerTrastornosDetectados() {
         for (int i = 0; i < 7; i++) {
             TrastornoTabla tt = ttol.get(i);
-            if (tt.getTiene().get().equals("DETECTADO")) {
+            if (tt.getTiene().get().equals("Si")) {
                 trastornosDetectados.add(i);
                 trastornosDetectadosNombre.add(tt.getTrastornoString());
                 
