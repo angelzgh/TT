@@ -25,10 +25,6 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></JFXButton>
-                  <JFXButton fx:id="btnRenviarcorreo" layoutX="39.0" layoutY="389.0" onAction="#enviarEmailRecomendacion" prefHeight="31.0" prefWidth="118.0" style="-fx-background-color: #FECD7C;" text="Enviar por correo">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></JFXButton>
                   <JFXButton fx:id="btnVolver" layoutX="52.0" layoutY="42.0" onAction="#regresarPrediagnostico" prefHeight="31.0" prefWidth="92.0" ripplerFill="WHITE" style="-fx-background-color: #68d393;" text="Volver">
                      <cursor>
                         <Cursor fx:constant="HAND" />

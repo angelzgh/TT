@@ -89,8 +89,7 @@ public class RecomendacionesController implements Initializable {
     @FXML
     private JFXButton btnRimprimir;
 
-    @FXML
-    private JFXButton btnRenviarcorreo;
+
 
     @FXML
     private JFXButton btnRcerrar;
@@ -192,10 +191,6 @@ public class RecomendacionesController implements Initializable {
         this.ic = ic;
     }
 
-    @FXML
-    void enviarEmailRecomendacion(ActionEvent event) {
-
-    }
 
     @FXML
     void imprimirRecomendacion(ActionEvent event) {
