@@ -47,7 +47,12 @@
                               <Insets left="30.0" />
                            </GridPane.margin>
                         </Label>
-                        <ImageView fx:id="imgAyudaAudio" fitHeight="44.0" fitWidth="47.0" onMouseClicked="#reproducirAudioAyuda" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <JFXButton fx:id="btnguardar" buttonType="RAISED" prefHeight="38.0" prefWidth="138.0" ripplerFill="#2ebb9f" style="-fx-background-color: #2ebb9f;" text="GUARDAR" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <ImageView fx:id="imgAyudaAudio" fitHeight="44.0" fitWidth="47.0" onMouseClicked="#reproducirAudioAyuda" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../imagenes/audio.png" />
                            </image>
@@ -55,6 +60,14 @@
                               <Insets right="50.0" />
                            </GridPane.margin>
                         </ImageView>
+                        <JFXTextArea fx:id="txtayuda" editable="false" opacity="0.66" style="-fx-background-color: #FFFFFF;" styleClass="letra" stylesheets="@../styles/Styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets bottom="20.0" top="5.0" />
+                           </GridPane.margin>
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </JFXTextArea>
                         <ImageView fx:id="imgAyuda" fitHeight="44.0" fitWidth="51.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../imagenes/ayuda.png" />
