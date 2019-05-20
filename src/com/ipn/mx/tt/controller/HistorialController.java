@@ -9,6 +9,7 @@ import com.ipn.mx.tt.dao.ConductaDAO;
 import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
 import com.ipn.mx.tt.dao.PacienteDAO;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
+import com.ipn.mx.tt.modelo.Paciente;
 import com.ipn.mx.tt.modelo.PrediagnosticoTabla;
 import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.Validador;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,7 +100,7 @@ public class HistorialController implements Initializable {
 
         String busqueda = v.validars(curp);
         if (cuestionarios.size() > 0) {
-            if (busqueda.length() > 2) {
+            if (busqueda.length() > 3) {
                 ptol.clear();
                 LinkedList ls = new LinkedList();
                 cuestionarios.forEach((cuestionario)
@@ -105,11 +108,24 @@ public class HistorialController implements Initializable {
 
                     PrediagnosticoTabla pt = new PrediagnosticoTabla((DBObject) cuestionario);
                     if (pt.getStatus().getValue().equals("2.0") && pt.getNombre().getValue().contains(curp)) {
+                        String fechi = pd.buscarFecha(pt.getNumeroCuestionario().getValue());
+                        System.out.println(fechi);
+                        String[] fecha = fechi.split("-");
+                        int x = 0;
+
+                        if (fecha.length > 0) {
+                            x = 2019 - Integer.parseInt(fecha[0]);
+
+                        } else {
+                            x = 60;
+                        }
+                        pt.setEdad(new SimpleStringProperty(String.valueOf(x)));
+
                         ptol.add(pt);
                     }
 
                 });
-            } else {
+            } else if(busqueda.length() ==0){
                 ptol.clear();
                 cargarDatos();
             }
@@ -159,6 +175,18 @@ public class HistorialController implements Initializable {
         cuestionarios.forEach((cuestionario) -> {
             PrediagnosticoTabla pt = new PrediagnosticoTabla((DBObject) cuestionario);
             if (pt.getStatus().getValue().equals("2.0")) {
+                String fechi = pd.buscarFecha(pt.getNumeroCuestionario().getValue());
+                System.out.println(fechi);
+                String[] fecha = fechi.split("-");
+                int x = 0;
+
+                if (fecha.length > 0) {
+                    x = 2019 - Integer.parseInt(fecha[0]);
+
+                } else {
+                    x = 60;
+                }
+                pt.setEdad(new SimpleStringProperty(String.valueOf(x)));
                 ptol.add(pt);
             }
         });

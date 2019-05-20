@@ -31,9 +31,6 @@ public class PrediagnosticosController implements Initializable {
     private JFXButton btnPhistorial;
 
     @FXML
-    private JFXButton btnPvalidar;
-
-    @FXML
     private BorderPane panelRight;
 
     public menuController getMc() {
@@ -44,23 +41,13 @@ public class PrediagnosticosController implements Initializable {
         this.mc = mc;
     }
 
-    
     @FXML
     void abrirHistorial(ActionEvent event) {
         HistorialController hc = (HistorialController) cv.cambiarVista("/Center/Historial.fxml", panelRight);
         hc.setMc(mc);
         btnPhistorial.setDisable(true);
-        btnPvalidar.setDisable(false);
         hc.cargarDatos();
     }
-
-    @FXML
-    void abrirValidar(ActionEvent event) {
-        ValidarController vc = (ValidarController) cv.cambiarVista("/Center/Validar.fxml", panelRight);
-        btnPhistorial.setDisable(false);
-        btnPvalidar.setDisable(true);
-    }
-
 
     /**
      * Initializes the controller class.

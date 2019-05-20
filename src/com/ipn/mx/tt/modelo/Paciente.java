@@ -24,6 +24,7 @@ public class Paciente {
     String Direccion;
     String Telefono;
     String CURP;
+    int Edad;
     private String Escolaridad;
 
     public String getEscolaridad() {
@@ -52,6 +53,7 @@ public class Paciente {
         this.Telefono = "-";
         this.CURP = "XEXX010101HNEXXXA4";
         this.Escolaridad = "-";
+        this.Edad = 60;
     }
 
     @Override
@@ -149,6 +151,7 @@ public class Paciente {
         this.Telefono = (String) dbo.get("Telefono");
         this.CURP = (String) dbo.get("_CURP");
         this.Escolaridad = (String) dbo.get("Escolaridad");
+        this.Edad = (int) dbo.get("Edad");
     }
 
     public Paciente(PacienteTabla pt) {

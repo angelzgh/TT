@@ -74,8 +74,10 @@ public class RecuperarcontraController implements Initializable {
                 try {
                     CustomMessage cm = new CustomMessage("Aviso", "Se envío un correo a tu dirección registrada.", 0);
                     System.out.println("CONFIRMADO");
-                    Email e=new Email(u.getNombre(), u.getApellido(), u.getId(),u.getCorreo(), u.getContraseña());
+                    Email e = new Email(u.getNombre(), u.getApellido(), u.getId(), u.getCorreo(), u.getContraseña());
                     e.send();
+                    LoginController lc = (LoginController) cv.cambiarVista("/Center/Login.fxml", panelPrincipal);
+                    lc.setUdao(ud);
                 } catch (MessagingException ex) {
                     Logger.getLogger(RecuperarcontraController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -127,6 +129,5 @@ public class RecuperarcontraController implements Initializable {
     public void setUd(UsuarioDAO ud) {
         this.ud = ud;
     }
-   
 
 }

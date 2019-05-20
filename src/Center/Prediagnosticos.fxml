@@ -43,11 +43,6 @@
                               <Font name="Arial" size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="btnPvalidar" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#abrirValidar" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Calificar" GridPane.rowIndex="5">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </JFXButton>
                         <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                            <image>
                               <Image url="@../imagenes/prediagnostico.png" />
@@ -59,14 +54,6 @@
                         <ImageView fitHeight="45.0" fitWidth="45.0" GridPane.rowIndex="3">
                            <image>
                               <Image url="@../imagenes/historial.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets left="50.0" />
-                           </GridPane.margin>
-                        </ImageView>
-                        <ImageView fitHeight="45.0" fitWidth="50.0" GridPane.rowIndex="5">
-                           <image>
-                              <Image url="@../imagenes/validar.png" />
                            </image>
                            <GridPane.margin>
                               <Insets left="50.0" />

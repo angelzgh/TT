@@ -158,6 +158,14 @@ public class TestPacientePreguntasController implements Initializable {
         contadorPregunta = 1;
 
         btnFinalizar.setVisible(false);
+        if(tipoCuestionario==1)
+        {
+            imgPreguntaAudio.setVisible(true);
+        }
+        else
+        {
+            imgPreguntaAudio.setVisible(false);
+        }
     }
 
     @FXML
@@ -176,7 +184,7 @@ public class TestPacientePreguntasController implements Initializable {
 
         pc.startgrafica();
         pc.darClickBotonGuardar();
-
+        mc.EnableTop();
     }
 
     @FXML
@@ -245,7 +253,7 @@ public class TestPacientePreguntasController implements Initializable {
 
     void contestarPregunta(int valor) {
 
-        while (!test.cuestionarioCompletado()) {
+        if (!test.cuestionarioCompletado()) {
             ThreadPregunta tp = new ThreadPregunta(3, rbtnTPcs, rbtnTPavc, rbtnTPnunca, rbtnTPoca, rbtnTPsiempre, regresar);
             //tp.runClock();
             //AGREGAR A LA VISTA

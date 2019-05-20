@@ -10,6 +10,7 @@ import com.ipn.mx.tt.util.ConexionJavaMongo;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class PacienteDAO extends DocumentoDAO {
         super("TT", "Paciente");
     }
 
-    public DBObject convertirPaciente(Paciente p) {
+    public DBObject convertirPaciente(Paciente p) throws ParseException {
 
         return new BasicDBObject("Direccion", p.getDireccion())
                 .append("Fecha", p.getFecha())
@@ -36,10 +37,11 @@ public class PacienteDAO extends DocumentoDAO {
                 .append("Sexo", p.getSexo())
                 .append("Telefono", p.getTelefono())
                 .append("_CURP", p.getCURP())
-                .append("Escolaridad", p.getEscolaridad());
+                .append("Escolaridad", p.getEscolaridad())
+                .append("Edad", p.getEdad());
     }
 
-    public void insertarPaciente(Paciente p) {
+    public void insertarPaciente(Paciente p) throws ParseException {
 
         cjm.getMongoCollection().insert(convertirPaciente(p));
         System.out.println("Registro Agregado con éxito");
@@ -99,4 +101,17 @@ public class PacienteDAO extends DocumentoDAO {
         }
     }
 
+    public String buscarFecha(String value) {
+        DBObject query = new BasicDBObject("_CURP", value);
+        DBCursor cursor = cjm.getMongoCollection().find(query);
+        DBObject jo;
+        if (cursor.hasNext()) {
+            jo = cursor.one();
+            return (String) jo.get("Fecha");
+        } else {
+
+            return "1996-04-02";
+        }
+
+    }
 }

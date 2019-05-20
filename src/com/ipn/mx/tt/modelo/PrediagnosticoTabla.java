@@ -39,7 +39,6 @@ public class PrediagnosticoTabla {
         LocalDateTime now = LocalDateTime.now();
         String[] date = dtf.format(now).split("-");
         this.Fecha = new SimpleStringProperty(date[0]);
-        this.Edad = new SimpleStringProperty(String.valueOf("67"));
     }
 
     public StringProperty getStatus() {

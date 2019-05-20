@@ -18,7 +18,10 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -128,7 +131,11 @@ public class PacienteNuevoController implements Initializable {
     }
 
     public void registrarPaciente(Paciente p) {
-        pd.insertarPaciente(p);
+        try {
+            pd.insertarPaciente(p);
+        } catch (ParseException ex) {
+            Logger.getLogger(PacienteNuevoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
