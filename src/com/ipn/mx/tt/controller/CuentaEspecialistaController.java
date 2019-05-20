@@ -86,6 +86,7 @@ public class CuentaEspecialistaController implements Initializable {
         CambiarcontraController cc = (CambiarcontraController) cv.cambiarVista("/Center/Cambiarcontra.fxml", panelP);
         cc.setUsuario(u);
         cc.setMc(mc);
+        ud.desconectar();
     }
 
     @FXML

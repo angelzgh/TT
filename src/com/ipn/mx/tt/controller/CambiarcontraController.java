@@ -128,6 +128,7 @@ public class CambiarcontraController implements Initializable {
         System.out.println(usuario.toString());
         cec.colocarDatos(usuario);
         cec.setMc(mc);
+        ud.desconectar();
     }
 
     @Override

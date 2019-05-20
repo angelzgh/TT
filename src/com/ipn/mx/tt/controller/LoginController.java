@@ -73,7 +73,7 @@ public class LoginController implements Initializable {
                 lblStatus.setText("BIENVENIDO");
                 menuController o = (menuController) mov.cambiarEscena(e, "Menu.fxml");
                 o.setUsuario(user);
-
+                udao.desconectar();
                 CustomMessage cm = new CustomMessage("BIENVENIDO", "Bienvenido al sistema", 0);
                 //alertMessage.alert(0, "BIENVENIDO AL SISTEMA", "BIENVENIDO: " + user.getId());
             } else {

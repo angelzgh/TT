@@ -66,7 +66,7 @@ public class Prediagnostico2Controller implements Initializable {
     private PreguntaContestadaDAO pcd;
     private PreguntaDAO pd;
     private List trastornos;
-    private LinkedList puntajes, trastornosDetectados,trastornosDetectadosNombre;
+    private LinkedList puntajes, trastornosDetectados, trastornosDetectadosNombre;
     private PrediagnosticoDAO pred;
     private SintomaDAO sd;
     private SintomaCuestionarioDAO scd;
@@ -155,7 +155,11 @@ public class Prediagnostico2Controller implements Initializable {
         pc.startgrafica();
         pc.setSintomasDetectados(sintomasDetectados);
         pc.habilitarBotonGuardar();
-
+        scd.desconectar();
+        sd.desconectar();
+        pd.desconectar();
+        pcd.desconectar();
+        pred.desconectar();
     }
 
     @FXML
@@ -174,6 +178,11 @@ public class Prediagnostico2Controller implements Initializable {
         rc.setTrastornosDetectadosNombre(trastornosDetectadosNombre);
         rc.ponerRecomendaciones();
         rc.ponerTrastornos();
+        scd.desconectar();
+        sd.desconectar();
+        pd.desconectar();
+        pcd.desconectar();
+        pred.desconectar();
     }
 
     public LinkedList getTrastornosDetectados() {
@@ -253,7 +262,7 @@ public class Prediagnostico2Controller implements Initializable {
         puntajes = new LinkedList();
         trastornosDetectados = new LinkedList();
         trastornosDetectadosNombre = new LinkedList();
-        
+
         columnaPregunta.setCellValueFactory(cellData -> cellData.getValue().getPregunta());
         columnaRespuesta.setCellValueFactory(cellData -> cellData.getValue().getRespuesta());
 
@@ -393,7 +402,7 @@ public class Prediagnostico2Controller implements Initializable {
             if (tt.getTiene().get().equals("Si")) {
                 trastornosDetectados.add(i);
                 trastornosDetectadosNombre.add(tt.getTrastornoString());
-                
+
             }
         }
         for (int i = 0; i < trastornosDetectados.size(); i++) {

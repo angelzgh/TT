@@ -33,4 +33,8 @@ public class DocumentoDAO {
 
         return cursor.toArray();
     }
+    public void desconectar()
+    {
+        cjm.cerrarConexion();
+    }
 }

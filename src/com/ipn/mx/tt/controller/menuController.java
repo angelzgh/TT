@@ -66,8 +66,7 @@ public class menuController implements Initializable {
     @FXML
     private Tab TabPrediagnostico;
 
-    @FXML
-    private Tab TabReporte;
+
 
     @FXML
     private Tab TabAyuda;
@@ -131,10 +130,7 @@ public class menuController implements Initializable {
             
 
         });
-        TabReporte.setOnSelectionChanged((Event event) -> {
-            ReportesController rc=(ReportesController)cv.cambiarVista("/Center/Reportes.fxml", PanelPrin);
-            rc.obtenerPacientes();
-        });
+
 
         TabAyuda.setOnSelectionChanged((Event event) -> {
             cv.cambiarVista("/Center/Ayuda.fxml", PanelPrin);

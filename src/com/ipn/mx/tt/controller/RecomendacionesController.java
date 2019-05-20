@@ -39,6 +39,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.jfoenix.controls.JFXTextArea;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -109,10 +111,10 @@ public class RecomendacionesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         red = new ResultadoDAO();
-        red.conectar();
-        rd = new RecomendacionDAO();
-        rd.conectar();
         cad = new CuestionarioAplicadoDAO();
+        rd = new RecomendacionDAO();
+        red.conectar();
+        rd.conectar();
         cad.conectar();
         cv = new cargadorVista();
         columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
@@ -198,6 +200,19 @@ public class RecomendacionesController implements Initializable {
     @FXML
     void imprimirRecomendacion(ActionEvent event) {
 
+        java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+        String file = new String("C://TT//" + paciente.getNombre() + ".pdf");
+        java.io.File fichero = new java.io.File(file);
+        if (desktop.isSupported(Desktop.Action.PRINT)) {
+            try {
+                desktop.print(fichero);
+            } catch (Exception e) {
+                System.out.print("El sistema no permite imprimir usando la clase Desktop");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.print("El sistema no permite imprimir usando la clase Desktop");
+        }
     }
 
     @FXML
@@ -271,41 +286,41 @@ public class RecomendacionesController implements Initializable {
         parametros.put("sexo", paciente.getSexo());
         parametros.put("curp", paciente.getCURP());
         parametros.put("escolaridad", paciente.getEscolaridad());
-        parametros.put("recoe",txtrecoesp.getText());
+        parametros.put("recoe", txtrecoesp.getText());
         System.out.println(txtrecoesp.getText());
         parametros.put("recos", "Prueba");
         System.out.println(resultado.getT1());
-            if(resultado.getT1()==0.0){
-            parametros.put("insomnio","Si");
-            }else{
-            parametros.put("insomnio","No");
-            }
-             if(resultado.getT2()==0.0){
-            parametros.put("ritmo","Si");
-            }else{
-            parametros.put("ritmo","No");
-            }
-              if(resultado.getT3()==0.0){
-            parametros.put("sindrome","Si");
-            }else{
-            parametros.put("sindrome","No");
-            }
-               if(resultado.getT4()==0.0){
-            parametros.put("apnea","Si");
-            }else{
-            parametros.put("apnea","No");
-            }
-                if(resultado.getT5()==0.0){
-            parametros.put("hiper","Si");
-            }else{
-            parametros.put("hiper","No");
-            }
-                 if(resultado.getT6()==0.0){
-            parametros.put("narc","Si");
-            }else{
-            parametros.put("narc","No");
-            }
-                
+        if (resultado.getT1() == 0.0) {
+            parametros.put("insomnio", "Si");
+        } else {
+            parametros.put("insomnio", "No");
+        }
+        if (resultado.getT2() == 0.0) {
+            parametros.put("ritmo", "Si");
+        } else {
+            parametros.put("ritmo", "No");
+        }
+        if (resultado.getT3() == 0.0) {
+            parametros.put("sindrome", "Si");
+        } else {
+            parametros.put("sindrome", "No");
+        }
+        if (resultado.getT4() == 0.0) {
+            parametros.put("apnea", "Si");
+        } else {
+            parametros.put("apnea", "No");
+        }
+        if (resultado.getT5() == 0.0) {
+            parametros.put("hiper", "Si");
+        } else {
+            parametros.put("hiper", "No");
+        }
+        if (resultado.getT6() == 0.0) {
+            parametros.put("narc", "Si");
+        } else {
+            parametros.put("narc", "No");
+        }
+
         JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
@@ -329,6 +344,9 @@ public class RecomendacionesController implements Initializable {
         pc.ponerTrastornosSintomas();
         pc.obtenerTrastornosDetectados();
         pc.setTrastornosDetectados(trastornosDetectados);
+        red.desconectar();
+        rd.desconectar();
+        cad.desconectar();
     }
 
     @FXML
@@ -444,8 +462,9 @@ public class RecomendacionesController implements Initializable {
                 = (PrediagnosticosController) cv.cambiarVista("/Center/Prediagnosticos.fxml", mc.getPanelPrin());
         pc.setMc(mc);
         CustomMessage cm = new CustomMessage("Aviso", "Se guardó la información del cuestionario", 0);
-
         pc.abrirHistorial();
-
+        red.desconectar();
+        rd.desconectar();
+        cad.desconectar();
     }
 }

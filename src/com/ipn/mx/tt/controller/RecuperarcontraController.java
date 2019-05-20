@@ -77,7 +77,8 @@ public class RecuperarcontraController implements Initializable {
                     Email e = new Email(u.getNombre(), u.getApellido(), u.getId(), u.getCorreo(), u.getContraseña());
                     e.send();
                     LoginController lc = (LoginController) cv.cambiarVista("/Center/Login.fxml", panelPrincipal);
-                    lc.setUdao(ud);
+                    ud.desconectar();
+                    psd.desconectar();
                 } catch (MessagingException ex) {
                     Logger.getLogger(RecuperarcontraController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -93,7 +94,9 @@ public class RecuperarcontraController implements Initializable {
     @FXML
     void cancelarCambio(ActionEvent event) {
         LoginController lc = (LoginController) cv.cambiarVista("/Center/Login.fxml", panelPrincipal);
-        lc.setUdao(ud);
+
+        ud.desconectar();
+        psd.desconectar();
     }
 
     /**
@@ -104,6 +107,8 @@ public class RecuperarcontraController implements Initializable {
         // TODO
         v = new Validador();
         psd = new PreguntaSeguridadDAO();
+        ud = new UsuarioDAO();
+        ud.conectar();
         psd.conectar();
 
         cv = new cargadorVista();
