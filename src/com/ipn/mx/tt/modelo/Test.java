@@ -82,7 +82,7 @@ public class Test {
             numeracion[i] = i + 1;
         }
         obtenerNumeracion();
-        contadorPreguntas = 1;
+        contadorPreguntas = 0;
 //System.out.println(SintomaPregunta.toString());
     }
 
@@ -111,12 +111,20 @@ public class Test {
         this.numeroTrastornos = t.numeroTrastornos;
     }
 
+    public int[] getNumeracion() {
+        return numeracion;
+    }
+
+    public void setNumeracion(int[] numeracion) {
+        System.arraycopy(numeracion, 0, this.numeracion, 0, this.numeracion.length);
+    }
+
     public Cuestionario getCuestionario() {
         return cuestionario;
     }
 
     public void setCuestionario(Cuestionario cuestionario) {
-        this.cuestionario = cuestionario;
+        this.cuestionario = new Cuestionario(cuestionario);
     }
 
     public Date getFinCuestionario() {
@@ -243,11 +251,12 @@ public class Test {
 
     public int getSigPregunta() {
 
-        if (contadorPreguntas > tamañoCuestionario) {
+        System.out.println(contadorPreguntas  + "---" + tamañoCuestionario);
+        if (cuestionarioCompletado()) {
             return -1;
         } else {
-            if (!cuestionario.respuestaContestada(numeracion[contadorPreguntas - 1])) {
-                return numeracion[contadorPreguntas - 1];
+            if (!cuestionario.respuestaContestada(numeracion[contadorPreguntas])) {
+                return numeracion[contadorPreguntas];
             } else {
                 //System.out.println("PREGUNTA PREVIAMENTE CONTESTADA: " + numeracion[contadorPreguntas - 1]);
                 sumarContadorPregunta();
@@ -265,7 +274,7 @@ public class Test {
     }
 
     public boolean cuestionarioCompletado() {
-        return contadorPreguntas > tamañoCuestionario;
+        return contadorPreguntas  > tamañoCuestionario-1;
     }
 
     public boolean respuestaContestada(int pregunta) {

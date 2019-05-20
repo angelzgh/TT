@@ -18,22 +18,87 @@ public class Cuestionario {
     private Instrumento s50, hsdr;
     private Date inicioCuestionario, duracion, finCuestionario;
     private LinkedList RespuestasContestadas;
+    private int contadorRespuestasContestadas;
+
+    private String[] sintomasDetectados;
+
+    public String[] getSintomasDetectados() {
+        return sintomasDetectados;
+    }
+
+    public void setSintomasDetectados(String[] sintomasDetectados) {
+        this.sintomasDetectados = sintomasDetectados;
+    }
 
     public Cuestionario() {
         s50 = new Instrumento();
         hsdr = new Instrumento();
         inicioCuestionario = new Date();
         RespuestasContestadas = new LinkedList();
+        contadorRespuestasContestadas = 0;
+        
+        sintomasDetectados = new String[10];
+        for (int i = 1; i < 10; i++) {
+            sintomasDetectados[i] = "";
+        }
+        
     }
 
+    public int getContadorRespuestasContestadas() {
+        return contadorRespuestasContestadas;
+    }
+
+    public void setContadorRespuestasContestadas(int contadorRespuestasContestadas) {
+        this.contadorRespuestasContestadas = contadorRespuestasContestadas;
+    }
+
+    public Instrumento getS50() {
+        return s50;
+    }
+
+    public void setS50(Instrumento s50) {
+        this.s50 = s50;
+    }
+
+    public Instrumento getHsdr() {
+        return hsdr;
+    }
+
+    public void setHsdr(Instrumento hsdr) {
+        this.hsdr = hsdr;
+    }
+    
+
     public Cuestionario(Cuestionario c) {
+        this.numCuestionario = c.numCuestionario;
+        this.s50=new Instrumento(c.s50);
+        this.hsdr=new Instrumento(c.hsdr);
+        this.inicioCuestionario = c.inicioCuestionario;
+        this.duracion = c.duracion;
+        this.finCuestionario = c.finCuestionario;
+        this.RespuestasContestadas = new LinkedList(c.RespuestasContestadas);
+        this.contadorRespuestasContestadas = c.contadorRespuestasContestadas;
+        
+        sintomasDetectados = new String[10];
+        System.arraycopy(c.sintomasDetectados, 1, sintomasDetectados, 1, 9);
+    }
+
+    public LinkedList getRespuestasContestadas() {
+        return RespuestasContestadas;
+    }
+
+    public void setRespuestasContestadas(LinkedList RespuestasContestadas) {
+        this.RespuestasContestadas = RespuestasContestadas;
+    }
+
+    public void setCuestionario(Cuestionario c) {
         this.numCuestionario = c.numCuestionario;
         this.s50 = c.s50;
         this.hsdr = c.hsdr;
         this.inicioCuestionario = c.inicioCuestionario;
         this.duracion = c.duracion;
         this.finCuestionario = c.finCuestionario;
-        this.RespuestasContestadas = c.RespuestasContestadas;
+        this.RespuestasContestadas = new LinkedList(c.RespuestasContestadas);
     }
 
     public boolean respuestaContestada(int numeroPregunta) {
@@ -75,6 +140,7 @@ public class Cuestionario {
             System.out.println(r.toString());
         }
         System.out.println("FIN RESPUESTAS");
+
     }
 
     public void quitarDesde(int desde) {

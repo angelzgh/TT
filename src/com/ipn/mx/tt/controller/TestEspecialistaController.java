@@ -13,6 +13,7 @@ import com.ipn.mx.tt.modelo.SintomaPregunta;
 import com.ipn.mx.tt.modelo.Test;
 import com.ipn.mx.tt.modelo.Cuestionario;
 import com.ipn.mx.tt.modelo.TrastornoSintoma;
+import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.ThreadPregunta;
 import com.ipn.mx.tt.util.cargadorVista;
 import com.jfoenix.controls.JFXButton;
@@ -53,17 +54,10 @@ public class TestEspecialistaController implements Initializable {
     private int contadorPregunta;
     private InfoCuestionario ic;
     private Conducta conducta;
-    private String[] sintomasDetectados;
     private int contadorPreguntaResta;
-    private LinkedList testEstados;
-
-    public String[] getSintomasDetectados() {
-        return sintomasDetectados;
-    }
-
-    public void setSintomasDetectados(String[] sintomasDetectados) {
-        this.sintomasDetectados = sintomasDetectados;
-    }
+    private LinkedList<Cuestionario> testEstados;
+    private LinkedList<Integer> contadorEstados;
+    private LinkedList<int[]> numeracionEstados;
 
     public Paciente getPaciente() {
         return paciente;
@@ -140,7 +134,9 @@ public class TestEspecialistaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        testEstados = new LinkedList();
+        testEstados = new LinkedList<Cuestionario>();
+        contadorEstados = new LinkedList<Integer>();
+        numeracionEstados= new LinkedList<int[]>();
         cv = new cargadorVista();
         // TODO
         rbtnTEnunca.setOnAction((event) -> {
@@ -158,7 +154,7 @@ public class TestEspecialistaController implements Initializable {
         rbtnTEsiempre.setOnAction((event) -> {
             contestarPregunta(5);
         });
-        contadorPregunta = 1;
+        contadorPregunta = 0;
         contadorPreguntaResta = 1;
 
         btnFinalizar.setVisible(false);
@@ -169,10 +165,6 @@ public class TestEspecialistaController implements Initializable {
         columnaRespuesta.setCellValueFactory((TreeTableColumn.CellDataFeatures<String, String> param) -> {
             return new SimpleStringProperty(param.getValue().getValue());
         });
-        sintomasDetectados = new String[10];
-        for (int i = 1; i < 10; i++) {
-            sintomasDetectados[i] = "";
-        }
     }
 
     @FXML
@@ -189,7 +181,7 @@ public class TestEspecialistaController implements Initializable {
         pc.habilitarBotonGuardar();
         pc.cargarResultados();
         pc.startgrafica();
-        pc.setSintomasDetectados(sintomasDetectados);
+        pc.setSintomasDetectados(test.getCuestionario().getSintomasDetectados());
         pc.habilitarBotonGuardar();
 
     }
@@ -197,7 +189,7 @@ public class TestEspecialistaController implements Initializable {
     public void cargarPregunta(Pregunta p) {
 
         if (p.getId() > 0 && p.getId() != 99) {
-            txtpregunta.setText(contadorPregunta + ".-" + p.getTexto());
+            txtpregunta.setText((contadorPregunta + 1) + ".-" + p.getTexto());
             pregunta = p.getId();
             instrumento = test.getTipoCuestionario(pregunta);
             // int tipo=id.tipoCuestionario(pregunta);
@@ -208,8 +200,6 @@ public class TestEspecialistaController implements Initializable {
                 rbtnTEavc.setVisible(false);
 
             }
-            contadorPregunta++;
-            contadorPreguntaResta++;
         }
     }
 
@@ -254,25 +244,20 @@ public class TestEspecialistaController implements Initializable {
             limpiarVista();
 
             //SUMAR AL CUESTIONARIO
-//            Cuestionario c=new Cuestionario(test.getCuestionario());
-//            testEstados.add(c);
-//            c.mostrarRespuestas();
-            for (int i = 0; i < 10; i++) {
-                System.out.println(sintomasDetectados[i]);
-            }
-            testEstados.add(sintomasDetectados);
+            Cuestionario c = new Cuestionario(test.getCuestionario());
+            copiarEstadoCuestionario(c);
             sumarATrastorno();
-           String[] orueba=(String[]) testEstados.get(0);
-                       for (int i = 0; i < 10; i++) {
-                System.out.println(orueba[i]);
-            }
-//            c.mostrarRespuestas();
-//            Cuestionario c1=new Cuestionario((Cuestionario) testEstados.get(0);
-
-            System.out.println("TAMAÑO LS" + testEstados.size());
+            System.out.println(c.getS50().toString());
+            System.out.println(c.getHsdr().toString());
+            // imprimirEstados();
+            //System.out.println("TAMAÑO LS" + testEstados.size());
             //TRAER NUEVA PREGUNTA
+            contadorPregunta++;
+            contadorPreguntaResta++;
+            System.out.println(contadorPregunta + "//" + testEstados.size());
 
             cargarPregunta(test.getPregunta(test.getSigPregunta()));
+
         }
         if (test.cuestionarioCompletado()) {
             lblProgress.setText("100%");
@@ -286,9 +271,19 @@ public class TestEspecialistaController implements Initializable {
             rbtnTEoca.setDisable(true);
             rbtnTEsiempre.setDisable(true);
             btnFinalizar.setVisible(true);
-            for (int i = 0; i < 10; i++) {
-                System.out.println(sintomasDetectados[i]);
-            }
+        }
+    }
+
+    public void copiarEstadoCuestionario(Cuestionario c) {
+        testEstados.add(c);
+        contadorEstados.add(test.getContadorPreguntas());
+        numeracionEstados.add(test.getNumeracion());
+
+    }
+
+    public void imprimirEstados() {
+        for (Cuestionario testEstado : testEstados) {
+            testEstado.mostrarRespuestas();
         }
     }
 
@@ -344,11 +339,11 @@ public class TestEspecialistaController implements Initializable {
             trastorno.forEach((trastornoLoop) -> {
                 TrastornoSintoma ts = (TrastornoSintoma) trastornoLoop;
                 if (valor >= 3) {
-                    if (sintomasDetectados[ts.getTrastorno()].contains(String.valueOf(numeroSintoma) + ",")) {
+                    if (test.getCuestionario().getSintomasDetectados()[ts.getTrastorno()].contains(String.valueOf(numeroSintoma) + ",")) {
                         System.out.println("YA AGREGADO" + numeroSintoma);
-                        System.out.println(sintomasDetectados[ts.getTrastorno()]);
+                        System.out.println(test.getCuestionario().getSintomasDetectados()[ts.getTrastorno()]);
                     } else {
-                        sintomasDetectados[ts.getTrastorno()] += numeroSintoma + ",";
+                        test.getCuestionario().getSintomasDetectados()[ts.getTrastorno()] += numeroSintoma + ",";
                     }
                 }
                 if (test.banderaLevantada(ts.getTrastorno())) {
@@ -403,16 +398,36 @@ public class TestEspecialistaController implements Initializable {
     @FXML
     private void regresarPregunta(ActionEvent ae) {
 
+        
         restarATrastorno();
+    }
+
+    public void cargarEstadoAnterior(int Estado, int contadorAnt) {
+
+        Cuestionario c = new Cuestionario(testEstados.get(Estado));
+        test.setCuestionario(c);
+        System.out.println("Cargando datos..." + Estado);
+        testEstados.remove(Estado);
+        test.getCuestionario().mostrarRespuestas();
+        test.setContadorPreguntas(contadorAnt);
+        contadorEstados.remove(Estado);
+        test.setNumeracion(numeracionEstados.get(Estado));
+        numeracionEstados.remove(Estado);
     }
 
     public void restarATrastorno() {
 
-        //test.restarContadorPregunta();
-        actualizarProgreso();
-        contadorPregunta--;
-        contadorPreguntaResta--;
-        quitarPreguntaView();
+        if (contadorPregunta > 0) {
+            contadorPregunta--;
+            quitarPreguntaView();
+            System.out.println(contadorPregunta + "//" + testEstados.size());
+            cargarEstadoAnterior(testEstados.size() - 1, contadorEstados.get(testEstados.size() - 1));
+            test.getCuestionario().setContadorRespuestasContestadas(contadorPregunta);
+            cargarPregunta(test.getPregunta(test.getSigPregunta()));
+            actualizarProgreso();
+        } else {
+            CustomMessage cm = new CustomMessage("ERROR", "No hay pregunta anterior.", 2);
+        }
     }
 
     @FXML
@@ -432,7 +447,7 @@ public class TestEspecialistaController implements Initializable {
 
     public void quitarPreguntaView() {
 
-        tablaRespuesta.getRoot().getChildren().remove(contadorPregunta - 2);
+        tablaRespuesta.getRoot().getChildren().remove(contadorPregunta);
     }
 
 }
