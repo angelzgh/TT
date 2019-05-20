@@ -52,10 +52,16 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btnEnviar" layoutX="198.0" layoutY="313.0" onAction="#cambiarContra" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #FFFFFF;" text="Enviar" />
-                        <JFXButton fx:id="btnCancelar" layoutX="61.0" layoutY="313.0" onAction="#cancelarCambio" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #F76969;" text="Cancelar" />
+                        <JFXButton fx:id="btnEnviar" layoutX="198.0" layoutY="313.0" onAction="#cambiarContra" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #FFFFFF;" text="Enviar">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
+                        <JFXButton fx:id="btnCancelar" layoutX="61.0" layoutY="313.0" onAction="#cancelarCambio" prefHeight="25.0" prefWidth="115.0" style="-fx-background-color: #F76969;" text="Cancelar">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
                         <JFXTextField fx:id="txtCorreo" focusColor="#a84042" layoutX="55.0" layoutY="108.0" prefHeight="25.0" prefWidth="246.0" promptText="Correo" style="-fx-background-color: #FFFFFF;" />
-                        <JFXTextField fx:id="txtResseguridad" focusColor="#a84042" layoutX="55.0" layoutY="230.0" prefHeight="25.0" prefWidth="246.0" promptText="Contraseña" style="-fx-background-color: #FFFFFF;" />
+                        <JFXTextField fx:id="txtResseguridad" focusColor="#a84042" layoutX="55.0" layoutY="230.0" prefHeight="25.0" prefWidth="246.0" promptText="Respuesta" style="-fx-background-color: #FFFFFF;" />
                         <JFXComboBox fx:id="cmbpreguntaseguridad" layoutX="55.0" layoutY="167.0" prefHeight="25.0" prefWidth="246.0" promptText="Pregunta de seguridad" style="-fx-background-color: #FFFFFF;" />
                      </children>
                   </Pane>

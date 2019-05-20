@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -71,21 +72,24 @@
                            <children>
                               <TableView fx:id="tbthabitos" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="301.0" prefWidth="533.0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                 <columns>
-                                  <TableColumn fx:id="columnaPregunta" editable="false" prefWidth="442.0" resizable="false" text="Pregunta" />
-                                  <TableColumn fx:id="columnaRespuesta" editable="false" prefWidth="90.0" resizable="false" text="Respuesta" />
+                                  <TableColumn fx:id="columnaPregunta" editable="false" prefWidth="417.0" resizable="false" text="Pregunta" />
+                                  <TableColumn fx:id="columnaRespuesta" editable="false" prefWidth="115.0" resizable="false" text="Respuesta" />
                                 </columns>
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
+                                 <GridPane.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </GridPane.margin>
                               </TableView>
                               <JFXTextField alignment="CENTER" editable="false" prefHeight="31.0" prefWidth="316.0" text="Los habitos encontrados son los siguientes:">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Century Gothic" size="18.0" />
                                  </font>
                               </JFXTextField>
                               <JFXTextField alignment="CENTER" editable="false" prefHeight="31.0" prefWidth="316.0" text="Valores de los trastornos encontrados" GridPane.columnIndex="1">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Century Gothic" size="18.0" />
                                  </font>
                               </JFXTextField>
                               <TableView fx:id="tbltrastornos" editable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="202.0" prefWidth="447.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -111,6 +115,9 @@
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="150.0" />
                                  </GridPane.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </JFXButton>
                               <JFXButton fx:id="btnregresar" onAction="#regresarDiagnostico" prefHeight="38.0" prefWidth="128.0" ripplerFill="#a8ddab" style="-fx-background-color: #a8ddab;" text="Regresar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                                  <font>
@@ -119,6 +126,9 @@
                                  <GridPane.margin>
                                     <Insets bottom="5.0" left="100.0" />
                                  </GridPane.margin>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </JFXButton>
                               <Label style="-fx-background-color: #FFFFFF;" text="Trabaja:" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                  <GridPane.margin>

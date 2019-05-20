@@ -4,14 +4,13 @@
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.TreeTableColumn?>
 <?import javafx.scene.control.TreeTableView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -47,14 +46,6 @@
                         <RowConstraints maxHeight="121.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fx:id="imgRegresar" fitHeight="31.0" fitWidth="92.0" onMouseClicked="#regresarImg" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                           <image>
-                              <Image url="@../imagenes/regresar.png" />
-                           </image>
-                           <GridPane.margin>
-                              <Insets right="160.0" />
-                           </GridPane.margin>
-                        </ImageView>
                         <JFXTextArea fx:id="txtpregunta" editable="false" labelFloat="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="169.0" prefWidth="974.0" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
                            <font>
                               <Font name="Arial" size="28.0" />
@@ -73,7 +64,10 @@
                               <Insets left="60.0" right="60.0" />
                            </GridPane.margin>
                         </ProgressBar>
-                        <JFXButton fx:id="regresar" onAction="#regresarPregunta" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: #70CFB2;" text="Regresar" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <JFXButton fx:id="regresar" onAction="#regresarPregunta" prefHeight="27.0" prefWidth="86.0" style="-fx-background-color: #70CFB2;" text="Regresar" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></JFXButton>
                         <JFXRadioButton fx:id="rbtnTEnunca" text="Nunca" GridPane.rowIndex="2">
                            <font>
                               <Font size="20.0" />

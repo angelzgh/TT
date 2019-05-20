@@ -59,6 +59,7 @@ public class PrediagnosticoTabla {
     }
 
     public StringProperty getEdad() {
+        
         return Edad;
     }
 

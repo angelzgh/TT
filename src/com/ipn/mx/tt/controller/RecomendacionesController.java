@@ -244,12 +244,15 @@ parametros.put("sexo",paciente.getSexo());
 parametros.put("curp",paciente.getCURP());
 parametros.put("escolaridad",paciente.getEscolaridad());
 parametros.put("recoe", "Texto de prueba");
-parametros.put("recos", "Texto de prueba");
-JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
-     
-        
-//JasperViewer.viewReport(informe,false);
+for(int i=1;i<=10;i++){
+parametros.put("recos",lsRecomendacion.get(i));
 
+}
+
+
+       
+JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());        
+//JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
         String file = new String("C://TT//" + paciente.getNombre() + ".pdf");
         Runtime.getRuntime().exec("cmd /c start " + file);
@@ -298,6 +301,7 @@ JasperPrint informe=JasperFillManager.fillReport(master, parametros, new JREmpty
                 Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
                 RecomendacionTabla rt = new RecomendacionTabla(r);
                 lsRecomendacion.add(r.getRecomendacion());
+                System.out.println( lsRecomendacion);
                 rtol.add(rt);
 
             }

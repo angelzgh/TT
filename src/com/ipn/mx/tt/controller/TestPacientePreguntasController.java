@@ -245,7 +245,7 @@ public class TestPacientePreguntasController implements Initializable {
 
     void contestarPregunta(int valor) {
 
-        while (!test.cuestionarioCompletado()) {
+        if (!test.cuestionarioCompletado()) {
             ThreadPregunta tp = new ThreadPregunta(3, rbtnTPcs, rbtnTPavc, rbtnTPnunca, rbtnTPoca, rbtnTPsiempre, regresar);
             //tp.runClock();
             //AGREGAR A LA VISTA
