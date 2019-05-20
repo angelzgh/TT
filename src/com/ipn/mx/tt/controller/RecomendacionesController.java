@@ -369,17 +369,19 @@ public class RecomendacionesController implements Initializable {
         List l = rd.traerRecomendacion(trastorno);
         LinkedList ls = new LinkedList();
         System.out.println("TAMAÑO MAXIMO:" + l.size());
-        while (ls.size() < 3) {
-            int x = (int) (Math.random() * l.size()) + 1;
-            System.out.println(x);
-            if (!ls.contains(x)) {
-                ls.add(x);
-                Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
-                RecomendacionTabla rt = new RecomendacionTabla(r);
-                lsRecomendacion.add(r.getRecomendacion());
-                System.out.println(lsRecomendacion);
-                rtol.add(rt);
+        if (!l.isEmpty()) {
+            while (ls.size() < 3) {
+                int x = (int) (Math.random() * l.size()) + 1;
+                System.out.println(x);
+                if (!ls.contains(x)) {
+                    ls.add(x);
+                    Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
+                    RecomendacionTabla rt = new RecomendacionTabla(r);
+                    lsRecomendacion.add(r.getRecomendacion());
+                    System.out.println(lsRecomendacion);
+                    rtol.add(rt);
 
+                }
             }
         }
     }
@@ -388,21 +390,16 @@ public class RecomendacionesController implements Initializable {
         String fechi = paciente.getFecha();
         System.out.println(fechi);
         String[] fecha;
-        if(fechi.contains("-"))
-        {
-             fecha= fechi.split("-");
-        }
-        else
-        {
-             fecha = fechi.split("/");
+        if (fechi.contains("-")) {
+            fecha = fechi.split("-");
+        } else {
+            fecha = fechi.split("/");
         }
         int x = 0;
 
         if (fecha[0].length() == 4) {
             x = 2019 - Integer.parseInt(fecha[0]);
-        }
-        else if(fecha[2].length() == 4)
-        {
+        } else if (fecha[2].length() == 4) {
             x = 2019 - Integer.parseInt(fecha[2]);
         }
         resultado = new Resultados(ic.getIdCuestionario(), paciente.getSexo(), x);
@@ -420,6 +417,6 @@ public class RecomendacionesController implements Initializable {
         CustomMessage cm = new CustomMessage("Aviso", "Se guardó la información del cuestionario", 0);
 
         pc.abrirHistorial();
-        
+
     }
 }
