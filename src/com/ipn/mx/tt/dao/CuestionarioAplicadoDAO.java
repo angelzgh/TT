@@ -27,7 +27,7 @@ public class CuestionarioAplicadoDAO extends DocumentoDAO {
 
     public List traerInformacion() {
         DBObject dbo = new BasicDBObject("status", 2.0);
-        DBCursor cursor = cjm.getMongoCollection().find(dbo).limit(25);
+        DBCursor cursor = cjm.getMongoCollection().find(dbo);
 
         return cursor.toArray();
     }
