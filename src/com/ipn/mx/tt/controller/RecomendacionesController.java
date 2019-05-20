@@ -260,10 +260,7 @@ public class RecomendacionesController implements Initializable {
         parametros.put("curp", paciente.getCURP());
         parametros.put("escolaridad", paciente.getEscolaridad());
         parametros.put("recoe", "Texto de prueba");
-        for (int i = 1; i <= 10; i++) {
-            parametros.put("recos", lsRecomendacion.get(i));
-
-        }
+            parametros.put("recos", lsRecomendacion.get(1));
 
         JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
