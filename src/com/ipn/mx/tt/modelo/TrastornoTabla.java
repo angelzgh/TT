@@ -115,10 +115,10 @@ public class TrastornoTabla {
     public StringProperty getTiene() {
         if (Double.parseDouble(getHsdq().get()) > Double.parseDouble(getHsdqM().get())
                 || Double.parseDouble(getS50().get()) > Double.parseDouble(getS50M().get())) {
-            setTiene(new SimpleStringProperty("DETECTADO"));
+            setTiene(new SimpleStringProperty("Si"));
         } else {
 
-            setTiene(new SimpleStringProperty("OK"));
+            setTiene(new SimpleStringProperty("No"));
         }
         return tiene;
     }

@@ -270,7 +270,7 @@ public class Prediagnostico2Controller implements Initializable {
                 super.updateItem(item, empty);
                 if (item == null) {
                     setStyle("");
-                } else if (item.getTiene().get().equals("DETECTADO")) {
+                } else if (item.getTiene().get().equals("Si")) {
                     setStyle("-fx-background-color: #42B855 ; ");
                 } else {
                     setStyle("");

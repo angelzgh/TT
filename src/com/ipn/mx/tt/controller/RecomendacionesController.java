@@ -272,11 +272,12 @@ public class RecomendacionesController implements Initializable {
         parametros.put("curp", paciente.getCURP());
         parametros.put("escolaridad", paciente.getEscolaridad());
         parametros.put("recoe", "Texto de prueba");
-        for (int i = 1; i <= 10; i++) {
-            parametros.put("recos", lsRecomendacion.get(i));
-
-        }
-
+        parametros.put("recos", "Prueba");
+            if(resultado.getT1()==1.0){
+            parametros.put("insomnio","Si");
+            }else{
+            parametros.put("insomnio","No");
+            }
         JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
