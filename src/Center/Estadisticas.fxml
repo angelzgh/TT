@@ -24,22 +24,22 @@
          </top>
          <center>
             <GridPane BorderPane.alignment="CENTER">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="421.0" minHeight="10.0" prefHeight="419.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="421.0" minHeight="10.0" prefHeight="419.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="232.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
                   <JFXButton fx:id="btnguardar" ripplerFill="#a74d4d" style="-fx-background-color: #a74d4d};" text="Guardar como imagen" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                   <BarChart fx:id="greportes" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="329.0" prefWidth="520.0" GridPane.halignment="CENTER">
-                    <xAxis>
-                      <CategoryAxis side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis side="LEFT" />
-                    </yAxis>
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" />
+                     </yAxis>
                   </BarChart>
                </children>
             </GridPane>
