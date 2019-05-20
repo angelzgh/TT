@@ -39,25 +39,20 @@
                               <Font size="27.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lblAyuda" alignment="CENTER" onMouseClicked="#mostrarAyuda" prefHeight="36.0" prefWidth="122.0" text="AYUDA" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label fx:id="lblAyuda" alignment="CENTER" onMouseClicked="#mostrarAyuda" prefHeight="36.0" prefWidth="122.0" text="AYUDA" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <font>
                               <Font name="Arial" size="26.0" />
                            </font>
                            <GridPane.margin>
-                              <Insets left="30.0" />
+                              <Insets left="2.0" />
                            </GridPane.margin>
                         </Label>
-                        <JFXButton fx:id="btnguardar" buttonType="RAISED" prefHeight="38.0" prefWidth="138.0" ripplerFill="#2ebb9f" style="-fx-background-color: #2ebb9f;" text="GUARDAR" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </JFXButton>
                         <ImageView fx:id="imgAyudaAudio" fitHeight="44.0" fitWidth="47.0" onMouseClicked="#reproducirAudioAyuda" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <image>
                               <Image url="@../imagenes/audio.png" />
                            </image>
                            <GridPane.margin>
-                              <Insets right="50.0" />
+                              <Insets right="45.0" />
                            </GridPane.margin>
                         </ImageView>
                         <JFXTextArea fx:id="txtayuda" editable="false" opacity="0.66" style="-fx-background-color: #FFFFFF;" styleClass="letra" stylesheets="@../styles/Styles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -73,7 +68,7 @@
                               <Image url="@../imagenes/ayuda.png" />
                            </image>
                            <GridPane.margin>
-                              <Insets right="100.0" />
+                              <Insets right="95.0" />
                            </GridPane.margin>
                         </ImageView>
                      </children>
