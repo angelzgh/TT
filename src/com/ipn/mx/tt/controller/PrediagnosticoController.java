@@ -8,6 +8,7 @@ package com.ipn.mx.tt.controller;
 import com.ipn.mx.tt.dao.CuestionarioAplicadoDAO;
 import com.ipn.mx.tt.dao.CuestionarioDAO;
 import com.ipn.mx.tt.dao.PrediagnosticoDAO;
+import com.ipn.mx.tt.dao.ResultadoDAO;
 import com.ipn.mx.tt.dao.SintomaCuestionarioDAO;
 import com.ipn.mx.tt.modelo.Conducta;
 import com.ipn.mx.tt.modelo.InfoCuestionario;
@@ -52,6 +53,7 @@ public class PrediagnosticoController implements Initializable {
     private Boolean testContestado;
     private SintomaCuestionarioDAO scd;
     private CuestionarioAplicadoDAO cad;
+
 
     private String[] sintomasDetectados;
 
@@ -130,11 +132,9 @@ public class PrediagnosticoController implements Initializable {
     private Label lblCuestionario;
     @FXML
     private JFXButton btnPsiguientes;
-  
 
     @FXML
     private BarChart<?, ?> ginsomnioh;
-      
 
     @FXML
     private BarChart<?, ?> gritmoh;
@@ -211,6 +211,7 @@ public class PrediagnosticoController implements Initializable {
         pdd = new PrediagnosticoDAO();
         scd = new SintomaCuestionarioDAO();
         cad = new CuestionarioAplicadoDAO();
+
         cad.conectar();
         scd.conectar();
         pdd.conectar();
@@ -304,7 +305,7 @@ public class PrediagnosticoController implements Initializable {
     }
 
     public void startgrafica() {
-CategoryAxis xAxisrih = new CategoryAxis();
+        CategoryAxis xAxisrih = new CategoryAxis();
         NumberAxis yAxisrih = new NumberAxis();
         xAxisrih.setLabel("Preguntas");
         yAxisrih.setLabel("Valor");
@@ -315,8 +316,8 @@ CategoryAxis xAxisrih = new CategoryAxis();
         XYChart.Series seriesihm = new XYChart.Series();
         double ihm = 29.44;
         seriesihm.getData().add(new XYChart.Data("Punto de corte", ihm));
-    ginsomnioh.getData().addAll(seriesih, seriesihm);
-    
+        ginsomnioh.getData().addAll(seriesih, seriesihm);
+
         CategoryAxis xAxisis = new CategoryAxis();
         NumberAxis yAxisis = new NumberAxis();
         xAxisis.setLabel("Preguntas");
@@ -480,7 +481,5 @@ CategoryAxis xAxisrih = new CategoryAxis();
     public void habilitarBotonGuardar() {
         btnGuardar.setVisible(true);
     }
-
-
 
 }

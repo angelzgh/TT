@@ -5,6 +5,8 @@
  */
 package com.ipn.mx.tt.dao;
 
+import com.mongodb.DBObject;
+
 /**
  *
  * @author Axel Reyes
@@ -19,4 +21,8 @@ public class ResultadoDAO extends DocumentoDAO{
         super("TT", "Resultado");
     }
     
+    public void insertarResultado(DBObject dbo)
+    {
+        cjm.getMongoCollection().insert(dbo);
+    }
 }

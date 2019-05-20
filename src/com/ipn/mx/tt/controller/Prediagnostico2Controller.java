@@ -8,6 +8,7 @@ package com.ipn.mx.tt.controller;
 import com.ipn.mx.tt.dao.PrediagnosticoDAO;
 import com.ipn.mx.tt.dao.PreguntaContestadaDAO;
 import com.ipn.mx.tt.dao.PreguntaDAO;
+import com.ipn.mx.tt.dao.ResultadoDAO;
 import com.ipn.mx.tt.dao.SintomaCuestionarioDAO;
 import com.ipn.mx.tt.dao.SintomaDAO;
 import com.ipn.mx.tt.modelo.Conducta;
@@ -166,6 +167,7 @@ public class Prediagnostico2Controller implements Initializable {
         rc.setIc(ic);
         rc.setConducta(conducta);
         rc.setPaciente(paciente);
+        rc.configurarResultados();
         rc.setSintomasDetectados(sintomasDetectados);
 
         rc.setTrastornosDetectados(trastornosDetectados);
@@ -240,6 +242,7 @@ public class Prediagnostico2Controller implements Initializable {
         pred = new PrediagnosticoDAO();
         sd = new SintomaDAO();
         scd = new SintomaCuestionarioDAO();
+
         scd.conectar();
         sd.conectar();
         pd.conectar();

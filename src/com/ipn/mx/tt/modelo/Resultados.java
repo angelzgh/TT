@@ -5,6 +5,7 @@
  */
 package com.ipn.mx.tt.modelo;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 
 /**
@@ -23,6 +24,17 @@ public class Resultados {
     private Double t5;
     private Double t6;
 
+        public Resultados(Double numCuestionario, String sexo, int edad) {
+        this.numCuestionario = numCuestionario;
+        this.sexo = sexo;
+        this.edad = edad;
+        this.t1 = 0.0;
+        this.t2 = 0.0;
+        this.t3 = 0.0;
+        this.t4 = 0.0;
+        this.t5 = 0.0;
+        this.t6 = 0.0;
+    }
     public Resultados(Double numCuestionario, String sexo, int edad, Double t1, Double t2, Double t3, Double t4, Double t5, Double t6) {
         this.numCuestionario = numCuestionario;
         this.sexo = sexo;
@@ -119,4 +131,24 @@ public class Resultados {
         this.t6 = t6;
     }
 
+    @Override
+    public String toString() {
+        return "Resultados{" + "numCuestionario=" + numCuestionario + ", sexo=" + sexo + ", edad=" + edad + ", t1=" + t1 + ", t2=" + t2 + ", t3=" + t3 + ", t4=" + t4 + ", t5=" + t5 + ", t6=" + t6 + '}';
+    }
+
+    public DBObject toDBO() {
+    return new BasicDBObject("numCuestionario",numCuestionario)
+            .append("sexo", sexo)
+            .append("edad", edad)
+            .append("t1", t1)
+            .append("t2", t2)
+            .append("t3", t3)
+            .append("t4", t4)
+            .append("t5", t5)
+            .append("t6", t6)
+            
+            ;
+    }
+
+    
 }
