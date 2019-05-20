@@ -271,13 +271,41 @@ public class RecomendacionesController implements Initializable {
         parametros.put("sexo", paciente.getSexo());
         parametros.put("curp", paciente.getCURP());
         parametros.put("escolaridad", paciente.getEscolaridad());
-        parametros.put("recoe", "Texto de prueba");
+        parametros.put("recoe",txtrecoesp.getText());
+        System.out.println(txtrecoesp.getText());
         parametros.put("recos", "Prueba");
-            if(resultado.getT1()==1.0){
+        System.out.println(resultado.getT1());
+            if(resultado.getT1()==0.0){
             parametros.put("insomnio","Si");
             }else{
             parametros.put("insomnio","No");
             }
+             if(resultado.getT2()==0.0){
+            parametros.put("ritmo","Si");
+            }else{
+            parametros.put("ritmo","No");
+            }
+              if(resultado.getT3()==0.0){
+            parametros.put("sindrome","Si");
+            }else{
+            parametros.put("sindrome","No");
+            }
+               if(resultado.getT4()==0.0){
+            parametros.put("apnea","Si");
+            }else{
+            parametros.put("apnea","No");
+            }
+                if(resultado.getT5()==0.0){
+            parametros.put("hiper","Si");
+            }else{
+            parametros.put("hiper","No");
+            }
+                 if(resultado.getT6()==0.0){
+            parametros.put("narc","Si");
+            }else{
+            parametros.put("narc","No");
+            }
+                
         JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");

@@ -317,13 +317,6 @@
 				</textElement>
 				<text><![CDATA[Narcolepsia]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="66" y="346" width="182" height="16" forecolor="#003333"/>
-				<textElement>
-					<font fontName="Arial"/>
-				</textElement>
-				<text><![CDATA[Impacto]]></text>
-			</staticText>
 			<line>
 				<reportElement x="0" y="384" width="555" height="1" forecolor="#009999"/>
 				<graphicElement>
@@ -421,11 +414,6 @@
 				<reportElement x="264" y="315" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{narc}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="264" y="342" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{impa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
