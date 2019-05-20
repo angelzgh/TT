@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
@@ -71,12 +72,38 @@ public class ReportesController implements Initializable {
 
     @FXML
     private BorderPane panelRight;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
+    public void obtenerPacientes() {
+        if (rbtodo.isSelected()) {
+            System.out.println("TODO");
+            txtedad.setVisible(false);
+            txtrangode.setVisible(false);
+            txtrangoa.setVisible(false);
+        } else if (rbedad.isSelected()) {
+
+            txtedad.setVisible(true);
+            txtrangode.setVisible(false);
+            txtrangoa.setVisible(false);
+            System.out.println("EDAD");
+        } else {
+            txtedad.setVisible(false);
+            txtrangode.setVisible(true);
+            txtrangoa.setVisible(true);
+            System.out.println("RANGO");
+        }
+    }
+
+    @FXML
+    void obtenerPaciente(ActionEvent event) {
+        obtenerPacientes();
+    }
+
 }

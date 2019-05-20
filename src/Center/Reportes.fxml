@@ -36,7 +36,7 @@
                         <RowConstraints maxHeight="372.0" minHeight="10.0" prefHeight="173.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <JFXRadioButton fx:id="rbrabgo" text="Rango de:" textFill="WHITE" GridPane.rowIndex="4">
+                        <JFXRadioButton fx:id="rbrabgo" onAction="#obtenerPaciente" text="Rango de:" textFill="WHITE" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -47,7 +47,7 @@
                               <ToggleGroup fx:id="gp1" />
                            </toggleGroup>
                         </JFXRadioButton>
-                        <JFXRadioButton fx:id="rbtodo" selected="true" text="Todo" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="5">
+                        <JFXRadioButton fx:id="rbtodo" onAction="#obtenerPaciente" selected="true" text="Todo" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="5">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
@@ -55,17 +55,17 @@
                               <Font size="13.0" />
                            </font>
                         </JFXRadioButton>
-                        <JFXTextField fx:id="txtedad" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="57.0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <JFXTextField fx:id="txtedad" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#buscarPacientes" prefHeight="25.0" prefWidth="57.0" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="20.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtrangode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="55.0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        <JFXTextField fx:id="txtrangode" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#buscarPacientes" prefHeight="25.0" prefWidth="55.0" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <Label text="a" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        <Label text="a" textFill="WHITE" visible="false" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets left="100.0" />
                            </GridPane.margin>
@@ -73,7 +73,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="txtrangoa" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="42.0" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                        <JFXTextField fx:id="txtrangoa" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#buscarPacientes" prefHeight="25.0" prefWidth="42.0" visible="false" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets right="20.0" />
                            </GridPane.margin>
@@ -123,7 +123,7 @@
                               <Font name="Century Gothic" size="23.0" />
                            </font>
                         </JFXTextField>
-                        <JFXRadioButton fx:id="rbedad" text="Edad:" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="3">
+                        <JFXRadioButton fx:id="rbedad" onAction="#obtenerPaciente" text="Edad:" textFill="WHITE" toggleGroup="$gp1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="30.0" />
                            </GridPane.margin>

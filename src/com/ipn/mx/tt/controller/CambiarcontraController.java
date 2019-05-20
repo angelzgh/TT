@@ -52,12 +52,12 @@ public class CambiarcontraController implements Initializable {
 
     @FXML
     private AnchorPane panelP;
-      @FXML
+    @FXML
     private JFXComboBox<?> cbxpregunta;
 
     @FXML
     private JFXTextField txtrespuesta;
-    
+
     @FXML
     private JFXCheckBox chbsi;
 
@@ -133,6 +133,7 @@ public class CambiarcontraController implements Initializable {
         // TODO
         cv = new cargadorVista();
         ud = new UsuarioDAO();
+        ud.conectar();
     }
 
 }
