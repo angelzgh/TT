@@ -54,7 +54,6 @@ public class PrediagnosticoController implements Initializable {
     private SintomaCuestionarioDAO scd;
     private CuestionarioAplicadoDAO cad;
 
-
     private String[] sintomasDetectados;
 
     public String[] getSintomasDetectados() {
@@ -470,6 +469,9 @@ public class PrediagnosticoController implements Initializable {
         pc.setSintomasDetectados(sintomasDetectados);
         pc.ponerTrastornosSintomas();
         pc.obtenerTrastornosDetectados();
+        cad.desconectar();
+        scd.desconectar();
+        pdd.desconectar();
     }
 
     public void darClickBotonGuardar() {

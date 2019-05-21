@@ -119,6 +119,8 @@ public class AñadirEspecialistaController implements Initializable {
                 ud.insertarUsuario(u);
                 PreguntaSeguridadRespondida psr = new PreguntaSeguridadRespondida(usuario, preguntaS, respuesta);
                 psd.insertarPregunta(psr);
+               ud.desconectar();
+               psd.desconectar();
                 CustomMessage cm = new CustomMessage("CARGADO CON ÉXITO", "El usuario se agregó correctamente.", 1);
             } else {
                 CustomMessage cm = new CustomMessage("AVISO", "Los campos no pueden estar vacíos", 2);

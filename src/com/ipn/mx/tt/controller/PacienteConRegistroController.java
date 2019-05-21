@@ -39,57 +39,57 @@ import static jdk.nashorn.internal.objects.NativeString.toUpperCase;
  * @author garci
  */
 public class PacienteConRegistroController implements Initializable {
-    
+
     private Validador v;
     private cargadorVista cv;
     private menuController c;
     private CuestionarioAplicadoDAO cad;
     private PacienteDAO pd;
     private boolean directoEspecialista;
-    
+
     public menuController getC() {
         return c;
     }
-    
+
     public void setC(menuController c) {
         this.c = c;
     }
-    
+
     private List pacientes;
-    
+
     @FXML
     private AnchorPane panelP;
-    
+
     @FXML
     private JFXButton btnPriniciar;
-    
+
     @FXML
     private JFXTextField txtPrnombre;
-    
+
     @FXML
     private TableView<PacienteTabla> tabla;
     @FXML
     private TableColumn<PacienteTabla, String> columnaCURP;
-    
+
     @FXML
     private TableColumn<PacienteTabla, String> columnaNombre;
-    
+
     @FXML
     private TableColumn<PacienteTabla, String> columnaTest;
     @FXML
     private TableColumn<PacienteTabla, String> columnaEdad;
-    
+
     @FXML
     private JFXButton btnPpregiagnostico;
     @FXML
     private JFXButton volverPacienteR;
-    
+
     private ObservableList<PacienteTabla> ol;
-    
+
     @FXML
     void buscarPaciente(KeyEvent event) {
         String curp = toUpperCase(txtPrnombre.getText());
-        
+
         String busqueda = v.validars(curp);
         if (pacientes.size() > 0) {
             if (busqueda.length() > 2) {
@@ -113,10 +113,10 @@ public class PacienteConRegistroController implements Initializable {
                 ol.clear();
             }
         } else {
-            
+
         }
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         v = new Validador();
@@ -127,23 +127,23 @@ public class PacienteConRegistroController implements Initializable {
         cad.conectar();
         pd.conectar();
         pacientes = pd.buscarSimilar();
-        
+
         System.out.println("PACIENTES:" + pacientes.size() + pacientes.toString());
         ol = FXCollections.observableArrayList();
-        
+
         columnaCURP.setCellValueFactory(cellData -> cellData.getValue().getCURP());
         columnaNombre.setCellValueFactory(cellData -> cellData.getValue().getNombre());
         columnaEdad.setCellValueFactory(cellData -> cellData.getValue().getEdad());
         columnaTest.setCellValueFactory(cellData -> cellData.getValue().getNum());
         tabla.setItems(ol);
     }
-    
+
     @FXML
     void iniciarTest(ActionEvent event) {
         if (tabla.getSelectionModel().getSelectedItem() != null) {
             PacienteTabla pt = tabla.getSelectionModel().getSelectedItem();
             pt.setOrigen(getPaciente(pt.getCURP().getValue()));
-            
+
             ComenzarTestController ctc = (ComenzarTestController) cv.cambiarVista("/Center/ComenzarTest.fxml", c.getPanelPrin());
             ctc.setC(c);
             ctc.setPaciente(pt.getOrigen());
@@ -179,15 +179,17 @@ public class PacienteConRegistroController implements Initializable {
                 ctc.setEspecialistaDirecto(true);
                 ctc.clicEspecialista();
             }
+            cad.desconectar();
+            pd.desconectar();
         } else {
             CustomMessage cm = new CustomMessage("Advertencia", "Seleccione un paciente", 0);
         }
-        
+
     }
-    
+
     public Paciente getPaciente(String curp) {
         Paciente p = new Paciente();
-        
+
         for (int i = 0; i < pacientes.size(); i++) {
             p = new Paciente((DBObject) pacientes.get(i));
             if (p.getCURP().equals(curp)) {
@@ -195,19 +197,19 @@ public class PacienteConRegistroController implements Initializable {
             }
         }
         return p;
-        
+
     }
-    
+
     public void directoEspecialista() {
         directoEspecialista = true;
     }
-    
+
     @FXML
     void verPrediagnostico(ActionEvent event) {
         if (tabla.getSelectionModel().getSelectedItem() != null) {
             PacienteTabla pt = tabla.getSelectionModel().getSelectedItem();
             pt.setOrigen(getPaciente(pt.getCURP().getValue()));
-            
+
             PacienteNuevoController pnc = (PacienteNuevoController) cv.cambiarVista("/Center/PacienteNuevo.fxml", panelP);
             pnc.setC(c);
             pnc.ponerPaciente(pt.getOrigen());
@@ -216,7 +218,7 @@ public class PacienteConRegistroController implements Initializable {
         } else {
             CustomMessage cm = new CustomMessage("Advertencia", "Seleccione un paciente", 0);
         }
-        
+
     }
-    
+
 }

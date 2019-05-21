@@ -118,12 +118,13 @@ public class ComenzarTestController implements Initializable {
                 itc.setIc(ic);
             }
             itc.setDatosPaciente(datosPaciente);
+            cad.desconectar();
         } else {
             TestPacienteController tpc = (TestPacienteController) cv.cambiarVista("/Center/TestPaciente.fxml", c.getPanelPrin());
             tpc.setMc(c);
             tpc.setTipoCuestionario(i);
             tpc.setDatosPaciente(datosPaciente);
-
+            cad.desconectar();
         }
 
     }
@@ -146,7 +147,7 @@ public class ComenzarTestController implements Initializable {
             pnc.setDatosPaciente(datosPaciente);
             pnc.setTipoCuestionario(1);
             pnc.setComenzarEspecialista(true);
-
+            cad.desconectar();
         } else {
             CustomMessage cm = new CustomMessage("¿?", "¿Asignar el cuestionario a un paciente?", 3);
             if (cm.getMessage().getButtonData().equals(ButtonType.OK.getButtonData())) {
@@ -170,7 +171,7 @@ public class ComenzarTestController implements Initializable {
                 pnc.setDatosPaciente(datosPaciente);
                 pnc.setTipoCuestionario(1);
                 pnc.setComenzarEspecialista(true);
-
+                cad.desconectar();
             }
         }
     }

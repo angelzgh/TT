@@ -39,6 +39,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import com.jfoenix.controls.JFXTextArea;
+import java.awt.Desktop;
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.sf.jasperreports.engine.JREmptyDataSource;
@@ -87,8 +89,7 @@ public class RecomendacionesController implements Initializable {
     @FXML
     private JFXButton btnRimprimir;
 
-    @FXML
-    private JFXButton btnRenviarcorreo;
+
 
     @FXML
     private JFXButton btnRcerrar;
@@ -109,10 +110,10 @@ public class RecomendacionesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         red = new ResultadoDAO();
-        red.conectar();
-        rd = new RecomendacionDAO();
-        rd.conectar();
         cad = new CuestionarioAplicadoDAO();
+        rd = new RecomendacionDAO();
+        red.conectar();
+        rd.conectar();
         cad.conectar();
         cv = new cargadorVista();
         columnaTrastorno.setCellValueFactory(cellData -> cellData.getValue().getTrastorno());
@@ -190,14 +191,23 @@ public class RecomendacionesController implements Initializable {
         this.ic = ic;
     }
 
-    @FXML
-    void enviarEmailRecomendacion(ActionEvent event) {
-
-    }
 
     @FXML
     void imprimirRecomendacion(ActionEvent event) {
 
+        java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+        String file = new String("C://TT//" + paciente.getNombre() + ".pdf");
+        java.io.File fichero = new java.io.File(file);
+        if (desktop.isSupported(Desktop.Action.PRINT)) {
+            try {
+                desktop.print(fichero);
+            } catch (Exception e) {
+                System.out.print("El sistema no permite imprimir usando la clase Desktop");
+                e.printStackTrace();
+            }
+        } else {
+            System.out.print("El sistema no permite imprimir usando la clase Desktop");
+        }
     }
 
     @FXML
@@ -271,13 +281,43 @@ public class RecomendacionesController implements Initializable {
         parametros.put("sexo", paciente.getSexo());
         parametros.put("curp", paciente.getCURP());
         parametros.put("escolaridad", paciente.getEscolaridad());
-        parametros.put("recoe", "Texto de prueba");
-        parametros.put("recos", "Prueba");
+        parametros.put("recoe", txtrecoesp.getText());
+        System.out.println(txtrecoesp.getText());
+        parametros.put("recos", "Evita dormir con las luces encendidas. \n Evita cambios bruscos en tus horas de sueño. \n Evita cenar Pesado. "
+                + "\n Practica algun deporte. \n No duermas con dispositivos móviles cercanos a ti. \n Procura dormir de 6 a 8 horas continuas en la noche.");
+        
+        System.out.println(resultado.getT1());
             if(resultado.getT1()==1.0){
             parametros.put("insomnio","Si");
             }else{
             parametros.put("insomnio","No");
             }
+             if(resultado.getT2()==1.0){
+            parametros.put("ritmo","Si");
+            }else{
+            parametros.put("ritmo","No");
+            }
+              if(resultado.getT3()==1.0){
+            parametros.put("sindrome","Si");
+            }else{
+            parametros.put("sindrome","No");
+            }
+               if(resultado.getT4()==1.0){
+            parametros.put("apnea","Si");
+            }else{
+            parametros.put("apnea","No");
+            }
+                if(resultado.getT5()==1.0){
+            parametros.put("hiper","Si");
+            }else{
+            parametros.put("hiper","No");
+            }
+                 if(resultado.getT6()==1.0){
+            parametros.put("narc","Si");
+            }else{
+            parametros.put("narc","No");
+            }
+                
         JasperPrint informe = JasperFillManager.fillReport(master, parametros, new JREmptyDataSource());
 //JasperViewer.viewReport(informe,false);
         JasperExportManager.exportReportToPdfFile(informe, "C://TT//" + paciente.getNombre() + ".pdf");
@@ -301,6 +341,9 @@ public class RecomendacionesController implements Initializable {
         pc.ponerTrastornosSintomas();
         pc.obtenerTrastornosDetectados();
         pc.setTrastornosDetectados(trastornosDetectados);
+        red.desconectar();
+        rd.desconectar();
+        cad.desconectar();
     }
 
     @FXML
@@ -370,17 +413,19 @@ public class RecomendacionesController implements Initializable {
         List l = rd.traerRecomendacion(trastorno);
         LinkedList ls = new LinkedList();
         System.out.println("TAMAÑO MAXIMO:" + l.size());
-        while (ls.size() < 3) {
-            int x = (int) (Math.random() * l.size()) + 1;
-            System.out.println(x);
-            if (!ls.contains(x)) {
-                ls.add(x);
-                Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
-                RecomendacionTabla rt = new RecomendacionTabla(r);
-                lsRecomendacion.add(r.getRecomendacion());
-                System.out.println(lsRecomendacion);
-                rtol.add(rt);
+        if (!l.isEmpty()) {
+            while (ls.size() < 3) {
+                int x = (int) (Math.random() * l.size()) + 1;
+                System.out.println(x);
+                if (!ls.contains(x)) {
+                    ls.add(x);
+                    Recomendacion r = new Recomendacion((DBObject) l.get(x - 1));
+                    RecomendacionTabla rt = new RecomendacionTabla(r);
+                    lsRecomendacion.add(r.getRecomendacion());
+                    System.out.println(lsRecomendacion);
+                    rtol.add(rt);
 
+                }
             }
         }
     }
@@ -389,21 +434,16 @@ public class RecomendacionesController implements Initializable {
         String fechi = paciente.getFecha();
         System.out.println(fechi);
         String[] fecha;
-        if(fechi.contains("-"))
-        {
-             fecha= fechi.split("-");
-        }
-        else
-        {
-             fecha = fechi.split("/");
+        if (fechi.contains("-")) {
+            fecha = fechi.split("-");
+        } else {
+            fecha = fechi.split("/");
         }
         int x = 0;
 
         if (fecha[0].length() == 4) {
             x = 2019 - Integer.parseInt(fecha[0]);
-        }
-        else if(fecha[2].length() == 4)
-        {
+        } else if (fecha[2].length() == 4) {
             x = 2019 - Integer.parseInt(fecha[2]);
         }
         resultado = new Resultados(ic.getIdCuestionario(), paciente.getSexo(), x);
@@ -419,8 +459,9 @@ public class RecomendacionesController implements Initializable {
                 = (PrediagnosticosController) cv.cambiarVista("/Center/Prediagnosticos.fxml", mc.getPanelPrin());
         pc.setMc(mc);
         CustomMessage cm = new CustomMessage("Aviso", "Se guardó la información del cuestionario", 0);
-
         pc.abrirHistorial();
-        
+        red.desconectar();
+        rd.desconectar();
+        cad.desconectar();
     }
 }

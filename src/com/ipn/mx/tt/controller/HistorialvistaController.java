@@ -129,6 +129,9 @@ public class HistorialvistaController implements Initializable {
                 = (PrediagnosticosController) cv.cambiarVista("/Center/Prediagnosticos.fxml", mc.getPanelPrin());
         pc.setMc(mc);
         pc.abrirHistorial();
+        pd.desconectar();
+        pcd.desconectar();
+        pred.desconectar();
     }
 
     public void cargarTablas() {

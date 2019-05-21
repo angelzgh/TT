@@ -56,6 +56,7 @@ public class ConfiguracionesController implements Initializable {
         cec.setMc(mc);
         btnCcuenta.setDisable(true);
         btnCañadir.setDisable(false);
+        ud.desconectar();
     }
 
     @FXML
@@ -64,6 +65,7 @@ public class ConfiguracionesController implements Initializable {
 
         btnCcuenta.setDisable(false);
         btnCañadir.setDisable(true);
+        ud.desconectar();
     }
 
     public Usuario getUsuario() {

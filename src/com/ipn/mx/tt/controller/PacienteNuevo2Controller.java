@@ -165,7 +165,6 @@ public class PacienteNuevo2Controller implements Initializable {
         this.comenzarEspecialista = comenzarEspecialista;
     }
 
-    
     public void hacerCuestionario() {
 
         if (comenzarEspecialista) {

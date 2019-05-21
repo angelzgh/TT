@@ -113,10 +113,10 @@ public class PacienteNuevoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         pd = new PacienteDAO();
+        cad = new CuestionarioAplicadoDAO();
         validador = new Validador();
         cv = new cargadorVista();
         pd.conectar();
-        cad = new CuestionarioAplicadoDAO();
         cad.conectar();
         cbxescolaridad.setItems(items);
         cbxescolaridad.setPromptText("-");
@@ -161,7 +161,7 @@ public class PacienteNuevoController implements Initializable {
                     && !Direccion.equals("") && !Telefono.equals("") && !cbxescolaridad.getValue().equals("-")) {
 
                 p = new Paciente(Nombre, Apellido, Sexo, Correo, Fecha, Direccion, Telefono, CURP, Escolaridad);
-                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId(),c.getDia());
+                ic = new InfoCuestionario(cad.buscarSiguiente() + 1, 0.0, CURP, c.getUsuario().getId(), c.getDia());
                 registrarPaciente(p, ic);
 
                 CustomMessage cm1 = new CustomMessage("MENSAJE", "¿Desea realizar el Cuestionario?", 4);
@@ -248,6 +248,8 @@ public class PacienteNuevoController implements Initializable {
     public void volverPaciente(ActionEvent event) {
         PacienteConRegistroController pcrc = (PacienteConRegistroController) cv.cambiarVista("/Center/PacienteConRegistro.fxml", panelP);
         pcrc.setC(c);
+        pd.desconectar();
+        cad.desconectar();
     }
 
     public void ponerPaciente(Paciente p) {

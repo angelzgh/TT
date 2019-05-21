@@ -149,7 +149,9 @@ public class HistorialController implements Initializable {
             pc.cargarResultados();
             pc.setTestContestado(false);
             pc.startgrafica();
-
+        cd.desconectar();
+        pd.desconectar();
+        cad.desconectar();
         } else {
             CustomMessage cm = new CustomMessage("ERROR", "Seleccione un Prediagnostico.", 2);
         }
@@ -164,7 +166,9 @@ public class HistorialController implements Initializable {
             hc.setMc(mc);
             hc.setNumPaciente(Double.parseDouble(tblPpre.getSelectionModel().getSelectedItem().getNumeroCuestionario().getValue()));
             hc.cargarTablas();
-
+        cd.desconectar();
+        pd.desconectar();
+        cad.desconectar();
         } else {
             CustomMessage cm = new CustomMessage("ERROR", "Seleccione un Prediagnostico.", 2);
         }

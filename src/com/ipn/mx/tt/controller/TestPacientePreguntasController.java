@@ -178,6 +178,8 @@ public class TestPacientePreguntasController implements Initializable {
         pc.startgrafica();
         pc.darClickBotonGuardar();
         mc.EnableTop();
+        TestPController tpc= (TestPController) cv.cambiarVista("/Center/TestP.fxml", mc.getPanelPrin());
+        tpc.setMc(mc);
     }
 
     @FXML

@@ -188,7 +188,9 @@ public class TestPacienteController implements Initializable {
             tppc.setConducta(conducta);
             tppc.ponerPaciente();
         }
-       mc.disableTop();
+        mc.disableTop();
+        cad.desconectar();
+        pd.desconectar();
     }
 
     public void cargarConducta() {
@@ -211,9 +213,8 @@ public class TestPacienteController implements Initializable {
         pd = new PacienteDAO();
         cad.conectar();
         pd.conectar();
-        
+
         // TODO
     }
-
 
 }

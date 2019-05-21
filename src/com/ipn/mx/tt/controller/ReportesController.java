@@ -5,16 +5,20 @@
  */
 package com.ipn.mx.tt.controller;
 
+import com.ipn.mx.tt.dao.ResultadoDAO;
 import com.ipn.mx.tt.util.CustomMessage;
 import com.ipn.mx.tt.util.Validador;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.layout.BorderPane;
 
 /**
@@ -25,6 +29,7 @@ import javafx.scene.layout.BorderPane;
 public class ReportesController implements Initializable {
 
     private Validador v;
+    private ResultadoDAO rd;
     @FXML
     private JFXRadioButton rbedad;
 
@@ -75,6 +80,12 @@ public class ReportesController implements Initializable {
 
     @FXML
     private BorderPane panelRight;
+    
+    @FXML
+    private JFXButton btnguardar;
+
+    @FXML
+    private BarChart<?, ?> greportes;
 
     /**
      * Initializes the controller class.
@@ -83,6 +94,8 @@ public class ReportesController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         v = new Validador();
+        rd=new ResultadoDAO();
+        rd.conectar();
     }
 
     public void obtenerPacientes() {
@@ -109,6 +122,7 @@ public class ReportesController implements Initializable {
     @FXML
     void obtenerPaciente(ActionEvent event) {
         obtenerPacientes();
+        
     }
 
     @FXML
@@ -146,9 +160,13 @@ public class ReportesController implements Initializable {
             if (desde.length() > 0 && hasta.length() > 0) {
 
             }
-            else {
+            else {  
             CustomMessage cm = new CustomMessage("Error", "El campo no puede estar vacío", 2);
         }
+        } else {
+            List ls=rd.obtenerTodo();
+            System.out.println(ls);
+            
         } 
     }
 }

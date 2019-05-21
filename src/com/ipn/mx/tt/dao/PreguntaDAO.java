@@ -6,41 +6,28 @@
 package com.ipn.mx.tt.dao;
 
 import com.ipn.mx.tt.modelo.Pregunta;
-import com.ipn.mx.tt.util.ConexionJavaMongo;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.nio.charset.Charset;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  *
  * @author Axel Reyes
  */
-public class PreguntaDAO {
+public class PreguntaDAO extends DocumentoDAO {
 
     private Charset UTF_8 = Charset.forName("UTF-8");
     private Charset ISO = Charset.forName("ISO-8859-1");
-    private ConexionJavaMongo cjm;
-    String base, coleccion;
+
 
     public PreguntaDAO(String base, String coleccion) {
-        this.base = base;
-        this.coleccion = coleccion;
-        cjm = new ConexionJavaMongo(base, coleccion);
-
-    }
-    public void conectar()
-    {
-        this.cjm.conectar();
+        super(base, coleccion);
     }
 
     public PreguntaDAO() {
-        this.base = "TT";
-        this.coleccion = "Pregunta";
-        cjm = new ConexionJavaMongo(base, coleccion);
-
+        super("TT", "Pregunta");
     }
 
     public DBObject convertirPregunta(Pregunta p) {
@@ -57,14 +44,14 @@ public class PreguntaDAO {
 
     }
 
-    public Pregunta getPregunta(int i,int tipo) {
+    public Pregunta getPregunta(int i, int tipo) {
 
         DBObject query = new BasicDBObject("_idPregunta", i);
         DBCursor cursor = cjm.getMongoCollection().find(query);
         Pregunta p;
         if (cursor.hasNext()) {
             DBObject jo = cursor.one();
-            p = new Pregunta(jo,tipo);
+            p = new Pregunta(jo, tipo);
         } else {
             p = new Pregunta();
         }
@@ -75,7 +62,7 @@ public class PreguntaDAO {
     public List getPreguntas(int tipo) {
         List ls;
         DBCursor cursor = cjm.getMongoCollection().find();
-        ls=cursor.toArray();
+        ls = cursor.toArray();
         return ls;
     }
 }
