@@ -30,10 +30,13 @@
                 <RowConstraints maxHeight="309.0" minHeight="10.0" prefHeight="102.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextArea prefHeight="330.0" prefWidth="1020.0" text="TEXTOOOOO">
+                  <JFXTextArea prefHeight="330.0" prefWidth="1020.0" text="El Sleep Disorder Support Tool (SDST) es un prototipo de sistema experto diseñado para auxiliar al médico especialista en el diagnóstico de los trastornos del dormir más comunes en el adulto mayor. Para ello el paciente deberá contestar una serie de preguntas relacionadas a su jornada laboral, hábitos de sueño y síntomas y malestares que pudieran presentar debido a alguno de estos trastornos. El sistema, a través de reglas previamente establecidas, detectará algún patrón que pudiera indicar que el paciente padece algún trastorno del dormir. El especialista se encargará de evaluar este prediagnóstico y decidir si es válido o no.">
                      <GridPane.margin>
                         <Insets bottom="10.0" top="50.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="18.0" />
+                     </font>
                   </JFXTextArea>
                </children>
             </GridPane>

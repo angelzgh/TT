@@ -40,10 +40,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="En la segunda parte del prediagnóstico, se puede observar los síntomas detectados por cada trastorno, los hábitos de sueño encontrados y los trastornos del dormir que padece el paciente. Para regresar a la pantalla anterior haga clic en el botón “Regresar”, para obtener las recomendaciones de los trastornos detectados haga clic en “Recomendaciones”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

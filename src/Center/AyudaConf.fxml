@@ -15,8 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="com.ipn.mx.tt.controller.AyudaConfController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1020.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.AyudaConfController">
    <children>
       <BorderPane prefHeight="510.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -46,10 +45,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="A través de la pantalla “Cuenta” en la pestaña “Configuraciones” puede visualizar y actualizar los datos del usuario activo, para ello, sobrescriba el dato que desea modificar (exceptuando Nombre de Usuario y el Núm. De Empleado),  y haga clic en el botón “Guardar”. Para modificar la contraseña, haga clic en el botón “Cambiar contraseña”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

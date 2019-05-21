@@ -40,10 +40,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="A través de la pantalla “Paciente Nuevo” en la pestaña “Paciente” puede agregar un nuevo paciente, para ello, ingrese todos los datos que se le solicitan y haga clic en el botón “Registrar”, posteriormente, se le preguntará si desea iniciar un test para el paciente que acaba de registrar, si hace clic en “Si” se le redirigirá a la pantalla de “Comenzar test”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

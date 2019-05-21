@@ -40,10 +40,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="En la pantalla de “Recomendaciones” nuevamente puede observar los trastornos del dormir detectados, así como una serie de recomendaciones que puede realizar en casa para tratar cada uno de ellos.  Para obtener un reporte en formato PDF del prediagnóstico, haga clic en el botón “Imprimir”. Para enviar este reporte por correo electrónico, haga clic en “Enviar por correo”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

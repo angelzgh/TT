@@ -40,10 +40,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="Además de las preguntas, en el “Test para Especialista” se puede observar una barra de progreso para saber que porcentaje del test ha contestado hasta ahora, así como también un registro sobre las preguntas que ya ha contestado con su respectiva respuesta. Con el botón “Regresar” puede regresar a la pregunta anterior para modificar su respuesta. Una vez finalizado el test, para poder ver los resultados haga clic en botón “Finalizar”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

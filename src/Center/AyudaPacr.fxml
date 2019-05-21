@@ -40,10 +40,13 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="A través de la pantalla “Paciente Registrado” en la pestaña “Paciente” puede buscar y visualizar todos los pacientes que se encuentran actualmente registrados en el sistema, para buscar un paciente solo tiene que empezar a escribir su CURP y se le mostrará en forma de tabla todas las coincidencias encontradas. Para iniciar un test, seleccione un paciente de la tabla y haga clic en “Iniciar Test”, se le redirigirá a la pantalla de “Comenzar test”. Para modificar los datos de un paciente, selecciones un paciente de la tabla y haga clic en “Modificar”." GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="14.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
                      <GridPane.margin>

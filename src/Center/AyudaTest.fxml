@@ -40,15 +40,21 @@
                         <Insets top="20.0" />
                      </GridPane.margin>
                   </JFXButton>
-                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                  <JFXTextArea editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="288.0" text="A través de la pantalla “Comenzar Test” de la pestaña “Test” puede empezar a contestar un cuestionario, para ello, primero deberá seleccionar el tipo de persona que va a contestarlo. " GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="16.0" />
+                     </font>
                   </JFXTextArea>
-                  <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" GridPane.rowIndex="1">
+                  <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" text="Especialista: Diseñado para ser contestado por el médico especialista, ya sea para investigación o para hacerlo en lugar de un paciente. Paciente: Diseñado para ser contestado por el paciente, contiene audios de las preguntas y módulos de ayuda para que sea más fácil su realización. Acompañante: Diseñado para ser contestado por el acompañante del paciente en caso de que no pueda hacerlo por si mismo, también contiene módulos de ayuda." GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Century Gothic" size="15.0" />
+                     </font>
                   </JFXTextArea>
                   <JFXTextField alignment="CENTER" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="1/8" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
