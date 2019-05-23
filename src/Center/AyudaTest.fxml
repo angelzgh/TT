@@ -48,7 +48,7 @@
                         <Font name="Century Gothic" size="16.0" />
                      </font>
                   </JFXTextArea>
-                  <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" text="Especialista: Diseñado para ser contestado por el médico especialista, ya sea para investigación o para hacerlo en lugar de un paciente. Paciente: Diseñado para ser contestado por el paciente, contiene audios de las preguntas y módulos de ayuda para que sea más fácil su realización. Acompañante: Diseñado para ser contestado por el acompañante del paciente en caso de que no pueda hacerlo por si mismo, también contiene módulos de ayuda." GridPane.rowIndex="1">
+                  <JFXTextArea editable="false" prefHeight="72.0" prefWidth="735.0" text="Especialista: Diseñado para ser contestado por el médico especialista, ya sea para investigación o para hacerlo en lugar de un paciente.&#10;Paciente: Diseñado para ser contestado por el paciente, contiene audios de las preguntas y módulos de ayuda para que sea más fácil su realización.&#10;Acompañante: Diseñado para ser contestado por el acompañante del paciente en caso de que no pueda hacerlo por si mismo, también contiene módulos de ayuda." GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets bottom="10.0" />
                      </GridPane.margin>
