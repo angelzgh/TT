@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.ConfiguracionesController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ipn.mx.tt.controller.AyudaController">
    <children>
       <SplitPane dividerPositions="0.5" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="1280.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <items>
@@ -49,7 +49,7 @@
                               <Font name="Century Gothic" size="23.0" />
                            </font>
                         </JFXTextField>
-                        <JFXButton fx:id="btnCcuenta" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Acerca de" GridPane.rowIndex="3">
+                        <JFXButton fx:id="btnAcerca" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verAcerca" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Acerca de" GridPane.rowIndex="3">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
@@ -57,7 +57,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="btnCañadir" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Configuraciones" GridPane.rowIndex="5">
+                        <JFXButton fx:id="btnConfig" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verConfig" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Configuraciones" GridPane.rowIndex="5">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -73,7 +73,7 @@
                               <Insets right="10.0" />
                            </GridPane.margin>
                         </ImageView>
-                        <JFXButton fx:id="btnCañadir1" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Paciente" GridPane.rowIndex="7">
+                        <JFXButton fx:id="btnPaciente" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verPaciente" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Paciente" GridPane.rowIndex="7">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -81,7 +81,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="btnCcuenta1" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Test" GridPane.rowIndex="9">
+                        <JFXButton fx:id="btnTest" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verTest" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Test" GridPane.rowIndex="9">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
@@ -89,7 +89,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="btnCañadir2" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Prediagnosticos" GridPane.rowIndex="11">
+                        <JFXButton fx:id="btnPrediagnostico" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verPrediagnostico" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Prediagnosticos" GridPane.rowIndex="11">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -97,7 +97,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
-                        <JFXButton fx:id="btnCañadir21" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Reportes" GridPane.rowIndex="13">
+                        <JFXButton fx:id="btnReportes" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#verReporte" prefHeight="50.0" prefWidth="261.0" style="-fx-background-color: #FFFFFF;" text="Reportes" GridPane.rowIndex="13">
                            <font>
                               <Font size="15.0" />
                            </font>
