@@ -27,7 +27,7 @@ public class Email {
         this.user=user;
         this.correo=correo;
         this.password=password;
-        
+        password = "";
         setMessage();
     }
     
